@@ -152,13 +152,13 @@ if __name__ == '__main__':
     queries = generate_queries(schema, postgres_patcher)
     for query in queries:
         try:
+            print("Executing:\n" + query)
             start_time = time.time()
             cursor.execute(query)
             result = cursor.statusmessage
             end_time = time.time()
             elapsed_time = end_time - start_time
-            print(query)
-            print(elapsed_time)
+            print("\t->\t" + str(elapsed_time))
             print("\n\n")
             with open("./query_execution_times.csv", "a") as csv_file:
                 writer = csv.writer(csv_file, delimiter=',')
