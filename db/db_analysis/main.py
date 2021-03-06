@@ -131,7 +131,7 @@ def mssql_patcher(query):
 
 # preserve/force join order in postgres
 def postgres_patcher(query):
-    return "BEGIN;\nSET LOCAL join_collapse_limit = 1;\n" + query + "\nCOMMIT;\n"
+    return "BEGIN;\nSET LOCAL join_collapse_limit = 1;\n" + query + "\nCOMMIT;"
 
 
 def connect():
@@ -157,9 +157,10 @@ if __name__ == '__main__':
             result = cursor.statusmessage
             end_time = time.time()
             elapsed_time = end_time - start_time
+            print(query)
             print(elapsed_time)
+            print("\n\n")
             with open("./query_execution_times.csv", "a") as csv_file:
-                print(elapsed_time)
                 writer = csv.writer(csv_file, delimiter=',')
                 writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, elapsed_time])
         except Exception as ex:
