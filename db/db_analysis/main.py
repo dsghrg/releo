@@ -1,8 +1,10 @@
-import functools
-import itertools
-import time
 import csv
+import functools
 import hashlib
+import itertools
+import random
+import time
+import re
 
 import numpy as np
 import psycopg2
@@ -34,8 +36,7 @@ def create_schema():
     category = Table('category', 'cat', [])
     deliverer = Table('deliverer', 'del', [])
     discount = Table('discount', 'dis', [])
-    # requires quotation since order is a restricted word
-    order = Table('"order"', 'ord', [])
+    order = Table('order', 'ord', [])
     order_detail = Table('order_details', 'ord_det', [])
     product = Table('product', 'prod', [])
     subcategory = Table('subcategory', 'sub', [])
@@ -73,43 +74,42 @@ def create_schema():
     subcategory.tablename_to_join = {category.name: subcat_joinables_cat, product.name: subcat_joinables_prod}
 
     return {'customer': customer, 'category': category, 'deliverer': deliverer, 'discount': discount, 'order': order,
-            'order_detail': order_detail, 'product': product, 'subcategory': subcategory}
+            'order_details': order_detail, 'product': product, 'subcategory': subcategory}
 
 
 def powerset(iterable):
     "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
     s = list(iterable)
-    return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1))
+    return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s) + 1))
 
+
+def dfs(visited, schema, comb, current):
+    if current.name not in visited:
+        visited.add(current.name)
+        for neighbour in schema[current.name].tablename_to_join.keys():
+            if neighbour in comb:
+                dfs(visited, schema, comb, schema[neighbour])
+
+
+# generate all possible logical queries with n involved relations
 def get_n_joinable_tables(n, schema):
     power_set = list(powerset(schema.keys()))
     n_power_set = [comb for comb in power_set if len(comb) == n]
-
     all_possible_joinable_tables = []
-    for comb in n_power_set:
-        join_possible = True
-        for table in comb:
-            joinable_tables_for_current = schema[table].tablename_to_join
 
-            # iter joins
-            for joinable_table_name in joinable_tables_for_current.keys():
-                if not joinable_table_name in comb:
-                    join_possible = False
-                    break
-            if not join_possible:
-                break
-
-        if join_possible:
+    for i, comb in enumerate(n_power_set):
+        visited = set()
+        dfs(visited, schema, comb, schema[comb[0]])
+        if len(visited) == n:
             all_possible_joinable_tables.append(comb)
-            
-    joinable_tables = []
     return all_possible_joinable_tables
 
-def generate_queries(schema, query_patcher, n):
-    # create_adjacency(schema)
-    # joinable_tables = get_n_joinable_tables(n, schema)
-    permutations = itertools.permutations(schema.keys())
+
+def generate_join_orders(schema, query_patcher, logical_query):
+
+    permutations = itertools.permutations(logical_query)
     queries = []
+
     for permutation in permutations:
         used_relations = {}
         impossible_query = False
@@ -137,6 +137,7 @@ def generate_queries(schema, query_patcher, n):
 
         if not impossible_query:
             query += ";"
+            query = re.sub(r'\border\b', '"order"', query)
             query = query_patcher(query)
             queries.append(query)
     return queries
@@ -177,22 +178,28 @@ def reconnect(conn, cursor):
 if __name__ == '__main__':
     conn, cursor = connect()
     schema = create_schema()
-    print(get_n_joinable_tables(4, schema))
-    queries = generate_queries(schema, postgres_patcher)
-    for query in queries:
-        try:
-            print("Executing:\n" + query)
-            start_time = time.time()
-            cursor.execute(query)
-            result = cursor.statusmessage
-            end_time = time.time()
-            elapsed_time = end_time - start_time
-            print("\t->\t" + str(elapsed_time))
-            print("\n\n")
-            with open("./query_execution_times.csv", "a") as csv_file:
-                writer = csv.writer(csv_file, delimiter=',')
-                writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, elapsed_time])
-        except Exception as ex:
-            print(ex)
-            conn, cursor = reconnect(conn, cursor)
-    print(len(queries))
+    for i in range(4, 8):
+        logical_queries = get_n_joinable_tables(i, schema)
+        logical_query = random.choice(logical_queries)
+        queries = generate_join_orders(schema, postgres_patcher, logical_query)
+        no_of_possible_executions = len(queries)
+        if (len(queries) > 100):
+            queries = random.choices(queries, k=100)
+        ratio_executed_to_possible_executions = len(queries) / no_of_possible_executions
+        for query in queries:
+            try:
+                print("Executing:\n" + query)
+                start_time = time.time()
+                cursor.execute(query)
+                result = cursor.statusmessage
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+                print("\t->\t" + str(elapsed_time))
+                print("\n\n")
+                with open("./query_execution_times.csv", "a") as csv_file:
+                    writer = csv.writer(csv_file, delimiter=',')
+                    writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, logical_query,
+                                     ratio_executed_to_possible_executions, len(logical_query), elapsed_time])
+            except Exception as ex:
+                print(ex)
+                conn, cursor = reconnect(conn, cursor)
