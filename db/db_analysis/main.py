@@ -76,10 +76,38 @@ def create_schema():
             'order_detail': order_detail, 'product': product, 'subcategory': subcategory}
 
 
-def generate_queries(schema, query_patcher):
-    schema = create_schema()
-    create_adjacency(schema)
+def powerset(iterable):
+    "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
+    s = list(iterable)
+    return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1))
 
+def get_n_joinable_tables(n, schema):
+    power_set = list(powerset(schema.keys()))
+    n_power_set = [comb for comb in power_set if len(comb) == n]
+
+    all_possible_joinable_tables = []
+    for comb in n_power_set:
+        join_possible = True
+        for table in comb:
+            joinable_tables_for_current = schema[table].tablename_to_join
+
+            # iter joins
+            for joinable_table_name in joinable_tables_for_current.keys():
+                if not joinable_table_name in comb:
+                    join_possible = False
+                    break
+            if not join_possible:
+                break
+
+        if join_possible:
+            all_possible_joinable_tables.append(comb)
+            
+    joinable_tables = []
+    return all_possible_joinable_tables
+
+def generate_queries(schema, query_patcher, n):
+    # create_adjacency(schema)
+    # joinable_tables = get_n_joinable_tables(n, schema)
     permutations = itertools.permutations(schema.keys())
     queries = []
     for permutation in permutations:
@@ -149,6 +177,7 @@ def reconnect(conn, cursor):
 if __name__ == '__main__':
     conn, cursor = connect()
     schema = create_schema()
+    print(get_n_joinable_tables(4, schema))
     queries = generate_queries(schema, postgres_patcher)
     for query in queries:
         try:
