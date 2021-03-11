@@ -96,7 +96,7 @@ def generate_queries(schema, query_patcher):
             rel_to_join_with = functools.reduce(
                 lambda rel_to_join, linked_relation: rel_to_join if rel_to_join is not None else used_relations[
                     linked_relation] if linked_relation in used_relations else None,
-                next_relation.tablename_to_join.keys(),
+                list(reversed(list(next_relation.tablename_to_join.keys()))),
                 None)
             if rel_to_join_with is not None:
                 join = next_relation.tablename_to_join[rel_to_join_with.name]
