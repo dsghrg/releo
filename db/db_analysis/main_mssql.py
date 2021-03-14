@@ -7,6 +7,7 @@ import time
 import re
 
 import numpy as np
+import pandas as pd
 
 # import psycopg2
 # from dbconnection import postgres_connection
@@ -187,6 +188,8 @@ if __name__ == '__main__':
     engine = create_mssql_engine()
     schema = create_schema()
 
+    logs = []
+
     for i in range(4, 8):
         logical_queries = get_n_joinable_tables(i, schema)
         logical_query = random.choice(logical_queries)
@@ -195,20 +198,33 @@ if __name__ == '__main__':
         if (len(queries) > 100):
             queries = random.choices(queries, k=100)
         ratio_executed_to_possible_executions = len(queries) / no_of_possible_executions
+        
         for query in queries:
             try:
-                print("Executing:\n" + query)
+                #print("Executing:\n" + query)
                 start_time = time.time()
                 engine.execute(query)
                 # result = cursor.statusmessage
                 end_time = time.time()
-                elapsed_time = end_time - start_time
-                print("\t->\t" + str(elapsed_time))
-                print("\n\n")
-                with open("./query_execution_times_4-7.csv", "a") as csv_file:
-                    writer = csv.writer(csv_file, delimiter=',')
-                    writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, logical_query,
-                                     ratio_executed_to_possible_executions, len(logical_query), elapsed_time])
+                elapsed_time_forced = end_time - start_time
+                #print("\t->\t" + str(elapsed_time))
+                #print("\n\n")               
+                
+                # Execute without order forcing
+                start_time = time.time()
+                query = query.replace("\nOPTION(FORCE ORDER);", "")
+                engine.execute(query)
+                end_time = time.time()
+                elapsed_time_non_forced = end_time - start_time
+
+                logs.append([hashlib.sha256(query.encode('utf-8')).hexdigest(), query.replace("\n"," "), logical_query,
+                                 ratio_executed_to_possible_executions, len(logical_query), elapsed_time_forced, elapsed_time_non_forced])
+            
             except Exception as ex:
                 print(ex)
                 engine = create_mssql_engine()
+    
+    logs_df = pd.DataFrame(logs, columns = ['id', 'query', 'logical_query', 'ratio_executed_to_possible_executions', 'len','time_forced', 'time_non_forced'])
+    logs_df.to_csv(r'logfiles_mssql.csv', index = False, sep = ';')
+
+
