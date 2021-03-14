@@ -140,7 +140,7 @@ def generate_join_orders(schema, query_patcher, logical_query):
 
         if not impossible_query:
             query += ";"
-            query = re.sub(r'\border\b', '"order"', query)
+            query = re.sub(r'\border\b', '[order]', query)
             query = query_patcher(query)
             queries.append(query)
     return queries

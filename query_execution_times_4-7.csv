@@ -1,0 +1,2654 @@
+b3770db637382f6fb289f5e0f76d50b68c15142a973f566af03513d5fe46aec0,"SELECT count(*) FROM category as cat
+JOIN subcategory as sub
+ON sub.category_id = cat.id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.42557549476623535
+7e533716e9f0f03d5548a2d5be5e7dc5115759bf4a3125112524b4230555bc59,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.5837550163269043
+f82cc2073378b2b1892180fefc3cdbbb5faaf965103a1a6394e4b0baade9a8e2,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.5020503997802734
+a9f5834a864c25dbd0ac33da3b74d60ccec34b97c3ab019d796e1df0d2604c4a,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.1933913230895996
+f003b39b3d44e11a123ea9d87437578083967d4584a4dc224f40ac18d5db43a9,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.3299233913421631
+8d46c132e8c094b4e292d621b1d8dab76e29cba9691a04ac0e50d740d0e986a4,"SELECT count(*) FROM subcategory as sub
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.18912935256958008
+dee7f87b280b3be039e5c364004f92c1305514363eea155a10cd28da95ca5a36,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.18442320823669434
+e1c98a5aa6fd176e40509868c88d5d4f62eb9e677919317ec2834a1fa83d1433,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.3106362819671631
+d46a4bd6a4529b3c82363c3bf8e5f7d4f4f4286a9d9b1cb9d645c5205cd1a04b,"SELECT count(*) FROM customer as cus
+JOIN ""order"" as ord
+ON ord.customer_id = cus.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('customer', 'deliverer', 'order', 'order_details', 'product')",1.0,5,0.7247545719146729
+28c3b8a61fa27c5097c7f1116ce6df6d6af014202f05935d7f789bf330a4b596,"SELECT count(*) FROM customer as cus
+JOIN ""order"" as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('customer', 'deliverer', 'order', 'order_details', 'product')",1.0,5,1.129093885421753
+47bc7ce58ce9e0bded40e61bbdb9dcf8a5b315e37ecd113f5ef1080662a2300d,"SELECT count(*) FROM customer as cus
+JOIN ""order"" as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('customer', 'deliverer', 'order', 'order_details', 'product')",1.0,5,0.814345121383667
+0b0a78a860611cb31faff7cade6d8239249c8ea3fdfe838f523f885f09d8c2a5,"SELECT count(*) FROM deliverer as del
+JOIN ""order"" as ord
+ON ord.deliverer_id = del.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.570380687713623
+c9264503b7f2373200dce7e8bbdaf141e57896b9a4c015ac9269d5f501de7048,"SELECT count(*) FROM deliverer as del
+JOIN ""order"" as ord
+ON ord.deliverer_id = del.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.5748178958892822
+ecb1fc2293acc9b8c983b206f6667ecf0baccabf2ed4768da752c2961cc553fb,"SELECT count(*) FROM discount as dis
+JOIN ""order"" as ord
+ON ord.discount_id = dis.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.5185811519622803
+cc85085a05b1719bc85573106dce8c2818395ac15080dc9bb2c122eb796495aa,"SELECT count(*) FROM discount as dis
+JOIN ""order"" as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.5067341327667236
+7c65e9b379d8d40ee5fa1b79e863c862a3397237c1c231bcc1009bd5683fcc2e,"SELECT count(*) FROM ""order"" as ord
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.6401100158691406
+2ed3070454043c7326afaca9b44984b862e3e79e2b3b2ab0c1caaee16bdfbd2d,"SELECT count(*) FROM ""order"" as ord
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.6951432228088379
+ec62c20e43d4ad7beb3be9861e747da3729e624f60351e70964d8980ff74c481,"SELECT count(*) FROM ""order"" as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.6031651496887207
+2c8e10205033df40864bb4f804fce4f0eab3037dd497df5c81110a517970d4fa,"SELECT count(*) FROM ""order"" as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.6940391063690186
+c2d24a2bf68eda5c8b6497ebeb6094a743d9b92e5ffc118ed747409b2d88b9f0,"SELECT count(*) FROM ""order"" as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.8889458179473877
+bc3a8536a0affe8e15143294d145e8ce92caa912fd5630b93e3a268f7022af3f,"SELECT count(*) FROM ""order"" as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.859656810760498
+0637915ee8ed159b01df38d9087cfe500313a21d094c12365ec9cecd74ab8a2c,"SELECT count(*) FROM order_details as ord_det
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.9234998226165771
+838e11a99b3bd38d9bcc46d909de5ad5bb4dd21c30bc2b7aa978840dca2f5a0a,"SELECT count(*) FROM order_details as ord_det
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details')",1.0,4,0.9826259613037109
+8881ab32a79c549fd074b2a8ac745d6081712e1f28d9d855cb1c0dae8f75330a,"SELECT count(*) FROM deliverer as del
+JOIN ""order"" as ord
+ON ord.deliverer_id = del.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.6359906196594238
+8094edf716638d862f21728f4e198d4d05228476c9273a2595920c01a2590a24,"SELECT count(*) FROM deliverer as del
+JOIN ""order"" as ord
+ON ord.deliverer_id = del.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,1.0539145469665527
+e8264eee5c5018f17d57d3e0510eb5b2ba4387ee3c824febb29c508fd6f1cd2a,"SELECT count(*) FROM deliverer as del
+JOIN ""order"" as ord
+ON ord.deliverer_id = del.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.7731099128723145
+3a7755a10c676dedbc05ca17f84a7c62a7a965751961cd894244e7b6df0293c8,"SELECT count(*) FROM discount as dis
+JOIN ""order"" as ord
+ON ord.discount_id = dis.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.629448652267456
+035fcd394b8a7df5d36c800acac539593aba55f879d03a13e2106cfaf2a632f2,"SELECT count(*) FROM discount as dis
+JOIN ""order"" as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,1.0634422302246094
+e58784e8afb6548a0b772e4ef92fee86022dba915b9e43fe45b0b1e07931a15b,"SELECT count(*) FROM discount as dis
+JOIN ""order"" as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.7245347499847412
+7c94458249a62772bf763b3c492285597a88278cd8bb4fce02017056ac475f6f,"SELECT count(*) FROM ""order"" as ord
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.8470685482025146
+50e3fff034f3126ab974e2b5abc1f1bea00cfd6a1df8b871629d7390c81de66c,"SELECT count(*) FROM ""order"" as ord
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,1.2696614265441895
+f490640483000177e075f6b069686b7dbba7acfb3398e9130e6d6796b8212954,"SELECT count(*) FROM ""order"" as ord
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.9549429416656494
+5292466eefabda3d4261f714eb8937584960bf89da5c82e89e2457930f8889c9,"SELECT count(*) FROM ""order"" as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.8383824825286865
+de89f56144731899b6abe0d742cbbe43e99151d63cb0c21703f828b513d59efa,"SELECT count(*) FROM ""order"" as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,1.2724347114562988
+9e1e52665e3a1498df39c0bbdc87b787addbc8a8c8fde0ebbe4a86817d958a62,"SELECT count(*) FROM ""order"" as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+OPTION(FORCE ORDER);","('deliverer', 'discount', 'order', 'order_details', 'product')",1.0,5,0.9866602420806885
+b3770db637382f6fb289f5e0f76d50b68c15142a973f566af03513d5fe46aec0,"SELECT count(*) FROM category as cat
+JOIN subcategory as sub
+ON sub.category_id = cat.id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.2793269157409668
+7e533716e9f0f03d5548a2d5be5e7dc5115759bf4a3125112524b4230555bc59,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.5311498641967773
+f82cc2073378b2b1892180fefc3cdbbb5faaf965103a1a6394e4b0baade9a8e2,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.4253408908843994
+a9f5834a864c25dbd0ac33da3b74d60ccec34b97c3ab019d796e1df0d2604c4a,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.17529582977294922
+f003b39b3d44e11a123ea9d87437578083967d4584a4dc224f40ac18d5db43a9,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.31743764877319336
+8d46c132e8c094b4e292d621b1d8dab76e29cba9691a04ac0e50d740d0e986a4,"SELECT count(*) FROM subcategory as sub
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.17763614654541016
+dee7f87b280b3be039e5c364004f92c1305514363eea155a10cd28da95ca5a36,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.17689251899719238
+e1c98a5aa6fd176e40509868c88d5d4f62eb9e677919317ec2834a1fa83d1433,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('category', 'order_details', 'product', 'subcategory')",1.0,4,0.3116586208343506
+5e779b09333205d47d1f991ac32c49475bbfc56fc7599274df8213a9e1783a6e,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.5825235843658447
+d81efdec45a078af79aada7cadd91b5a41bb6b41e939c77a8d7a902f112cd6af,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.7119643688201904
+67dc1a5189354b709277591a8f6581758df6237e5c128bcc1c923c28ab466f68,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,1.1064317226409912
+d8ceac74dbf5472d973a05c409462db50b61ac4d3d7f40d1a32bb30792ab9444,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,1.0833706855773926
+9f0836e46864aa449a85666254962c64056eb3fdb177a3dc27cc59bbcdcf554f,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.8193035125732422
+d7ee6b5d946bade318df7a118668f96c18b12a3e292e4cef7ab890be6d97b9e6,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,1.2252764701843262
+47186c1b83b4e4d9af95c374fc15ffb447ecbb8112f1b3979495eb7ab53f57b7,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,1.2013204097747803
+ac0e54a4a93432ebd36529f4441dad388ba00a081215615363ab1079b178a12b,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.939077615737915
+c14220b31d8aa22f67fa9571979aa4e72ad1f69f93f8396a9ec0d789c612ff26,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,1.2893414497375488
+ce4fc299f9aeda71f25cf858c7598380b1cef0118b7cd96758fbe7bf63f39006,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.9341249465942383
+e154c2b730193774144faf0fa7b7c70d53600debd9ee28ad3a65848b26920b73,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.906416654586792
+f17cf3102b6e7b34aefff06b8cd87951d5a66f5de41449a6f7dcb82d4913e701,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,1.091759443283081
+2c6128598c266d4cb98bbf58fff88b66843cdce8adaf6e2d0933e6d44751923f,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.7923328876495361
+2f8abfd945b19119f39dd07a96a118b178684c61ec0a934bb7777d8c220f4036,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.7762124538421631
+ebf2f8ca5a15bb29af08c86f2c49d14299b436707911865482478180fb86bb35,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.67037034034729
+e79156eba2667832e9f8a4f79ac891cd0fe196f70ea4934a4e34e0db539860a3,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('discount', 'order', 'order_details', 'product', 'subcategory')",1.0,5,0.6599109172821045
+d9e06dcb6e0741d0147708eca0ababea36e0a5d29c5af1c6697bb2c89735b83b,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.7767455577850342
+ab6a5c14eccde505cb8f09888200dd936c11935cae9fbffe7e477eddd023df9f,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.1390266418457031
+a871b049676df32d83cf8c7bd4af80ed6a07488071e22da4f7c30fc84b1da778,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.1119956970214844
+ae4a363162d89be8798f4def3d149fc33a48f50546e9837b26a1467597e6b402,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.8337156772613525
+b0f5d45c243b3111912c0f3fd3393bbce398f3a4e5e5ccd89aa4d25913ac44b9,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.7269723415374756
+14fe31e140856b4eabb11d44d604aeb3546592b48f44e2493cbb7fd7049ac246,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.8020830154418945
+f0352d9785af87726e617f30eec3a52b6f710bb98157f22cdd7bd4a16b3de712,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.8468325138092041
+964a8bf309949db778e24111d49c790404c20f390bf4e7d08930a844cd0f6d1b,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.7945711612701416
+a0d3eb89ec1328e01154ee95f04db8bbfc4d55d9dc01d38267677b228aa4d6e5,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.8294060230255127
+7ed9f3e3606e378b444f3244194bc394528ee11fe2862743750633b8b3aba678,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.3405168056488037
+a96e10bae95fb50dc71a57e663c2c7d0f188d07489dad94d99e663ad3b3f9c81,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.235159158706665
+acf9b0659d06e528895848a27d578ce27aeec09620d02f624c257c5bfba9e166,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.8923108577728271
+19309d8573ae6b36b0cdcb550b9857a7b1218a06656e57beebb418606b512a17,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.9001915454864502
+e77f2329e32e75af6b1742813a6a677cd731740fd954364357412e40159d059b,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.9280438423156738
+0ca027d12491e70eaf8ce2ad604b510bf5abfed2a9c05b090c03f8afc5bfb522,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.962083101272583
+5803fce332b10dc0aeb5a130a3411a68c549ffd687f4693308e9553d18e25ce6,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.9225106239318848
+70abaf6977c915ec1b8d38d2128cd37b20d0f5206079bcfef243a116d7177c52,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.3805019855499268
+88ce8e74e4ffd03bd96d66562f8afb094c0be149b0c095d7de44be3657bcf6b8,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2410905361175537
+4bc9ecbefd457a318077f730dd52aeb096eeb40dbd9833bde91c5f4596863ad4,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0099916458129883
+edc8b590389aa8174bde544e4f99ea9f8cf99b897e4aa76a794a2557f211d8a1,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.329073190689087
+88b9f79c6861d47d432a1b7b08ec60d7e813ecd90378faa2a62f122ce378b59d,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4090917110443115
+a517dbfcaa9fc39d4f6d859b1092ac17d66bde4d51ffc599a2b4295e1df44327,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.3515183925628662
+157dac5e535fde3ff34de01977a8b10b8cc8b16132ec74e1e48bd6da5362b922,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2892074584960938
+dc9193ae4919d4577cb9b0c9fc4e53106c5c7ae6fc8a9cd9d1136b8dd1fa0bec,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0547289848327637
+6a71a5302d3284283cad456902f221f6ae354336bdc4e685478ee4b3f034f617,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.5124306678771973
+3cb05f732c6f7a00ddaee2356bd9170feb33ea179c39cb151a86feb07dc9fc6d,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.3936920166015625
+f2b6e488dd2336e45e216e70220ec6448a3bb886841d0c9c62ba9e3328f490b6,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0876333713531494
+e782f45c63f9fa838b0756d1e09dbd9baea451f2b0f2c0788c467bc9902145d8,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4932687282562256
+2aec9d67e80b607e90ef00ddbbb7d875d7126c39477fc535a9e6420179dd9028,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4834465980529785
+7689e549fee348e8ed8923b38cb31d67ff6e87378e69fdb48e2ce2f0e90994d7,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4237861633300781
+aaca9f205acd89d73fb41d6d4aae6aaebcfe2ae51b0e12e8e792a2bb58c987df,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.1179776191711426
+43fac04da0707f6fb6d85783893b323fd326fa00f09f8350b050315a8a885e85,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.401726245880127
+39ad450aa5bc22b04f6e2d7e4d013d76fcb202d5962f9b9783e0f04c24ef37ce,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.585378885269165
+182a9dd7b6d15a9babcf18955cf44ddf5f747934c9325b18278dbf4da66c64e5,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.5882236957550049
+73d6590654d9b6e05f65c64809bf9e2290c726b703d9892d6c24973715a451e8,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4727118015289307
+ab43f39c1425d37f8b0d095c873024e27242527839d1a9d90f52d7b4a0af8c2f,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2139055728912354
+e708b9704c978e8490994cfec7046fa5eaecbd686f08108ef8a2618b12afcc8f,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.6429858207702637
+baff686d06e7a0378929192855bf2384ed2b115a87adb886a713e9b785687088,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4937093257904053
+31502fc5e987cfd9608618119f7e052b673cce70d9f1fbf49d9a56f70b7c50cc,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.188577651977539
+c635c4f9fe1277ea9624dbba85be36117ac80dff3b2d578c45b3ed737d806b95,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.477848768234253
+e6c257020b1aa9351e896f653d2c5efe77357d58f32d05837376abfc6aa00111,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.49778151512146
+5c31e88deffbedbb8fcf33af16ad966fe7a647a0a8889773bf88d51b37415f17,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0994799137115479
+52893361531b70a6c024d6f070a61f9cc12264224d250d668d86151986e534b4,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2669095993041992
+66feb9b9d7174e4dbfabf1e3b3d1048f92fab072a7b59e5a1a3f562f5de1811b,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.3496019840240479
+60f7431c3c15144a1b60a614fc1c24d113f970c69c551595ae6220aedbd50612,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.1070196628570557
+25ab5da8ceaa83855322587e62043070c62015833f74831c7454827603797370,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.375417709350586
+39b4ce58b71c378f7789de7c3fd2ac6a3db69b3f32d932add770f1952affd429,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.9659435749053955
+eaeb1270e5083242d3957a9a114ad071f6d7780ae96bfb647940b2da4462f367,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.1904406547546387
+54f1e65b2c34dc0e92aadf7d636696ecd009f8f335947f7b7e0bae68726dbbcd,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2121741771697998
+ddee024f380d7ad4659081ed6c1f93f1db92d871ac8ba0f7173a78da81d39728,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.1128273010253906
+91410ed071e79f701ba9c0e012d8320d7c43aac13e268712d0b6c0aa882cdd53,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2978184223175049
+54e96a569b5e49f68dbf5d6a3d21f613389a4d4c05e3d21a04de53aebc5e1fbb,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.4632580280303955
+7402c1ae5899aa91b143a6192092b986e01c9678af66382ea6e1474646c24560,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0193946361541748
+c8635ba4a4681dbd0689f98fe02e5d59b9a0b832ee09f951e0e5007c2ebc2823,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.2884867191314697
+da89420ad43c3a024d5d10e1573b3c251b301dec86773eb544e18de63e6cd96b,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.9164130687713623
+f8b6e7a935df2c6f69d0f8c0a91b4100433d3735624f4e409f7a86f580c2f9f2,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0938715934753418
+b478c89107d6f5a15e890a5b563ce33790ad1cdf4120b7775a9f2661b33c1a41,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.7793707847595215
+0a845589578665cee5f6503b923268247b5d4022ad08e998845b711e4c9cebfd,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0481302738189697
+bf3e2cbbff06a5dbf0b7b534e37b9269c641651434d120f477f63bc3129912d0,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,0.7807269096374512
+61606654bd898898a82bfa5313db97693d4f8c9be8f443d0901bc4a6bc19842d,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'discount', 'order', 'order_details', 'product', 'subcategory')",1.0,6,1.0680642127990723
+86b65f467eddf28bc358661f4cef796ea047835393c5d3cd607ab552f84448dc,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.03891921043396
+14f3ec21504bb8d50ea09f1b1193b6c5f255aa0ad766857d4d04b94b82bb316b,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5485599040985107
+465bc34a55a3c51b2ba378dee45061c97f77f361a8570dc0a83a9d1d4cc84547,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4259567260742188
+fe839fc12a7e3a35fd93419fc649ed815e8a2a7311e7949aa275a8f7b08b5c13,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.8432581424713135
+bc11bf10c9586c762b7d030378fc6467ab9311dbde0768cf7f8fe050a5a2a4e9,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2366344928741455
+acec4e1622662158afc6aae5c4b00a1b6b1ca5541333356ed8ea8be10173a7a7,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3699617385864258
+53bd34a886cf8fd3fb050b3d19e63b5644d24adab9d9fda82b732327f0fbd081,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.501802921295166
+5050f17b2027a5bfe568b6caf9ef123bcdfc13fc49082913af360c3df8789aac,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5664691925048828
+9e34727052901964d0a5496988d207c1678efbef747a2043cdbb9b7decde2d03,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.6993699073791504
+804604bb4846783d3b06a64cf8e04c475b19c6d8c570fec1d1b2a1b0f192fddd,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2831404209136963
+096c47b45f26496ecdede3cc319383f337c4e7251078212fb7a3c7374756a12a,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2832963466644287
+0caeca98663bb127c2a88ea3f93e1513c2bb35462baffa50de6d4ae4fd1fd162,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.7367770671844482
+ae827f365d0d8513b2d1014a74da269bb2cf3bf8d4967d1ed3561349f57c3778,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2655670642852783
+3c2d9da95f2f63a29f5c4e0742b35ffe78c23e24e04bd70870f1fc1ccb5e42f3,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.503584384918213
+ae827f365d0d8513b2d1014a74da269bb2cf3bf8d4967d1ed3561349f57c3778,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1572000980377197
+4c2816bcbfa979aa2edf001ec9e5948c24af2109cb9c4dca30a455cd9aa532eb,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5328266620635986
+d62f0d87eeedc2f3118f3c8290f2eabc0c4ddb730a8e6760d0fe92c86f6fa54c,"SELECT count(*) FROM subcategory as sub
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0028796195983887
+580e1f023eced9f103767182c635f3d05fd9d7e584448169ffc86619ca60dc9c,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4868919849395752
+0e9c840e4660dd273fac5ea08e598c8adb1fe03397ba98c07ba381ac2c601644,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.579833984375
+c772175e74813d479feb5ed6799e7e39912999c3d4f779926c9bce3df0b1424d,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.268301010131836
+8438e367aa19b3311c8b573202d03d9f939eed09464426867af85389f5018994,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1573686599731445
+d21705377cd8513f74f7f262d910c97e1b50d4ad91296ee67b1e1628fcaee757,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2682437896728516
+704fb3e74ef8b007348a627545f13bc31880bea4f528576f336f9796279014c8,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.297309160232544
+d62f0d87eeedc2f3118f3c8290f2eabc0c4ddb730a8e6760d0fe92c86f6fa54c,"SELECT count(*) FROM subcategory as sub
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0018799304962158
+14d0a5148aa825147a19cf15f4e857f241d74062c1b619475c4031793fb66d95,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.7516319751739502
+14f3ec21504bb8d50ea09f1b1193b6c5f255aa0ad766857d4d04b94b82bb316b,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4534635543823242
+0200c5838d94b1c49589bfe229790471af89b4b338ba8b401e5e04c427dd1bb9,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5661840438842773
+0b4aab66491f716602f792de6688ce19381ca744bcf646747b47c56d75964f05,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4878795146942139
+477a664aed34cb1642ca5e6434013cdf309c86e0604e704760a2ac5e9ffa8204,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4540414810180664
+3bca18ef3452fa3ab38dc3b95cfffd3d46d4daeec9c8a504681a4c9e2c582de0,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.6672565937042236
+d0297f7222989aced9b6a0e221a53f014bf6f567e3f5161219dbfd4189ae0cf8,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5332014560699463
+5201bf21d3e3597fe4b8643c7e19dad5b30c8a1074a96c913fceb4feecc2ae67,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.7349884510040283
+95f945db0fa3852176b37ccbeb4528cd4b95fe2c91b97a16826f077b0fb1a069,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5747978687286377
+83cd7a156e8e6b015afb339e393b6d73639a06413b0f41846a49a7282c159caf,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1722674369812012
+a755dcb2d23a66c8f76f41a132d44984db892a08b3fbc0f9191763fe504a0dab,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.9847941398620605
+760520887554b2cdc081920069c4e5f1d855aac9ffe358e76ccbe5149f13a7cc,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5026323795318604
+9e34727052901964d0a5496988d207c1678efbef747a2043cdbb9b7decde2d03,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3609669208526611
+b5b3bc634460d94194714562d8bf0b9be6e62e44614fefb36278be756233a9d3,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.471848964691162
+de7fe84cef2d5db110aa424bdb830697580fda9790e31e2eeeea0b65a71ed4ad,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5475986003875732
+14d0a5148aa825147a19cf15f4e857f241d74062c1b619475c4031793fb66d95,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5959827899932861
+477a664aed34cb1642ca5e6434013cdf309c86e0604e704760a2ac5e9ffa8204,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3182096481323242
+1423bc29b99c8bb7fb26576f25831676f12b44dd867314b322bcabd1eb8fc7d7,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3137104511260986
+9e34727052901964d0a5496988d207c1678efbef747a2043cdbb9b7decde2d03,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4727997779846191
+7015b05e06debf0cb86747ab4d76c321a985e6ddbe04b070dc51fef7d1e73a7d,"SELECT count(*) FROM category as cat
+JOIN subcategory as sub
+ON sub.category_id = cat.id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.7995269298553467
+30da5cfee0edeb52e72e23b1341925b6ad620f5cfcac4d2bd67835d5d8e2b92f,"SELECT count(*) FROM category as cat
+JOIN subcategory as sub
+ON sub.category_id = cat.id
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0787477493286133
+289cd8ad2f41a51839292af07822495e86950fd9b706993a0314bbd6de6e39ca,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.300462007522583
+6ceef002255521585643650083561f4e1e5002d71cbdcef4e1951d3d7fc16d15,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.6587846279144287
+37395064b7272a52ac6706d5dd003169547e5340198281c3fd552195c82be61a,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.268007516860962
+de7fe84cef2d5db110aa424bdb830697580fda9790e31e2eeeea0b65a71ed4ad,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5653412342071533
+ad84a99beb01261dbcfb5e425ccc85cd0f697034e6117116798199bacce579c1,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5665357112884521
+1423bc29b99c8bb7fb26576f25831676f12b44dd867314b322bcabd1eb8fc7d7,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4396576881408691
+10293fe2822de1078a038d8b2bc43856220f687d8a5aad11140e2ca66ceae533,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0815329551696777
+053a743aa37cad9b39af5185637860ca0036d66547c1a01a560ecefcbe28fcd7,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.6762287616729736
+096c47b45f26496ecdede3cc319383f337c4e7251078212fb7a3c7374756a12a,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2360000610351562
+0e9c840e4660dd273fac5ea08e598c8adb1fe03397ba98c07ba381ac2c601644,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.628493309020996
+c1a1bb5fec9e018f900e40de370aba12cbd024aa6a76e7ee6cf1e158f830e096,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.283982753753662
+ca93efde0c6c7bc08044ac7294ba52cd84ac0a655d1e8a5e8337bf96f3224358,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5446887016296387
+ef3bedabfea533308c77c9b08519aba488603aa1303e9e14b071f4f36f923dd3,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5537660121917725
+d3c60c4072fa01779e7d88613b94e6a5367f2ed2d4c2f896ed75cc3b49b75f38,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4394090175628662
+477a664aed34cb1642ca5e6434013cdf309c86e0604e704760a2ac5e9ffa8204,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.407374620437622
+4e57e0758a43bd86cf79ea37d99861132931d8b39847855aa04e74e9935c995b,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1895833015441895
+ae9c511313e1d88144407ae98bc668e7541e261c37b1fc3abdc6c1787ce9079b,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0938339233398438
+ad84a99beb01261dbcfb5e425ccc85cd0f697034e6117116798199bacce579c1,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.596442699432373
+281ac2436ea55a45f1c7a36df9fb31d6f20191db399d1c76a8310c39b647587c,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3936090469360352
+c1a1bb5fec9e018f900e40de370aba12cbd024aa6a76e7ee6cf1e158f830e096,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2673346996307373
+97c14e6e0912dad5573cef39d514526bf70150f5c1b837d2cd5c94a23ff7d59a,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.9400568008422852
+1e1468c4a427d42c0872c50f4dc90de550b77d861283be0dab58c87be8ce186f,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2056524753570557
+df38923ca117fd4ce3fd519c106f294eb59d88417cb0589b35f0633b06b0d46c,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4702742099761963
+1423bc29b99c8bb7fb26576f25831676f12b44dd867314b322bcabd1eb8fc7d7,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3758103847503662
+a9e113334ea0ec3b193d0b0e2ef1146e132e5ed4b735dcfb02bc3d45772f6a76,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0058579444885254
+95c981203b4cfaafe0e02861bc6165f56658702bf94693bae3642acaf56fc98b,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1565163135528564
+096c47b45f26496ecdede3cc319383f337c4e7251078212fb7a3c7374756a12a,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2362744808197021
+eabd1a8254916f14198ff7b16e1c861b4b75b29d6c662502f9ccd1cdc085e3ca,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2051973342895508
+c485959a8c4df5d4d778c499962383b4efe81730b44c9f33362e5919d99dd171,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4664297103881836
+846a12a30787a87eba6933fee75c772da954a81a6e05fb3e657f4a9ca3800f86,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3938138484954834
+bc11bf10c9586c762b7d030378fc6467ab9311dbde0768cf7f8fe050a5a2a4e9,"SELECT count(*) FROM [order] as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1121609210968018
+3bca18ef3452fa3ab38dc3b95cfffd3d46d4daeec9c8a504681a4c9e2c582de0,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4245705604553223
+a4b1193f6c447a9c15649b60859119cbd022b7e3b118959cf528e719b0afb8e7,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2968993186950684
+0200c5838d94b1c49589bfe229790471af89b4b338ba8b401e5e04c427dd1bb9,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.532355785369873
+0e9c840e4660dd273fac5ea08e598c8adb1fe03397ba98c07ba381ac2c601644,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.5048723220825195
+00a6b98dc5d57d5032ae35c5c6b8c4d59c702e44c8e3b9c444e88a8a548ff959,"SELECT count(*) FROM product as prod
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1415622234344482
+6e491b4aaa42156d151fd9ff29e967d3f5e5ae44e07978b7c2af729fc6608fa5,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.954071044921875
+5350651ccebab76d1eaf214c3ba9e97d80518c50630274155c43605d41634afc,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.9704818725585938
+82042f5593cb429c68087eb5e8b2742d2d59a9d50f3da20ed2437ab1edf28945,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4082963466644287
+a8e7f581c0e6212721a793a4913aae76737652782d957f067163c6ac36ab0009,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3936619758605957
+289cd8ad2f41a51839292af07822495e86950fd9b706993a0314bbd6de6e39ca,"SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1130516529083252
+09265761dba205c0c9757e096fd3fd84910471da3c368ed1db62c3d0a0d10935,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3166866302490234
+804604bb4846783d3b06a64cf8e04c475b19c6d8c570fec1d1b2a1b0f192fddd,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1155760288238525
+a9e113334ea0ec3b193d0b0e2ef1146e132e5ed4b735dcfb02bc3d45772f6a76,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.9432504177093506
+8438e367aa19b3311c8b573202d03d9f939eed09464426867af85389f5018994,"SELECT count(*) FROM [order] as ord
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.3025414943695068
+40076ad89e46c38651eef8b4d6595c994d3c0b4b579d164fee8501fcea65e20f,"SELECT count(*) FROM order_details as ord_det
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.7306098937988281
+ae9c511313e1d88144407ae98bc668e7541e261c37b1fc3abdc6c1787ce9079b,"SELECT count(*) FROM customer as cus
+JOIN [order] as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.0775806903839111
+c77cb3c554d492511a5e99d17dbd4baeff275e6a6e6cd1ba3d438bca50caf373,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.502363681793213
+ae827f365d0d8513b2d1014a74da269bb2cf3bf8d4967d1ed3561349f57c3778,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2186272144317627
+ae827f365d0d8513b2d1014a74da269bb2cf3bf8d4967d1ed3561349f57c3778,"SELECT count(*) FROM subcategory as sub
+JOIN product as prod
+ON prod.subcategory_id = sub.id
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.151064157485962
+2fd6398cd5b0ceaa0fcf3506f26c28397cb5bbceb6f61d8a664739c9d7fe767f,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.1318035125732422
+bcb266388aa513f8c277587a83bb25bfe37eae20223e3b9c560286ac777a44c9,"SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN [order] as ord
+ON ord.id = ord_det.order_id
+JOIN category as cat
+ON cat.id = sub.category_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.2686700820922852
+de7fe84cef2d5db110aa424bdb830697580fda9790e31e2eeeea0b65a71ed4ad,"SELECT count(*) FROM [order] as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,1.4888203144073486
+f93e42a64edf74c3dc58a14b76c9ceb2d66aaefc8e852e14213398314d3f2530,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.7769191265106201
+f93e42a64edf74c3dc58a14b76c9ceb2d66aaefc8e852e14213398314d3f2530,"SELECT count(*) FROM discount as dis
+JOIN [order] as ord
+ON ord.discount_id = dis.id
+JOIN customer as cus
+ON cus.id = ord.customer_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN category as cat
+ON cat.id = sub.category_id
+OPTION(FORCE ORDER);","('customer', 'category', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,0.7169263362884521
