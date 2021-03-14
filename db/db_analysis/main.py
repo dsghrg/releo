@@ -196,7 +196,7 @@ if __name__ == '__main__':
                 elapsed_time = end_time - start_time
                 print("\t->\t" + str(elapsed_time))
                 print("\n\n")
-                with open("./query_execution_times.csv", "a") as csv_file:
+                with open("./query_execution_times_4-7.csv", "a") as csv_file:
                     writer = csv.writer(csv_file, delimiter=',')
                     writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, logical_query,
                                      ratio_executed_to_possible_executions, len(logical_query), elapsed_time])
