@@ -47,6 +47,7 @@ order_df = pd.DataFrame(order_lst, columns = ['id', 'customer_id', 'amount', 'de
 
 # product table
 product_lst = [[k ,
+              random_string_generator(30, string.ascii_letters),
               math.floor(random.uniform(0, 1) * 480 + 20),
               random.randint(1, size_subcategory) ] for k in range(1, size_product + 1)]
 product_df = pd.DataFrame(product_lst, columns = ['id', 'name', 'price', 'subcategory_id'])

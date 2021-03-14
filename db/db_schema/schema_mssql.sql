@@ -19,7 +19,7 @@ CREATE TABLE dbo.discount (
     discount float NOT NULL
 )
 
-CREATE TABLE dbo.order (
+CREATE TABLE dbo.[order] (
     id bigint NOT NULL,
     customer_id bigint NOT NULL,
     amount float NOT NULL,
