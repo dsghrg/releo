@@ -4,6 +4,8 @@ import string
 import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine
+from sqlalchemy.schema import DropTable
+from sqlalchemy.ext.compiler import compiles
 
 from dbconnection import postgres_connection
 
@@ -16,11 +18,14 @@ size_product = 100000 * 10
 size_order = 2000000 * 10
 size_order_details = 6000000 * 10
 
+@compiles(DropTable, "postgresql")
+def _compile_drop_table(element, compiler, **kwargs):
+    return compiler.visit_drop_table(element) + " CASCADE"
 
 def random_string_generator(str_size, allowed_chars):
     return ''.join(random.choice(allowed_chars) for x in range(str_size))
 
-
+print('creating pandas tables...')
 # Customer table
 customer_lst = [[k, random_string_generator(30, string.ascii_letters)] for k in range(1, size_customer + 1)]
 customer_df = pd.DataFrame(customer_lst, columns=['id', 'name'])
@@ -66,33 +71,36 @@ order_details_lst = [[k,
                       random.randint(1, 20)] for k in range(1, size_order_details + 1)]
 order_details_df = pd.DataFrame(order_details_lst, columns=['id', 'order_id', 'product_id', 'price', 'quantity'])
 
+print('connecting to db...')
 creds = postgres_connection()
-postgres_engine = create_engine(
-    'postgresql://{}:{}@{}:5432/{}'.format(creds['DATABASE_CONNECTION__USER'], creds['DATABASE_CONNECTION__PASSWORD'],
-                                           creds['DATABASE_CONNECTION__HOST'], creds['DATABASE_CONNECTION__DATABASE']))
+engine = create_engine(
+    'postgresql://{}:{}@{}:5432/{}'.format(creds['user'], creds['password'],
+                                           creds['host'], creds['database']))
 
-SERVERNAME = 'mssqlbench.cloudlab.zhaw.ch'
-SERVER = 'MSSQLBENCH'
-DATABASE = 'random_database_small'
+#SERVERNAME = 'mssqlbench.cloudlab.zhaw.ch'
+#SERVER = 'MSSQLBENCH'
+#DATABASE = 'random_database_small'
 
-# params_log = urllib.parse.quote_plus(r'DRIVER={ODBC Driver 13 for SQL Server};SERVER=MSSQLBENCH;DATABASE=random_database_small;Trusted_Connection=yes')
-# conn_sql_server = 'mssql+pyodbc:///?odbc_connect={}'.format(params_log)
+print('connected!')
 
-engine = create_engine(postgres_engine, fast_executemany=True)
+#params_log = urllib.parse.quote_plus(r'DRIVER={ODBC Driver 13 for SQL Server};SERVER=MSSQLBENCH;DATABASE=random_database_small;Trusted_Connection=yes')
+#conn_sql_server = 'mssql+pyodbc:///?odbc_connect={}'.format(params_log)
 
-customer_df.to_sql("customer", con=engine, schema='dbo', if_exists='replace', index=False)
+#engine = create_engine(postgres_engine, fast_executemany=True)
+
+customer_df.to_sql("customer", con=engine, schema='public', if_exists='replace', index=False)
 print("Customer done")
-deliverer_df.to_sql("deliverer", con=engine, schema='dbo', if_exists='replace', index=False)
+deliverer_df.to_sql("deliverer", con=engine, schema='public', if_exists='replace', index=False)
 print("deliverer done")
-discount_df.to_sql("discount", con=engine, schema='dbo', if_exists='replace', index=False)
+discount_df.to_sql("discount", con=engine, schema='public', if_exists='replace', index=False)
 print("discount done")
-category_df.to_sql("category", con=engine, schema='dbo', if_exists='replace', index=False)
+category_df.to_sql("category", con=engine, schema='public', if_exists='replace', index=False)
 print("category done")
-subcategory_df.to_sql("subcategory", con=engine, schema='dbo', if_exists='replace', index=False)
+subcategory_df.to_sql("subcategory", con=engine, schema='public', if_exists='replace', index=False)
 print("subcategory done")
-order_df.to_sql("order", con=engine, schema='dbo', if_exists='replace', index=False)
+order_df.to_sql("order", con=engine, schema='public', if_exists='replace', index=False)
 print("order done")
-product_df.to_sql("product", con=engine, schema='dbo', if_exists='replace', index=False)
+product_df.to_sql("product", con=engine, schema='public', if_exists='replace', index=False)
 print("product done")
-order_details_df.to_sql("order_details", con=engine, schema='dbo', if_exists='replace', index=False)
+order_details_df.to_sql("order_details", con=engine, schema='public', if_exists='replace', index=False)
 print("order_details done")
