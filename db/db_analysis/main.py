@@ -114,7 +114,7 @@ def generate_join_orders(schema, query_patcher, logical_query):
         used_relations = {}
         impossible_query = False
         first_table = schema[permutation[0]]
-        query = "SELECT * FROM " + first_table.name + " as " + first_table.alias
+        query = "SELECT count(*) FROM " + first_table.name + " as " + first_table.alias
         used_relations[first_table.name] = first_table
 
         for i in range(1, len(permutation)):
@@ -178,7 +178,7 @@ def reconnect(conn, cursor):
 if __name__ == '__main__':
     conn, cursor = connect()
     schema = create_schema()
-    for i in range(4, 8):
+    for i in range(4, 9):
         logical_queries = get_n_joinable_tables(i, schema)
         logical_query = random.choice(logical_queries)
         queries = generate_join_orders(schema, postgres_patcher, logical_query)
