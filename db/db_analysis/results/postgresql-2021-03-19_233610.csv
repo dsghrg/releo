@@ -1,0 +1,58 @@
+2021-03-19 23:36:10.776 CET,,,7544,,6055275a.1d78,1,,2021-03-19 23:36:10 CET,,0,LOG,00000,"ending log output to stderr",,"Future log output will go to log destination ""csvlog"".",,,,,,,""
+2021-03-19 23:36:10.857 CET,,,1188,,6055275a.4a4,1,,2021-03-19 23:36:10 CET,,0,LOG,00000,"database system was shut down at 2021-03-19 23:36:09 CET",,,,,,,,,""
+2021-03-19 23:36:10.906 CET,,,7544,,6055275a.1d78,2,,2021-03-19 23:36:10 CET,,0,LOG,00000,"database system is ready to accept connections",,,,,,,,,""
+2021-03-19 23:38:44.967 CET,"postgres","shop_db",9952,"::1:55099",6055278c.26e0,1,"",2021-03-19 23:37:00 CET,5/9,0,LOG,00000,"duration: 104052.362 ms  plan:
+Query Text: LOAD 'auto_explain';
+SET auto_explain.log_min_duration = 0;
+set auto_explain.log_analyze = true;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN subcategory as sub
+ON sub.id = prod.subcategory_id
+JOIN deliverer as del
+ON del.id = ord.deliverer_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN category as cat
+ON cat.id = sub.category_id;
+
+Finalize Aggregate  (cost=12084799.49..12084799.50 rows=1 width=8) (actual time=101267.331..101267.332 rows=1 loops=1)
+  ->  Gather  (cost=12084799.27..12084799.48 rows=2 width=8) (actual time=101260.614..104052.267 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=12083799.27..12083799.28 rows=1 width=8) (actual time=101176.516..101176.516 rows=1 loops=3)
+              ->  Hash Join  (cost=426671.63..11722631.98 rows=144466918 width=0) (actual time=51962.205..99325.729 rows=20000000 loops=3)
+                    Hash Cond: (sub.category_id = cat.id)
+                    ->  Hash Join  (cost=426362.63..9735902.86 rows=144466918 width=8) (actual time=51953.971..91392.986 rows=20000000 loops=3)
+                          Hash Cond: (ord.discount_id = dis.id)
+                          ->  Hash Join  (cost=426346.38..7749466.48 rows=144466918 width=16) (actual time=51953.002..86018.578 rows=20000000 loops=3)
+                                Hash Cond: (ord.deliverer_id = del.id)
+                                ->  Hash Join  (cost=426309.38..2632892.73 rows=24077820 width=24) (actual time=51952.361..80446.923 rows=20000000 loops=3)
+                                      Hash Cond: (prod.subcategory_id = sub.id)
+                                      ->  Parallel Hash Join  (cost=424716.38..2300229.71 rows=24077820 width=24) (actual time=51916.894..68765.826 rows=20000000 loops=3)
+                                            Hash Cond: (ord_det.order_id = ord.id)
+                                            ->  Parallel Hash Join  (cost=21720.00..1211971.33 rows=24077820 width=16) (actual time=15245.400..30322.515 rows=20000000 loops=3)
+                                                  Hash Cond: (ord_det.product_id = prod.id)
+                                                  ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=1.029..6531.950 rows=20000000 loops=3)
+                                                  ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=16) (actual time=416.612..416.612 rows=333333 loops=3)
+                                                        Buckets: 131072  Batches: 16  Memory Usage: 4032kB
+                                                        ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=16) (actual time=0.956..220.713 rows=333333 loops=3)
+                                            ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=24) (actual time=9434.169..9434.170 rows=6666667 loops=3)
+                                                  Buckets: 65536  Batches: 512  Memory Usage: 2688kB
+                                                  ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=24) (actual time=0.757..4027.602 rows=6666667 loops=3)
+                                      ->  Hash  (cost=968.00..968.00 rows=50000 width=16) (actual time=34.963..34.963 rows=50000 loops=3)
+                                            Buckets: 65536  Batches: 1  Memory Usage: 2856kB
+                                            ->  Seq Scan on subcategory sub  (cost=0.00..968.00 rows=50000 width=16) (actual time=0.672..21.231 rows=50000 loops=3)
+                                ->  Hash  (cost=22.00..22.00 rows=1200 width=8) (actual time=0.614..0.614 rows=4 loops=3)
+                                      Buckets: 2048  Batches: 1  Memory Usage: 17kB
+                                      ->  Seq Scan on deliverer del  (cost=0.00..22.00 rows=1200 width=8) (actual time=0.586..0.588 rows=4 loops=3)
+                          ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.943..0.943 rows=500 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.571..0.743 rows=500 loops=3)
+                    ->  Hash  (cost=184.00..184.00 rows=10000 width=8) (actual time=7.876..7.876 rows=10000 loops=3)
+                          Buckets: 16384  Batches: 1  Memory Usage: 519kB
+                          ->  Seq Scan on category cat  (cost=0.00..184.00 rows=10000 width=8) (actual time=0.771..5.044 rows=10000 loops=3)",,,,,,,,,"pgAdmin 4 - CONN:6667795"
