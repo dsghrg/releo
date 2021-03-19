@@ -175,8 +175,15 @@ def reconnect(conn, cursor):
     return connect()
 
 
+def enable_auto_explain(cursor):
+    cursor.execute("LOAD 'auto_explain';")
+    cursor.execute("SET auto_explain.log_min_duration = 0;")
+    cursor.execute("SET auto_explain.log_analyze = true;")
+
+
 if __name__ == '__main__':
     conn, cursor = connect()
+    enable_auto_explain(cursor)
     schema = create_schema()
     for i in range(4, 9):
         logical_queries = get_n_joinable_tables(i, schema)
