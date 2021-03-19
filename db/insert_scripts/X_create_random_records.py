@@ -26,7 +26,7 @@ customer_lst = [[k, random_string_generator(30, string.ascii_letters)] for k in 
 customer_df = pd.DataFrame(customer_lst, columns=['id', 'name'])
 
 # deliverer table
-deliverer_lst = [['1', 'DHL'], ['2', 'IPS'], ['3', 'FEDEX'], ['4', 'UPS']]
+deliverer_lst = [[1, 'DHL'], [2, 'IPS'], [3, 'FEDEX'], [4, 'UPS']]
 deliverer_df = pd.DataFrame(deliverer_lst, columns=['id', 'name'])
 
 # discount table
