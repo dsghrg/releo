@@ -56,3 +56,377 @@ Finalize Aggregate  (cost=12084799.49..12084799.50 rows=1 width=8) (actual time=
                     ->  Hash  (cost=184.00..184.00 rows=10000 width=8) (actual time=7.876..7.876 rows=10000 loops=3)
                           Buckets: 16384  Batches: 1  Memory Usage: 519kB
                           ->  Seq Scan on category cat  (cost=0.00..184.00 rows=10000 width=8) (actual time=0.771..5.044 rows=10000 loops=3)",,,,,,,,,"pgAdmin 4 - CONN:6667795"
+2021-03-19 23:47:13.318 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,1,"",2021-03-19 23:47:13 CET,6/73,0,WARNING,25001,"there is already a transaction in progress",,,,,,,,,""
+2021-03-19 23:48:15.318 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,2,"",2021-03-19 23:47:13 CET,6/73,0,LOG,00000,"duration: 61969.295 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM discount as dis
+JOIN ""order"" as ord
+ON ord.discount_id = dis.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id;
+COMMIT;
+Finalize Aggregate  (cost=2418205.96..2418205.97 rows=1 width=8) (actual time=59270.892..59270.892 rows=1 loops=1)
+  ->  Gather  (cost=2418205.74..2418205.95 rows=2 width=8) (actual time=59266.827..61968.940 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2417205.74..2417205.75 rows=1 width=8) (actual time=59213.921..59213.921 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=522633.19..2357011.19 rows=24077820 width=0) (actual time=48433.196..57866.123 rows=20000000 loops=3)
+                    Hash Cond: (ord_det.product_id = prod.id)
+                    ->  Parallel Hash Join  (cost=501320.19..1944681.86 rows=25000000 width=8) (actual time=30562.134..42791.227 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.order_id = ord.id)
+                          ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=1.097..10910.618 rows=20000000 loops=3)
+                          ->  Parallel Hash  (cost=364600.31..364600.31 rows=8333350 width=8) (actual time=8370.403..8370.403 rows=6666667 loops=3)
+                                Buckets: 131072  Batches: 512  Memory Usage: 2592kB
+                                ->  Hash Join  (cost=16.25..364600.31 rows=8333350 width=8) (actual time=2.128..4245.698 rows=6666667 loops=3)
+                                      Hash Cond: (ord.discount_id = dis.id)
+                                      ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=1.017..1972.690 rows=6666667 loops=3)
+                                      ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=1.069..1.070 rows=500 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                            ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.720..0.872 rows=500 loops=3)
+                    ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=246.069..246.069 rows=333333 loops=3)
+                          Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                          ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.691..127.012 rows=333333 loops=3)",,,,,,,,,""
+2021-03-19 23:49:12.503 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,3,"",2021-03-19 23:47:13 CET,6/74,0,LOG,00000,"duration: 57165.607 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM ""order"" as ord
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id;
+COMMIT;
+Finalize Aggregate  (cost=2418205.96..2418205.97 rows=1 width=8) (actual time=54151.291..54151.291 rows=1 loops=1)
+  ->  Gather  (cost=2418205.74..2418205.95 rows=2 width=8) (actual time=54148.253..57165.043 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2417205.74..2417205.75 rows=1 width=8) (actual time=54090.672..54090.672 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=522633.19..2357011.19 rows=24077820 width=0) (actual time=43190.215..52733.750 rows=20000000 loops=3)
+                    Hash Cond: (ord_det.product_id = prod.id)
+                    ->  Parallel Hash Join  (cost=501320.19..1944681.86 rows=25000000 width=8) (actual time=25591.050..37870.106 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.order_id = ord.id)
+                          ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=0.773..7201.638 rows=20000000 loops=3)
+                          ->  Parallel Hash  (cost=364600.31..364600.31 rows=8333350 width=8) (actual time=8128.348..8128.348 rows=6666667 loops=3)
+                                Buckets: 131072  Batches: 512  Memory Usage: 2592kB
+                                ->  Hash Join  (cost=16.25..364600.31 rows=8333350 width=8) (actual time=1.762..4138.124 rows=6666667 loops=3)
+                                      Hash Cond: (ord.discount_id = dis.id)
+                                      ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.844..1894.637 rows=6666667 loops=3)
+                                      ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.871..0.871 rows=500 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                            ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.590..0.709 rows=500 loops=3)
+                    ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=213.841..213.841 rows=333333 loops=3)
+                          Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                          ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.666..99.302 rows=333333 loops=3)",,,,,,,,,""
+2021-03-19 23:50:15.298 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,4,"",2021-03-19 23:47:13 CET,6/75,0,LOG,00000,"duration: 62755.345 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM ""order"" as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id;
+COMMIT;
+Finalize Aggregate  (cost=2663648.39..2663648.40 rows=1 width=8) (actual time=60020.502..60020.502 rows=1 loops=1)
+  ->  Gather  (cost=2663648.18..2663648.39 rows=2 width=8) (actual time=60016.757..62754.901 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2662648.18..2662648.19 rows=1 width=8) (actual time=59962.974..59962.974 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=416187.63..2602453.63 rows=24077820 width=0) (actual time=50051.460..58741.812 rows=20000000 loops=3)
+                    Hash Cond: (ord_det.product_id = prod.id)
+                    ->  Hash Join  (cost=394874.63..2190124.29 rows=25000000 width=8) (actual time=24466.868..44577.149 rows=20000000 loops=3)
+                          Hash Cond: (ord.discount_id = dis.id)
+                          ->  Parallel Hash Join  (cost=394858.38..1846358.04 rows=25000000 width=16) (actual time=24465.853..38783.350 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.order_id = ord.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=0.987..7258.520 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=16) (actual time=6747.870..6747.874 rows=6666667 loops=3)
+                                      Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                      ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.793..2448.605 rows=6666667 loops=3)
+                          ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.975..0.976 rows=500 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.784..0.868 rows=500 loops=3)
+                    ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=234.483..234.483 rows=333333 loops=3)
+                          Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                          ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.608..111.806 rows=333333 loops=3)",,,,,,,,,""
+2021-03-19 23:51:19.615 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,5,"",2021-03-19 23:47:13 CET,6/76,0,LOG,00000,"duration: 64278.503 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM ""order"" as ord
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id;
+COMMIT;
+Finalize Aggregate  (cost=2699796.42..2699796.43 rows=1 width=8) (actual time=61544.496..61544.496 rows=1 loops=1)
+  ->  Gather  (cost=2699796.20..2699796.41 rows=2 width=8) (actual time=61540.017..64277.947 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2698796.20..2698796.21 rows=1 width=8) (actual time=61457.911..61457.912 rows=1 loops=3)
+              ->  Hash Join  (cost=416187.63..2638601.65 rows=24077820 width=0) (actual time=45083.645..60181.091 rows=20000000 loops=3)
+                    Hash Cond: (ord.discount_id = dis.id)
+                    ->  Parallel Hash Join  (cost=416171.38..2307515.38 rows=24077820 width=8) (actual time=45082.681..55013.532 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.product_id = prod.id)
+                          ->  Parallel Hash Join  (cost=394858.38..1846358.04 rows=25000000 width=16) (actual time=24826.439..38635.174 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.order_id = ord.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=0.931..7114.724 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=16) (actual time=7598.184..7598.185 rows=6666667 loops=3)
+                                      Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                      ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.957..2416.684 rows=6666667 loops=3)
+                          ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=222.938..222.938 rows=333333 loops=3)
+                                Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                                ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.596..101.428 rows=333333 loops=3)
+                    ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.742..0.742 rows=500 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                          ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.517..0.612 rows=500 loops=3)",,,,,,,,,""
+2021-03-19 23:52:23.478 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,6,"",2021-03-19 23:47:13 CET,6/77,0,LOG,00000,"duration: 63831.953 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM order_details as ord_det
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id;
+COMMIT;
+Finalize Aggregate  (cost=2663648.39..2663648.40 rows=1 width=8) (actual time=60531.799..60531.800 rows=1 loops=1)
+  ->  Gather  (cost=2663648.18..2663648.39 rows=2 width=8) (actual time=60528.184..63831.333 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2662648.18..2662648.19 rows=1 width=8) (actual time=60478.964..60478.964 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=416187.63..2602453.63 rows=24077820 width=0) (actual time=50077.924..59168.847 rows=20000000 loops=3)
+                    Hash Cond: (ord_det.product_id = prod.id)
+                    ->  Hash Join  (cost=394874.63..2190124.29 rows=25000000 width=8) (actual time=24355.327..44333.741 rows=20000000 loops=3)
+                          Hash Cond: (ord.discount_id = dis.id)
+                          ->  Parallel Hash Join  (cost=394858.38..1846358.04 rows=25000000 width=16) (actual time=24354.283..38562.487 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.order_id = ord.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=1.152..7088.142 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=16) (actual time=7091.419..7091.420 rows=6666667 loops=3)
+                                      Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                      ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.820..2486.730 rows=6666667 loops=3)
+                          ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.999..0.999 rows=500 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.812..0.898 rows=500 loops=3)
+                    ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=239.911..239.911 rows=333333 loops=3)
+                          Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                          ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.649..112.608 rows=333333 loops=3)",,,,,,,,,""
+2021-03-19 23:53:31.359 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,7,"",2021-03-19 23:47:13 CET,6/78,0,LOG,00000,"duration: 67836.770 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM order_details as ord_det
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id;
+COMMIT;
+Finalize Aggregate  (cost=2699796.42..2699796.43 rows=1 width=8) (actual time=64267.870..64267.870 rows=1 loops=1)
+  ->  Gather  (cost=2699796.20..2699796.41 rows=2 width=8) (actual time=64263.826..67835.603 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2698796.20..2698796.21 rows=1 width=8) (actual time=64205.785..64205.785 rows=1 loops=3)
+              ->  Hash Join  (cost=416187.63..2638601.65 rows=24077820 width=0) (actual time=47829.538..62951.852 rows=20000000 loops=3)
+                    Hash Cond: (ord.discount_id = dis.id)
+                    ->  Parallel Hash Join  (cost=416171.38..2307515.38 rows=24077820 width=8) (actual time=47828.474..57821.992 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.product_id = prod.id)
+                          ->  Parallel Hash Join  (cost=394858.38..1846358.04 rows=25000000 width=16) (actual time=25344.665..41183.851 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.order_id = ord.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=0.938..7689.249 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=16) (actual time=6556.333..6556.333 rows=6666667 loops=3)
+                                      Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                      ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.890..2442.123 rows=6666667 loops=3)
+                          ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=222.387..222.387 rows=333333 loops=3)
+                                Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                                ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.676..103.944 rows=333333 loops=3)
+                    ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.806..0.806 rows=500 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                          ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.541..0.666 rows=500 loops=3)",,,,,,,,,""
+2021-03-19 23:54:31.859 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,8,"",2021-03-19 23:47:13 CET,6/79,0,LOG,00000,"duration: 60432.907 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM order_details as ord_det
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id;
+COMMIT;
+Finalize Aggregate  (cost=2628392.75..2628392.76 rows=1 width=8) (actual time=57889.654..57889.654 rows=1 loops=1)
+  ->  Gather  (cost=2628392.53..2628392.74 rows=2 width=8) (actual time=57884.379..60432.764 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2627392.53..2627392.54 rows=1 width=8) (actual time=57832.813..57832.813 rows=1 loops=3)
+              ->  Hash Join  (cost=416187.63..2567197.98 rows=24077820 width=0) (actual time=39980.667..56548.771 rows=20000000 loops=3)
+                    Hash Cond: (ord.discount_id = dis.id)
+                    ->  Parallel Hash Join  (cost=416171.38..2236111.71 rows=24077820 width=8) (actual time=39979.591..51326.842 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.order_id = ord.id)
+                          ->  Parallel Hash Join  (cost=21313.00..1211157.33 rows=24077820 width=8) (actual time=11957.405..23904.955 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.product_id = prod.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=1.131..5813.894 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=243.249..243.250 rows=333333 loops=3)
+                                      Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                                      ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.893..110.404 rows=333333 loops=3)
+                          ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=16) (actual time=6295.870..6295.870 rows=6666667 loops=3)
+                                Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.634..2338.257 rows=6666667 loops=3)
+                    ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.736..0.736 rows=500 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                          ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.535..0.620 rows=500 loops=3)",,,,,,,,,""
+2021-03-19 23:55:30.737 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,9,"",2021-03-19 23:47:13 CET,6/80,0,LOG,00000,"duration: 58826.200 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM product as prod
+JOIN order_details as ord_det
+ON ord_det.product_id = prod.id
+JOIN ""order"" as ord
+ON ord.id = ord_det.order_id
+JOIN discount as dis
+ON dis.id = ord.discount_id;
+COMMIT;
+Finalize Aggregate  (cost=2628392.75..2628392.76 rows=1 width=8) (actual time=56242.128..56242.128 rows=1 loops=1)
+  ->  Gather  (cost=2628392.53..2628392.74 rows=2 width=8) (actual time=56237.105..58826.111 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2627392.53..2627392.54 rows=1 width=8) (actual time=56187.218..56187.218 rows=1 loops=3)
+              ->  Hash Join  (cost=416187.63..2567197.98 rows=24077820 width=0) (actual time=39058.079..54968.896 rows=20000000 loops=3)
+                    Hash Cond: (ord.discount_id = dis.id)
+                    ->  Parallel Hash Join  (cost=416171.38..2236111.71 rows=24077820 width=8) (actual time=39057.043..49950.461 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.order_id = ord.id)
+                          ->  Parallel Hash Join  (cost=21313.00..1211157.33 rows=24077820 width=8) (actual time=11090.164..23393.897 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.product_id = prod.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=1.013..5452.516 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=218.017..218.017 rows=333333 loops=3)
+                                      Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                                      ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.813..98.199 rows=333333 loops=3)
+                          ->  Parallel Hash  (cost=250000.50..250000.50 rows=8333350 width=16) (actual time=6066.066..6066.066 rows=6666667 loops=3)
+                                Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=16) (actual time=0.598..2207.995 rows=6666667 loops=3)
+                    ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.787..0.787 rows=500 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                          ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.538..0.642 rows=500 loops=3)",,,,,,,,,""
+2021-03-19 23:56:37.279 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,10,"",2021-03-19 23:47:13 CET,6/81,0,LOG,00000,"duration: 66466.497 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM customer as cus
+JOIN ""order"" as ord
+ON ord.customer_id = cus.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id;
+COMMIT;
+Finalize Aggregate  (cost=2697073.37..2697073.38 rows=1 width=8) (actual time=63147.715..63147.715 rows=1 loops=1)
+  ->  Gather  (cost=2697073.16..2697073.37 rows=2 width=8) (actual time=63143.360..66466.367 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2696073.16..2696073.17 rows=1 width=8) (actual time=63088.033..63088.033 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=801500.61..2635878.61 rows=24077820 width=0) (actual time=53123.627..61825.876 rows=20000000 loops=3)
+                    Hash Cond: (ord_det.product_id = prod.id)
+                    ->  Parallel Hash Join  (cost=780187.60..2223549.27 rows=25000000 width=8) (actual time=35293.048..47674.479 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.order_id = ord.id)
+                          ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=0.973..7083.907 rows=20000000 loops=3)
+                          ->  Parallel Hash  (cost=643467.73..643467.73 rows=8333350 width=8) (actual time=18103.676..18103.676 rows=6666667 loops=3)
+                                Buckets: 131072  Batches: 512  Memory Usage: 2592kB
+                                ->  Hash Join  (cost=96697.63..643467.73 rows=8333350 width=8) (actual time=7468.152..14236.542 rows=6666667 loops=3)
+                                      Hash Cond: (ord.discount_id = dis.id)
+                                      ->  Parallel Hash Join  (cost=96681.38..528867.92 rows=8333350 width=16) (actual time=7467.039..12275.440 rows=6666667 loops=3)
+                                            Hash Cond: (ord.customer_id = cus.id)
+                                            ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=24) (actual time=0.848..2486.809 rows=6666667 loops=3)
+                                            ->  Parallel Hash  (cost=62500.50..62500.50 rows=2083350 width=8) (actual time=1670.044..1670.045 rows=1666667 loops=3)
+                                                  Buckets: 131072  Batches: 128  Memory Usage: 2592kB
+                                                  ->  Parallel Seq Scan on customer cus  (cost=0.00..62500.50 rows=2083350 width=8) (actual time=0.925..779.134 rows=1666667 loops=3)
+                                      ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=1.084..1.085 rows=500 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                            ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.871..0.972 rows=500 loops=3)
+                    ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=225.727..225.727 rows=333333 loops=3)
+                          Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                          ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.568..104.240 rows=333333 loops=3)",,,,,,,,,""
+2021-03-19 23:57:49.721 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,11,"",2021-03-19 23:47:13 CET,6/82,0,LOG,00000,"duration: 72384.697 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM customer as cus
+JOIN ""order"" as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN discount as dis
+ON dis.id = ord.discount_id
+JOIN product as prod
+ON prod.id = ord_det.product_id;
+COMMIT;
+Finalize Aggregate  (cost=2942515.81..2942515.82 rows=1 width=8) (actual time=69119.800..69119.800 rows=1 loops=1)
+  ->  Gather  (cost=2942515.59..2942515.80 rows=2 width=8) (actual time=69114.520..72384.564 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2941515.59..2941515.60 rows=1 width=8) (actual time=69063.146..69063.146 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=695055.04..2881321.04 rows=24077820 width=0) (actual time=58968.073..67833.837 rows=20000000 loops=3)
+                    Hash Cond: (ord_det.product_id = prod.id)
+                    ->  Hash Join  (cost=673742.04..2468991.71 rows=25000000 width=8) (actual time=34049.159..53299.721 rows=20000000 loops=3)
+                          Hash Cond: (ord.discount_id = dis.id)
+                          ->  Parallel Hash Join  (cost=673725.79..2125225.46 rows=25000000 width=16) (actual time=34048.103..47682.060 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.order_id = ord.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=0.986..7293.599 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=528867.92..528867.92 rows=8333350 width=16) (actual time=15864.236..15864.237 rows=6666667 loops=3)
+                                      Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                      ->  Parallel Hash Join  (cost=96681.38..528867.92 rows=8333350 width=16) (actual time=6687.693..11607.073 rows=6666667 loops=3)
+                                            Hash Cond: (ord.customer_id = cus.id)
+                                            ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=24) (actual time=0.843..2554.580 rows=6666667 loops=3)
+                                            ->  Parallel Hash  (cost=62500.50..62500.50 rows=2083350 width=8) (actual time=1326.480..1326.480 rows=1666667 loops=3)
+                                                  Buckets: 131072  Batches: 128  Memory Usage: 2592kB
+                                                  ->  Parallel Seq Scan on customer cus  (cost=0.00..62500.50 rows=2083350 width=8) (actual time=0.956..515.841 rows=1666667 loops=3)
+                          ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=1.017..1.017 rows=500 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                                ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.824..0.911 rows=500 loops=3)
+                    ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=537.111..537.111 rows=333333 loops=3)
+                          Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                          ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.615..110.353 rows=333333 loops=3)",,,,,,,,,""
+2021-03-19 23:59:02.015 CET,"postgres","shop_db",4812,"127.0.0.1:56196",605529f1.12cc,12,"",2021-03-19 23:47:13 CET,6/83,0,LOG,00000,"duration: 72174.505 ms  plan:
+Query Text: BEGIN;
+SET LOCAL join_collapse_limit = 1;
+SELECT count(*) FROM customer as cus
+JOIN ""order"" as ord
+ON ord.customer_id = cus.id
+JOIN order_details as ord_det
+ON ord_det.order_id = ord.id
+JOIN product as prod
+ON prod.id = ord_det.product_id
+JOIN discount as dis
+ON dis.id = ord.discount_id;
+COMMIT;
+Finalize Aggregate  (cost=2978663.83..2978663.84 rows=1 width=8) (actual time=68959.236..68959.237 rows=1 loops=1)
+  ->  Gather  (cost=2978663.62..2978663.83 rows=2 width=8) (actual time=68954.674..72174.380 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=2977663.62..2977663.63 rows=1 width=8) (actual time=68866.001..68866.001 rows=1 loops=3)
+              ->  Hash Join  (cost=695055.04..2917469.07 rows=24077820 width=0) (actual time=53672.364..67656.575 rows=20000000 loops=3)
+                    Hash Cond: (ord.discount_id = dis.id)
+                    ->  Parallel Hash Join  (cost=695038.79..2586382.79 rows=24077820 width=8) (actual time=53671.128..62861.222 rows=20000000 loops=3)
+                          Hash Cond: (ord_det.product_id = prod.id)
+                          ->  Parallel Hash Join  (cost=673725.79..2125225.46 rows=25000000 width=16) (actual time=32443.360..46388.285 rows=20000000 loops=3)
+                                Hash Cond: (ord_det.order_id = ord.id)
+                                ->  Parallel Seq Scan on order_details ord_det  (cost=0.00..750000.00 rows=25000000 width=16) (actual time=1.018..6856.482 rows=20000000 loops=3)
+                                ->  Parallel Hash  (cost=528867.92..528867.92 rows=8333350 width=16) (actual time=15345.685..15345.686 rows=6666667 loops=3)
+                                      Buckets: 131072  Batches: 512  Memory Usage: 2912kB
+                                      ->  Parallel Hash Join  (cost=96681.38..528867.92 rows=8333350 width=16) (actual time=6164.569..11138.868 rows=6666667 loops=3)
+                                            Hash Cond: (ord.customer_id = cus.id)
+                                            ->  Parallel Seq Scan on ""order"" ord  (cost=0.00..250000.50 rows=8333350 width=24) (actual time=0.659..2311.287 rows=6666667 loops=3)
+                                            ->  Parallel Hash  (cost=62500.50..62500.50 rows=2083350 width=8) (actual time=1316.068..1316.069 rows=1666667 loops=3)
+                                                  Buckets: 131072  Batches: 128  Memory Usage: 2624kB
+                                                  ->  Parallel Seq Scan on customer cus  (cost=0.00..62500.50 rows=2083350 width=8) (actual time=0.916..531.435 rows=1666667 loops=3)
+                          ->  Parallel Hash  (cost=14476.67..14476.67 rows=416667 width=8) (actual time=698.582..698.582 rows=333333 loops=3)
+                                Buckets: 131072  Batches: 16  Memory Usage: 3520kB
+                                ->  Parallel Seq Scan on product prod  (cost=0.00..14476.67 rows=416667 width=8) (actual time=0.834..109.689 rows=333333 loops=3)
+                    ->  Hash  (cost=10.00..10.00 rows=500 width=8) (actual time=0.970..0.970 rows=500 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 28kB
+                          ->  Seq Scan on discount dis  (cost=0.00..10.00 rows=500 width=8) (actual time=0.768..0.857 rows=500 loops=3)",,,,,,,,,""

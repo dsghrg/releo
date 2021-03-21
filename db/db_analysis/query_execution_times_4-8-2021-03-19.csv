@@ -1,3 +1,4 @@
+hash,query,talbes,ratio,nr tables,time in s
 8f30001f9d8fbdd12cf2c549c1d18aecb5179c6e93b134408aa10e6e5133a61c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -7,7 +8,7 @@ JOIN order_details as ord_det
 ON ord_det.order_id = ord.id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,62.016008138656616
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,62.01600814
 652b46f08f4c6cc6d7b742e8f29459ef3aa3e4c0eb082a373ea5ac576ab37132,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -17,7 +18,7 @@ JOIN order_details as ord_det
 ON ord_det.order_id = ord.id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,57.16840147972107
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,57.16840148
 0c4e4892d51909b640663cb014ff89490427b88a64fe3e3848d56e9c4cdfd3c9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -27,7 +28,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,62.75937366485596
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,62.75937366
 ab1490adb86d539f4c916619286fffcf48087bf9084603c553281e639dd2b8ad,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -37,7 +38,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,64.2832601070404
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,64.28326011
 ab6585bb00d680d795643570c68a52e31c9dc36f40f704e71a50bf9ea860abf8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -47,7 +48,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,63.8353374004364
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,63.8353374
 ec9f3267bef17cdb2116d641fbdc1d3ce5189681fc588665e572a4cdc24f096c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -57,7 +58,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,67.84187602996826
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,67.84187603
 50f81af9dfccc2caa06fe5fd06cbf814761957b0aa6405c98dca15049adcdd4c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -67,7 +68,7 @@ JOIN ""order"" as ord
 ON ord.id = ord_det.order_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,60.43634653091431
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,60.43634653
 12c65286e8b03931df67052563d4ba9f418ee9607f05eb2057299249f06677b4,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -77,7 +78,7 @@ JOIN ""order"" as ord
 ON ord.id = ord_det.order_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('discount', 'order', 'order_details', 'product')",1.0,4,58.82939863204956
+COMMIT;","('discount', 'order', 'order_details', 'product')",1,4,58.82939863
 61e62c16ef8f54b8f849978a964e8fd45e8fb0fa94916ef4e69c0d4126c163d2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -89,7 +90,7 @@ JOIN order_details as ord_det
 ON ord_det.order_id = ord.id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,66.4734046459198
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,66.47340465
 102cf200f5d4a438498c58377b26fbc8c3435091037069a14b465054d18547ae,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -101,7 +102,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,72.38873386383057
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,72.38873386
 4601a5d624f2007b7910130bb3f2ec9fb4eabe24099479cfbff7a9c873c510b6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -113,7 +114,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,72.17817211151123
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,72.17817211
 fc2add9f980e015a47ffe4de669ede431af9020b2e575ba8aea0cfdeda0d0218,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -125,7 +126,7 @@ JOIN order_details as ord_det
 ON ord_det.order_id = ord.id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,64.11186528205872
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,64.11186528
 b1add28cbd12bf08b7de29f34bcd5af78040c12542844bd44b456e5c746384d0,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -137,7 +138,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,79.28936982154846
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,79.28936982
 da8e08c6d0c20435a939cf7e66ac450e9a4512a30118718918cfea77e95f6362,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -149,7 +150,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,79.92581081390381
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,79.92581081
 24d99f745001cb376e2dcf9d18328e69ff53a15f8c708d7688215ac4af5ca88a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -161,7 +162,7 @@ JOIN order_details as ord_det
 ON ord_det.order_id = ord.id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,66.21489930152893
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,66.2148993
 45cb231ba5c9ebfef393d603203f7122d96a3131d113fbc39afdba7b01786b0b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -173,7 +174,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,68.97939968109131
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,68.97939968
 ff9dab06f4a9ea7b596f00cdc77cf6ee37c77911031ff2a842326ffed9f4fbe9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -185,7 +186,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,75.22048234939575
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,75.22048235
 98e46defc3c7fe349b9bcfdc5aa0ba331d588521f3673973040d35a07cdcf3df,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -197,7 +198,7 @@ JOIN order_details as ord_det
 ON ord_det.order_id = ord.id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,65.41523003578186
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,65.41523004
 d33ff1592cedf8192fe1e1e7f289a58d7c53a30d35f47b75a48f9c0ae899f48d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -209,7 +210,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,77.8525288105011
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,77.85252881
 4a7c22f4f33ba2abfbffbb6a82a5bd2478576342db1cb29696e2f4eb7f613610,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -221,7 +222,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,78.88335251808167
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,78.88335252
 7f213bbcbe00acbafdab0c23637111ca903774156c00daada056a3f6b7a3bf71,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -233,7 +234,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,84.06663060188293
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,84.0666306
 ac6ffbe869db238ff7a4827930211c86f4cb6809236238972640e24cc9f687f5,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -245,7 +246,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,89.38342571258545
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,89.38342571
 48055458d997b122ea2649c85855536a843a0f6cac0ec1b7e68f2aa5219a7599,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -257,7 +258,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,80.56823921203613
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,80.56823921
 462666416d80266dc01bbb461ba1bb9d6294798599c0b25ca890ded1ac053f11,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -269,7 +270,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,82.13311791419983
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,82.13311791
 75ad32d8db3279d20c842175f12cf3f51abdfdddc34f4f9b60b7684622380e42,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -281,7 +282,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,86.93770837783813
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,86.93770838
 12e6993fc46f15adee10bf10b62ac3e23b0eac18afea25954bfff32e5626560c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -293,7 +294,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,84.871098279953
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,84.87109828
 128d5947959df40c39e60b3710864e103ca06dbfc5a7c2421a3fae49646cb83e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -305,7 +306,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,88.43184232711792
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,88.43184233
 c2d48c526674a015949c0b9ba3edaeeeb103849c15a9ff8f9c2639faf554f6b9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -317,7 +318,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,85.0934009552002
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,85.09340096
 a89a613baafa59d8af4ff7cb2486da936a796107c92ce5fa1c7f26e12c0a64de,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -329,7 +330,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN product as prod
 ON prod.id = ord_det.product_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,83.99024438858032
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,83.99024439
 7f16c4f1bdfea68f84efae91064c76a04f8efbfd3b3ca70cc4da52978eb5552b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -341,7 +342,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,82.57540607452393
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,82.57540607
 4c822d820919ca58f6e85b613b147b9daaeb3c9547917ec3207cdf7186261025,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -353,7 +354,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,89.98728084564209
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,89.98728085
 5299275d7ea1e064b593ba950dfba87a0dbfe82d5021a870a921c8356ba63464,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -365,7 +366,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,83.74025130271912
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,83.7402513
 9288baae375bfa6c12906f08663617ff6bc3075e2da7222ef601c5559520e7f7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -377,7 +378,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,81.45906567573547
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,81.45906568
 f0716b66103cad70aaa7528b72c722760cf420fa705e386ff0851297ad397f13,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -389,7 +390,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,81.93943691253662
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,81.93943691
 508e8c66031faba7c0bb6681776683236c7886e0224e1237356a943f1905e1e5,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -401,7 +402,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,82.12450742721558
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,82.12450743
 15e37606e721fdf18fa00d98acc56ac4bbf7a308d108bdcb97002b6f74b7e067,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -413,7 +414,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1.0,5,81.10697650909424
+COMMIT;","('customer', 'discount', 'order', 'order_details', 'product')",1,5,81.10697651
 60430993adcdefa38d2a3c4a23c2e888e6433b8074c200dd8547047a0818f16e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -427,7 +428,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,118.72360587120056
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,118.7236059
 ec92ed16af2afcf42d10646904af32b0e35e6c6759c58f6e68b1e45e5e2b264a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -441,7 +442,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,79.94825005531311
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,79.94825006
 ab02f21028140ac125f45888bf9cd382c7e3babf5b3c12a0d2f79e83ff7637f7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -455,7 +456,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,82.66082692146301
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,82.66082692
 d4be59d9606506923501e3eefd83d6b66ae121251c8e0214a782eaa29f63653f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -469,7 +470,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,83.4007887840271
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,83.40078878
 a5d56a9463909f2d70fa2523a8514247511cf081fdbd6f0da68df359c113a799,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -483,7 +484,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,117.80309581756592
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,117.8030958
 7a3d577e8596a34ae1bc44ea2ee07cd466515c90a4a99eba362af9cfbf1a2e42,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -497,7 +498,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,139.0571973323822
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,139.0571973
 39ec6cf6f4485e92ee6f69de76727de314a452b6faa77869965c1c76da81a5c0,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -511,7 +512,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,138.99928450584412
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,138.9992845
 f76c018b339decc4c967791989fbacde439fe8a59e4622a22baf376d652f1e55,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -525,7 +526,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,138.12342023849487
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,138.1234202
 6cb2e9b4b8d5ae7d27c93df65135e7bdebc8fa8b7bb0e9d7c509b0bce69269ad,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -539,7 +540,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,116.92896723747253
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,116.9289672
 71032ada66358ccebd7581e11b82b19dca7578d3f57e9c89b87391ab000cad6f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -553,7 +554,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,77.78088808059692
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,77.78088808
 81d7fdcda82899aa2dd137ed23ae8fe3b7c02edb7ca9ed696efbb3628298649e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -567,7 +568,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,81.4503846168518
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,81.45038462
 e37a0837b3d3a02af35b4913ca5406ca57d13166696a345c3799c474db83de49,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -581,7 +582,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,81.66994404792786
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,81.66994405
 840be00560a12c38e273629497285286481bee5527e8465b506d1187ea9c97c7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -595,7 +596,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,119.42929100990295
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,119.429291
 b38fa53efeba3a4f6bda8dff1fc5963a70a37fec259c2674a4f59a91cfa0675e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -609,7 +610,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,132.53899574279785
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,132.5389957
 a51692287eb31d56d57764bf62be410776cf1ba7a6632bc5d7f80be0cc6d6b9e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -623,7 +624,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,138.8034703731537
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,138.8034704
 eb5752e97e3d17c23496bb317fa0b1f3e8e14df602d7a3e1e706a35a7ddfcf3b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -637,7 +638,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,139.40634965896606
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,139.4063497
 e4595abd3c5383922e8d86dfbca1d09e83e3c6255283f195a5cb3e64494d98d0,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -651,7 +652,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.33105707168579
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.33105707
 9f0b443ab528ffe444fc7775fefbbbb1dcfb3af7ef34555c8b270a3dc5f1e224,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -665,7 +666,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.25524401664734
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.25524402
 adb94dcf16a8d4c523ace321550531197a52dc0928746df191916c172def5582,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -679,7 +680,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.9920711517334
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.99207115
 fdac2832989a92aae6355ca8620770568ff11013d1ce60bc04c9f1cea25d4b3e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -693,7 +694,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,91.55683398246765
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,91.55683398
 53bbea3f6b11409dc5b2d9380cad55273972d4d4c7315273b3b7fdd37fbc559a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -707,7 +708,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,92.90688157081604
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,92.90688157
 d38a832492c17f4a03459163785f3024e0d317b64e0ae2eed216e596a29ef2ed,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -721,7 +722,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,91.28847312927246
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,91.28847313
 54909f0b1c375b269e77c5ab14b5fe3f9dab9afb9e4b945e4e8afa8e2468b261,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -735,7 +736,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,100.477956533432
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,100.4779565
 6fa2bc981812468bae48f28dd86575b6d3c8dfc29ce6e668c293933678498224,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -749,7 +750,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,96.51976561546326
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,96.51976562
 5d57a2159813ba28cb57cb8576ca352d6d7cd49bc5bbd88e508cd0065dad10e7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -763,7 +764,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,96.10633087158203
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,96.10633087
 52d89194d6ad7219d1e8cc7e8e0d1fa7d7530b7229e7a03eae1f664727c77903,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -777,7 +778,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,95.58032727241516
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,95.58032727
 1cec2257ae195b5a710ef8578a09c4cfd6169b86d36dbe0b37378c65b38b81b5,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -791,7 +792,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,95.57329487800598
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,95.57329488
 37caa296f41a5dc05220b07f6a635d0be43b76144b1aec31ad3aba468da1d9d6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -805,7 +806,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,95.2240834236145
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,95.22408342
 db766c3e7ac28bf52e858780679b93d969f44923ae5a543dec6cf1003b0da697,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -819,7 +820,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.49470543861389
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.49470544
 ec6939b00d3bdb61c4435c617f47126fc649605429c891b1d788a34b4cb68571,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -833,7 +834,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,95.39282131195068
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,95.39282131
 0f66fe9635edf4c6f1110af13d26db50e5cfe700aa546ee5cc338d1e2f6e58f9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -847,7 +848,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.03307867050171
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.03307867
 b1730cba3e113447840d763e72650fe6da44b897a7242bd34751184c9afb26ea,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -861,7 +862,7 @@ JOIN product as prod
 ON prod.id = ord_det.product_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.45777678489685
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.45777678
 3c5bbeceaf679f745d18e78ffda46faff3e7cef4ab5ee66a228de195ade001d6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -875,7 +876,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.08536100387573
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.085361
 9a9e7fd6a71e98987b8e874b5f8a11e6166194a8e337c81ba4930e9f78935743,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -889,7 +890,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.68554735183716
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.68554735
 0002014523343c6bd7828f35415901d56c4a3f8517c2ded897c42de3eb1bfd93,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -903,7 +904,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,96.08681583404541
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,96.08681583
 9f59463e5814652cd45844a5a41d36b193a6cf42ee6a3bfb8a2bc1ddf9b40066,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -917,7 +918,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,97.167076587677
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,97.16707659
 f92e52f91d6b6bb61eb64b68a5c393cc9e41fefb2e7265d141d07a704e981022,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -931,7 +932,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,96.80618143081665
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,96.80618143
 34dac740367f52aef7a4afb1b9313d8ac96e54f489084339b3c5892e9c3ff4ce,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -945,7 +946,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,96.19229125976562
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,96.19229126
 06b88cc38257fb5f5b6eb62f81771728dd6f2484ca22b67d9c0679361a517cd1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -959,7 +960,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,95.62314057350159
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,95.62314057
 4c1cce8cea6931b91e102d11a8123e8eb57c8ea43bed4bb66de53d93edd5bd1b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -973,7 +974,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.13746786117554
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.13746786
 1d3ba03c622ef6f2079898d71ac61d9a63b622f2aa01a397299554080b9e81bb,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -987,7 +988,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.46185231208801
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.46185231
 93059720bf87e26f094fc10b7f7210fc4e0ee0d4534783df08451695acd06e5d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1001,7 +1002,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.59170079231262
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.59170079
 e2f6e199ac686bb131f0e1a1b03197311219676c3749e122cd5f043e70964dd8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1015,7 +1016,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.48640394210815
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.48640394
 26c105e5144d0bbf273939338ed9ea3bf192a12d4e8e8ea1d44febd725d87446,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1029,7 +1030,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.57441234588623
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.57441235
 cc7e707ebf7fd15e95d3950a5e60df9afd1d53c6f6629845b876357771c8bec2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1043,7 +1044,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,97.19715237617493
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,97.19715238
 c07d062137abb191bc2c32039cb022d07bbf41b3c6ded3a2010b75f7185bf167,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1057,7 +1058,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,97.31204986572266
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,97.31204987
 e1d12132662fca7552ba61b5357eac26c27da69073f333568b0404932590dfc6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1071,7 +1072,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.24640798568726
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.24640799
 1642146ea351a96eb47ed7647cf96bea680322e0d3c2b871a4c2054b7ffdd9e9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1085,7 +1086,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,91.10971784591675
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,91.10971785
 4b232b25ddde757bd40bf85c268f5033b8f76dd07407247697e78f57a9ab598f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1099,7 +1100,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,99.96977639198303
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,99.96977639
 99a5b5ae35f9fb08277f6d5533114f6716eab7f63f861e4cff5500d6e8919293,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1113,7 +1114,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,94.82169342041016
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,94.82169342
 cb7a9c4de3bf25a38e10d48c6c814ea20d99f18af24e2849b28961bcbcee9ffa,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1127,7 +1128,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN subcategory as sub
 ON sub.id = prod.subcategory_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,95.96263027191162
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,95.96263027
 b131151386469dde0b6456ba0791a4204ef3a8fba50eb4c5cfe0726019c4d0a3,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1141,7 +1142,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.08107852935791
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.08107853
 16c2572a1ab1c4b966886615a14f93078d08e454fb9940cf747e167d6ca25f8e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1155,7 +1156,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,99.11966609954834
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,99.1196661
 570b0db86af226025b9f86c9746cc59ddc37c235bc79d6fae158258fe1313805,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1169,7 +1170,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,92.7922625541687
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,92.79226255
 9b25e2fcfd062a7cbe1bc12b2c49c9d83fe07a0053002e1edcf7cabfedc58116,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1183,7 +1184,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,93.12962675094604
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,93.12962675
 ed4e52ff11fdcb10b0d79aa8a22cd9562a0f6f2fd9c3dbffc4fc1fd3ae2080af,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1197,7 +1198,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,92.4196388721466
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,92.41963887
 fed52868073172f918781d2ce2bcdc3d262ebd8f28efae225f242010ad2119c0,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1211,7 +1212,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,81.22042918205261
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,81.22042918
 2cc1764d838a28765dfc9b2494a6b56d49599e08e7dd85725a106d7025e4af2c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1225,7 +1226,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,79.80637907981873
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,79.80637908
 a62d980f3df0996674af3648bd4340bc3396a9d67c17b5c4bc37273d2d833c82,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -1239,7 +1240,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,81.11968183517456
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,81.11968184
 0e63c3386b3d07969a2efe8aa7cfc757e69874175419e868e23232a9cc99b159,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -1253,7 +1254,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1.0,6,81.7559106349945
+COMMIT;","('customer', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",1,6,81.75591063
 7f420a92db0aced6518cd91bc7a69b96988fb94df4d1dfe5bb064151d73da93c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1269,7 +1270,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,103.8719265460968
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,103.8719265
 399b88f6700e1c624a4c57009b9c44d9b051c70960e84a0b1206d67eb7c47fb2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1285,7 +1286,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,108.76355862617493
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,108.7635586
 6b87fbfe0354abce51643050daa3c9e63ceeffa7c2077772e1ef29f8417b92b2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1301,7 +1302,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.36510729789734
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.3651073
 999a33e77d6b53deb373a10a150d4c63122b6f6d305d247ad6029d8b7b05a1f8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1317,7 +1318,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,130.5992877483368
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,130.5992877
 6216870073555a4fad32c346f5d6e5bae61e289ea920663dfd54356ea3802646,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1333,7 +1334,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,109.70288610458374
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,109.7028861
 c6b5186d24279b3c1cb5a116dfa625c54eff53bae1a30254c2790f827797e5b2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1349,7 +1350,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,99.86216950416565
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,99.8621695
 8e4a63bff16b6fa775da15afa6c2b3264b510abd36138ed5a17bf55469eb5049,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1365,7 +1366,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.991779088974
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.9917791
 8e4a63bff16b6fa775da15afa6c2b3264b510abd36138ed5a17bf55469eb5049,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1381,7 +1382,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.34899830818176
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.3489983
 b647ef291c07fa5053bfbd525626fe8aa97ae12bd65a19ec4ddc2adf22fdd639,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1397,7 +1398,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,97.76319766044617
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,97.76319766
 03f302589917786ddd64b30c184ca43d21f8d0c7e9598e5fbd5b8197847a6352,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -1413,7 +1414,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,81.49151182174683
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,81.49151182
 ea52acb61faf7ff7cc2370ff120c064b715f9ba6c5a9a8c5b0108f5ccf7a2bbb,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1429,7 +1430,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.05693340301514
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.0569334
 d08c76e6f0192e6558c143e9201547db4c18db0039f5015ab08c8d1e21e34273,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1445,7 +1446,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.62078404426575
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.620784
 b647ef291c07fa5053bfbd525626fe8aa97ae12bd65a19ec4ddc2adf22fdd639,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1461,7 +1462,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,97.42532968521118
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,97.42532969
 8462947817e7b7480dd706308c3f72a598e430c6f8cb209a99e9710d993e26ae,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1477,7 +1478,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.30474162101746
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.3047416
 85b59781141f9dcd54eb863a1a0604bced294b34d3bcf193c74140e53c0315a9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -1493,7 +1494,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,140.16926074028015
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,140.1692607
 8377a56bb290d5d04bf0b812cc5eacc07b833642f158947a270caa4da36486fc,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1509,7 +1510,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,127.73564124107361
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,127.7356412
 5c51a129936b6ed4e2a0db7b4f152c3a2252ad39c199deafe3024175de1bac9e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1525,7 +1526,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.43392372131348
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.4339237
 adfd307b0bddd9dd3d85e9574e9b57c001c2956041b9c1430712b64497b263b4,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1541,7 +1542,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,88.64431524276733
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,88.64431524
 4778337f1bc7791c0f2c628488b9473b53e510836c09a4cbc87b6d9ee3c4ad9a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1557,7 +1558,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,101.9191505908966
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,101.9191506
 88e93e1deea5bd773f471dbfbc0489c489061f83ab6f463a12e86a31f9f53317,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1573,7 +1574,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.13524866104126
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.1352487
 60fa1ddea11ed621eb69588d0e61a2c325b14110d89d96e7a5d96091daaff5dd,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1589,7 +1590,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.66370892524719
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.6637089
 4d19b10534f841636dfdb85acfca15261cd26b6005f0cec0872b3fbe8a0ddd43,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1605,7 +1606,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.94961261749268
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.9496126
 834fd8776db71082a6d213a271ef5a14e707c03195bbd22cfdfe26492a2e9fd8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1621,7 +1622,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,102.33661413192749
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,102.3366141
 7257dcbe65eb48175943d3d4cf3b60dd4c392623786c3e56307b89995191c9ee,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -1637,7 +1638,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,89.24461531639099
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,89.24461532
 2a2898e3e3e6322a79fbd0bc2ac79dfe147d9117d5cbcd1fd55f144245da737c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1653,7 +1654,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,98.92088198661804
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,98.92088199
 4778337f1bc7791c0f2c628488b9473b53e510836c09a4cbc87b6d9ee3c4ad9a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1669,7 +1670,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,103.96273922920227
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,103.9627392
 79017b5c26d095aadf579ca0ba18b2ac36a48b6b0b7f92a888fbda8170850e3c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1685,7 +1686,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,100.53903722763062
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,100.5390372
 dda22a9c66e1bbc8e0dfe42b4df60bc4716345105b40f11ba410ca7994817b39,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1701,7 +1702,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,87.76265597343445
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,87.76265597
 ba4bd5f35874bc91dfa4abc96ba2eb11ffce3a8818c352d0b242fff56c03d07f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1717,7 +1718,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.59088850021362
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.5908885
 03f302589917786ddd64b30c184ca43d21f8d0c7e9598e5fbd5b8197847a6352,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -1733,7 +1734,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,79.29295420646667
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,79.29295421
 a1cda04070414d465ef34fae36f7d5ead586acde821b2de5d23cd43a6fce6f52,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1749,7 +1750,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,102.75728821754456
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,102.7572882
 ebf0a8e991b71c79d70f62bfe6a8bb7c7d7c7129f53806153a22d4fc3a4bd506,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1765,7 +1766,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.51669383049011
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.5166938
 f67f73f52fc86fdb4f85b3aa8745d856792fb5cdbf8d256c5b0e9ba4b5774a9e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1781,7 +1782,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,102.67530059814453
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,102.6753006
 03ed82e9d4fc3f8081028973f7d706861b8d6c94a243b42b29cf351eb87771f1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1797,7 +1798,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.8672194480896
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.8672194
 b016aa3c6e56c75ba869ec7c7408bb46df6026bd2f5486370a65114fca9f82f3,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1813,7 +1814,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.27681112289429
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.2768111
 43202316df2cf9ba7fdb0f966155dc98edb9d6c741b1da96e7101897b6a7d3f0,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1829,7 +1830,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.25486898422241
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.254869
 4a89cf651b96bf681a1d25467caf37c7c924c9b42ab3167ccc9160c5615f6e4a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1845,7 +1846,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.38844442367554
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.3884444
 85b59781141f9dcd54eb863a1a0604bced294b34d3bcf193c74140e53c0315a9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -1861,7 +1862,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,144.17017245292664
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,144.1701725
 06035eea46e5f7d57351940354becf4da77c50f79b9e62337c2483ce91e25a66,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1877,7 +1878,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,89.27131342887878
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,89.27131343
 5c51a129936b6ed4e2a0db7b4f152c3a2252ad39c199deafe3024175de1bac9e,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1893,7 +1894,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.4034698009491
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.4034698
 1950ce6a6f00fac3b494c8dc82d272891be913ac37e440179d905c845059d100,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -1909,7 +1910,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.86029171943665
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.8602917
 d08c76e6f0192e6558c143e9201547db4c18db0039f5015ab08c8d1e21e34273,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1925,7 +1926,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.99917364120483
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.9991736
 9b9a6f3311abd59fefcd8dd03861ac503eae147f1c432c125fbbfa433795d59b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -1941,7 +1942,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.73601961135864
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.7360196
 bfb5ef33975d093b8651f071b884862d1ee996e5df26ed777c4b0ccf1e2fde55,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -1957,7 +1958,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.42130446434021
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.4213045
 dd6646d956586008297da6837578907df6d0ece377c0ae7b869ae2df3767f3e2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -1973,7 +1974,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,91.22824168205261
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,91.22824168
 4ca021fc38e6e2c832141eb355216c291d49bbd4cda63feb28d33188f3269c68,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -1989,7 +1990,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,127.48548078536987
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,127.4854808
 4ca021fc38e6e2c832141eb355216c291d49bbd4cda63feb28d33188f3269c68,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -2005,7 +2006,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,127.88473773002625
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,127.8847377
 b016aa3c6e56c75ba869ec7c7408bb46df6026bd2f5486370a65114fca9f82f3,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2021,7 +2022,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.56981801986694
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.569818
 a503bac62ce387fb4660a05b6647b73f04be768d16555ca5cc394fa93a5b1573,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2037,7 +2038,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,90.3469717502594
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,90.34697175
 7f420a92db0aced6518cd91bc7a69b96988fb94df4d1dfe5bb064151d73da93c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2053,7 +2054,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.19247126579285
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.1924713
 53f266cd98ddd738cf51e33bbaaf87b9ed721e9927f262415bff79836c4435a1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2069,7 +2070,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.67287826538086
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.6728783
 2a2898e3e3e6322a79fbd0bc2ac79dfe147d9117d5cbcd1fd55f144245da737c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2085,7 +2086,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,101.01309657096863
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,101.0130966
 56a3011e7cc4f56e2234e478e2fb06d505bff1b3e94069cb3766d44bde3ba28d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2101,7 +2102,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.71459984779358
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.7145998
 7257dcbe65eb48175943d3d4cf3b60dd4c392623786c3e56307b89995191c9ee,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -2117,7 +2118,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,90.50653839111328
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,90.50653839
 85b59781141f9dcd54eb863a1a0604bced294b34d3bcf193c74140e53c0315a9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -2133,7 +2134,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,142.2849633693695
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,142.2849634
 b7fd1e7635bb47b59757c488df6fcfb7b4c02fd127f29db3308a340d2f1fe5fb,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2149,7 +2150,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.9007499217987
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.9007499
 21eee5600de1d419fa0616fba5125d5ef6cd1ee6b940978bb3a6cf9ceaaba40f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2165,7 +2166,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,103.23194408416748
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,103.2319441
 dda69896099aa2b081de7d7db7ae3d3228df08a7aa810f2916fad178c5437c02,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -2181,7 +2182,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,87.95708179473877
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,87.95708179
 65829f875fc4ad54ac46072201972c5d9e7e971260578820d29ee5c7ca656c2b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -2197,7 +2198,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,123.84539484977722
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,123.8453948
 3309fd4595800d1bd0b7b962189e5cf9572ef17057c7beb3778d0df5afeb6399,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2213,7 +2214,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,150.9176344871521
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,150.9176345
 dda22a9c66e1bbc8e0dfe42b4df60bc4716345105b40f11ba410ca7994817b39,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2229,7 +2230,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,90.34036922454834
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,90.34036922
 ba418388bd26afe45fb98705721ba1a7acbf45efbfd7d755fae7b97ff6fc2c84,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2245,7 +2246,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,89.77950716018677
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,89.77950716
 2841abf759b29eb906237209d987cd2bb806673cb181e1cd846341ad38a7f355,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2261,7 +2262,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,91.8927972316742
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,91.89279723
 739be8c73b4b0e0bc12b12b3b9a0f2483916319409d4140792658df1db255eb6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2277,7 +2278,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.79831743240356
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.7983174
 b7fd1e7635bb47b59757c488df6fcfb7b4c02fd127f29db3308a340d2f1fe5fb,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2293,7 +2294,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,103.0900411605835
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,103.0900412
 7810f71f29ebf611c3a5b8d6d306265dc2cbd2b9f7397cfc33d6d67ccce8ca29,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2309,7 +2310,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.25462198257446
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.254622
 5f114192c2304eae60ab1dc6f7474543db595d06813bf9df91f72ad9650c2ed8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2325,7 +2326,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,89.89187002182007
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,89.89187002
 dd6646d956586008297da6837578907df6d0ece377c0ae7b869ae2df3767f3e2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2341,7 +2342,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,100.50240993499756
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,100.5024099
 02fe19d1a7508829c46b4c2a21fe62cec77ecdcd2d305e8dc9cadc2e0150fe82,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2357,7 +2358,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.89004945755005
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.8900495
 524227dcf47c171cfdcdd4945060da9b1c3b6c46a444c14e143350189048b674,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2373,7 +2374,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,100.49634385108948
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,100.4963439
 4e01557f0a5275318d947b6aa9d74e5fdb0a052a981d47ab7d2a0b88664ecec3,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2389,7 +2390,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,92.6808762550354
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,92.68087626
 03ed82e9d4fc3f8081028973f7d706861b8d6c94a243b42b29cf351eb87771f1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2405,7 +2406,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.47731971740723
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.4773197
 229d07bc257ed046e47cd8e67ecfb098154c17b96d9032748e94acc37ffcc882,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2421,7 +2422,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,103.29477119445801
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,103.2947712
 5453bf49d3a404e2172ab799a802393da562f7cf1c286694a73abdc01eae5147,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2437,7 +2438,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,108.2732343673706
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,108.2732344
 1c908abb33a86fbae067e1d9d5e997aca85963c8db6c1ab9b365ee222e249cb2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2453,7 +2454,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,101.28178119659424
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,101.2817812
 7257dcbe65eb48175943d3d4cf3b60dd4c392623786c3e56307b89995191c9ee,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -2469,7 +2470,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,91.9131863117218
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,91.91318631
 6e166017dc0eec971bb2024ba2a89333d888418569d57c71a1006048dee7e903,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2485,7 +2486,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.40344667434692
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.4034467
 a503bac62ce387fb4660a05b6647b73f04be768d16555ca5cc394fa93a5b1573,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2501,7 +2502,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,93.11866331100464
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,93.11866331
 4c83d1f00ebc7823f0e90147f85cc9b1576c8f5425600cb6303c6c9db48cec83,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2517,7 +2518,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.70562052726746
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.7056205
 79017b5c26d095aadf579ca0ba18b2ac36a48b6b0b7f92a888fbda8170850e3c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2533,7 +2534,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,104.97101187705994
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,104.9710119
 229d07bc257ed046e47cd8e67ecfb098154c17b96d9032748e94acc37ffcc882,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2549,7 +2550,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.0926263332367
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.0926263
 45916a284cde129d987319da6cef48c9bd867ff0a2da7d5baf4c230f7f26714b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2565,7 +2566,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,83.35297966003418
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,83.35297966
 732549a2a9962e7babc0fdaf6ed6210ed5547f6b7f95ae6e09bb34e1f3edd4dc,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -2581,7 +2582,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,87.37581419944763
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,87.3758142
 ebf0a8e991b71c79d70f62bfe6a8bb7c7d7c7129f53806153a22d4fc3a4bd506,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2597,7 +2598,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.78878426551819
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.7887843
 60fa1ddea11ed621eb69588d0e61a2c325b14110d89d96e7a5d96091daaff5dd,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2613,7 +2614,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.11909699440002
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.119097
 28c9d2c5db2219573f9746ca18a8671dbb0572070ec67bd08c6bce025c446937,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2629,7 +2630,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,101.04599595069885
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,101.045996
 02fe19d1a7508829c46b4c2a21fe62cec77ecdcd2d305e8dc9cadc2e0150fe82,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2645,7 +2646,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,107.7481141090393
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,107.7481141
 6e166017dc0eec971bb2024ba2a89333d888418569d57c71a1006048dee7e903,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2661,7 +2662,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.39282751083374
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.3928275
 4e01557f0a5275318d947b6aa9d74e5fdb0a052a981d47ab7d2a0b88664ecec3,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2677,7 +2678,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,96.80402207374573
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,96.80402207
 874d8293a76c917bc1c6b939cd24c51b196fbbbe3c7fda5f0ddd37c585c8a7c2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -2693,7 +2694,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,148.43257355690002
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,148.4325736
 33eb409d504593bac4f75676051585f9aac5b012df2c425da9fe774c0af226c7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -2709,7 +2710,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,145.7509844303131
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,145.7509844
 a773d740709dcb32f5206007096da50e8ff903d4ecd2ce442a6ec37fc760e48c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2725,7 +2726,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,80.35476040840149
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,80.35476041
 ba4bd5f35874bc91dfa4abc96ba2eb11ffce3a8818c352d0b242fff56c03d07f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2741,7 +2742,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.77377653121948
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.7737765
 3309fd4595800d1bd0b7b962189e5cf9572ef17057c7beb3778d0df5afeb6399,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2757,7 +2758,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,148.1263234615326
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,148.1263235
 9241ceebea876fe52b76675c693ba514ba6a1cc41c3f5be17b58789ef1603480,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2773,7 +2774,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,106.80736351013184
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,106.8073635
 03f302589917786ddd64b30c184ca43d21f8d0c7e9598e5fbd5b8197847a6352,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2789,7 +2790,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,85.68033981323242
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,85.68033981
 9b9a6f3311abd59fefcd8dd03861ac503eae147f1c432c125fbbfa433795d59b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2805,7 +2806,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,103.57428526878357
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,103.5742853
 d8c1c659ca42e6b741cf1005bf172c8694903c13bb299d69124955c09e3c9cd7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2821,7 +2822,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,105.04653930664062
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,105.0465393
 793bfbb312c1c20f5256c3b2cacd0ebba9749c8d21fab75f060ad2b732df976a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2837,7 +2838,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,89.8616783618927
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,89.86167836
 54eab6a9ee63f8d210d26a4aa34ba88a06c2de6940729d7930bc1c318adbec75,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2853,7 +2854,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.8064516129032258,7,88.30425763130188
+COMMIT;","('customer', 'category', 'deliverer', 'order', 'order_details', 'product', 'subcategory')",0.806451613,7,88.30425763
 987476d881cb47a6c8add731c5b7eae3dc1f17ce530298ed8c4c939be984abac,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -2871,7 +2872,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,137.4320569038391
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,137.4320569
 21c0a68a15c28e1a1ac90f3a0e3efaf12e07eff2ec3c3dbb0e486a38f3b19cf7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -2889,7 +2890,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,92.95175552368164
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,92.95175552
 a0eb7449f806d5c18e218f11f9f29ee732f5c0688e7e4e1e9da6927d10cbaeb4,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2907,7 +2908,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.07698845863342
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.0769885
 791802e603b8afc358b23859310febfb5e808c25a79e5b6126cc6bf76fe22898,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2925,7 +2926,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,120.06356573104858
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,120.0635657
 51c504bb15d56442c9cfd2a953c93829cf67c0514021a9174fee90432a1adce8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2943,7 +2944,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.45496582984924
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.4549658
 29c1e106583631e0c304684b074d2863d2ab5d0b10dba37a9adfc3914d934fde,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2961,7 +2962,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.05009317398071
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.0500932
 2dafd56f0312ab9cae82afad5aa62b279fb7a8db82aa402be3bb188a38e03fd8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -2979,7 +2980,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.6459436416626
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.6459436
 83e2795e24930c327e2e2e0aa041fa1684678d9595f9bf6c77482fde8f0d1e03,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -2997,7 +2998,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.517893075943
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.5178931
 0609afee5fe67a2208fbee0bd134bc22b3cad61642249eff184c6f21c0f56eb9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -3015,7 +3016,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,151.37096643447876
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,151.3709664
 ed1d7880afa84399c25ee19bc6cc352530766bd6a2b49bb52333a1b133bee13d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3033,7 +3034,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.53739309310913
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.5373931
 055d7bdcb4358271c5bc8fa596973367d6afe2b5922eeb4c57984125326f6896,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3051,7 +3052,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,120.92833542823792
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,120.9283354
 4bdc692a9d18102ab0b805756579d23d87f0660363a3e33aa02499d3bd5b06df,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3069,7 +3070,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,120.1978542804718
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,120.1978543
 7f5c84fa8a18513a88eacc6ef1f71a9251b36af1e1882bdc96481dc5194d159a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3087,7 +3088,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.9919102191925
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.9919102
 233ba45253311ab5d033dcd2e7f3fcf470784826373e97f6802cd04d4f9682b2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3105,7 +3106,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,116.8715751171112
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,116.8715751
 1cdd393657efa28081cf58e551a9aa137097875c197ad11247d2d3db678ffe4b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3123,7 +3124,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,117.15144991874695
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,117.1514499
 e79843d2d9dfc6085f99cc8ac0064a974dda9c09a55229810128653a61917da2,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3141,7 +3142,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,118.11530590057373
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,118.1153059
 6781fdce0915a058f337c646980a7e8c9b4aa2356bad90544725f7f17c99395b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3159,7 +3160,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,97.55180191993713
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,97.55180192
 7c977abbf12dc23bb00a09fa9aebd86023d7ae004eae366938f3312168e17769,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3177,7 +3178,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,122.08443760871887
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,122.0844376
 df12f842aaa9ccca4c494f2ad937a390197be73d33df42ac43c54a8b717ab7e1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3195,7 +3196,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.62520933151245
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.6252093
 11605056a6e549cff5e8b319fc76e82236910c486acc65f04fbaaf36c2949d3c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3213,7 +3214,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.53800964355469
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.5380096
 d054e2c17ee260405138487cc3a8dd61f3dc90f8a977f6ecfb8f158ea786fc66,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3231,7 +3232,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,119.14273285865784
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,119.1427329
 24613616c4b0169664078213516916a8a302bb451043f140dd8e0fad876b28ce,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -3249,7 +3250,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,161.3280153274536
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,161.3280153
 c73e6ea15d309be34d7d3d946371ebf6df975504f689efea3f24253faa6403b4,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3267,7 +3268,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,120.94987440109253
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,120.9498744
 935c00afb413eed659bbbee7e356439f3ed7232997c39ba58c70e1ef12808d83,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -3285,7 +3286,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,101.90571022033691
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,101.9057102
 2fd57b6421e06c4a6ea69a000ecc339d1c3326111dc36414caead7fbf9b03435,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3303,7 +3304,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.26711797714233
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.267118
 37e30fe9e8b13bc3c3c7b3d602aa849307730032588ca74a332ea2de9ab16291,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3321,7 +3322,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,121.01774597167969
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,121.017746
 6273bf35acf9e65738b3ff0e1dd7b9cf164dfc7b68901e0d799e5341ec790515,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3339,7 +3340,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.17219734191895
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.1721973
 37d9a26af79ea702038bb3a82c4beba93a31b05fc15dd8f3781a79d11be11523,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -3357,7 +3358,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,125.28761100769043
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,125.287611
 c563cc67852098c98b9407225929f03d113071715e0558529f6786ffe629302a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -3375,7 +3376,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,89.59862804412842
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,89.59862804
 fb1c14f156eee00a1881d9d7bef1705126eb4839083ed93ae38cdd3fc3ad28b5,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3393,7 +3394,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,115.38885140419006
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,115.3888514
 809a0f1cf53f7c26284ca76f2755ccd91d1d085fe92aa432a63aed366f5e5d51,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3411,7 +3412,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,116.23961925506592
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,116.2396193
 df8bac0b8d6b5bb7a08e2ac502b29916d61cbfb886b81b03705738c5d9d4584a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3429,7 +3430,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,162.05790185928345
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,162.0579019
 63e820d1fd67218f655ae25b8a6397d7a936b92142471c74a2368724cd0b0c68,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3447,7 +3448,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.50416445732117
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.5041645
 66d8d654f7c854e3d3886394fdab82e70d1c5d50d73d4842616e4ad8a7a27cc7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3465,7 +3466,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.3407347202301
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.3407347
 abe4482a42ca0e7c73823786d3d929c8f5fef7cfafa1e09499d0e88bf7cb00c7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3483,7 +3484,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.45982384681702
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.4598238
 fad9351317d2580deff037458a8f1392a13f43c1bef6d8cea0d952363fd9615b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3501,7 +3502,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.75864720344543
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.7586472
 4b4f3874a1fd4977982a098931426f9775a9f7f1bd690ade97b020b2ffb380be,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3519,7 +3520,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.78839492797852
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.7883949
 2e56872700bddc813f8f5cb77a6dcb948fc1704bd77c7d2311a4f08addbaa3e7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3537,7 +3538,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,115.65618419647217
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,115.6561842
 a44630bc29da07d0477f5ee17e1dadc47b3fb4edbed11b124608e3fec168b5dd,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3555,7 +3556,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.32891702651978
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.328917
 be7a2d2c93b56065047c7fba82c18be3f9a18f9280d82a7afa919655fd318bf5,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3573,7 +3574,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,108.53321266174316
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,108.5332127
 148df2c959a8c8521383e2098ab43c5a2d02c263b4a520160ecaa6b0db8ac62c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3591,7 +3592,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,116.01617002487183
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,116.01617
 c51df208ba2c3bc00688f3b484040a9e1e18f2459765bd4262827cfd52d75741,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3609,7 +3610,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.67606711387634
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.6760671
 0d737d95439f58372e0372b057bbc9a4cca6c46283e59a19e32a6bfb1041244f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3627,7 +3628,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.84937286376953
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.8493729
 d87ce7c2a97b0f422e860d3c309aff658db7e79ba0e3792ffe56bfa09d7e6025,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3645,7 +3646,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,108.27442598342896
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,108.274426
 1f9ff0d0d7483fa88b3b127dbf8560be20cd6664cca2a954429cc5c1ab674f85,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -3663,7 +3664,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,99.44081711769104
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,99.44081712
 2f5d0c8289761f401118f7bc61058756fa169ac2e5902cff44431656fc523510,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3681,7 +3682,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.16071248054504
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.1607125
 c8cc7bfe87e48d73ed494a7374162f56bf6f94d849209d860b3eedd781febe0f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3699,7 +3700,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,157.02475452423096
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,157.0247545
 ca68cb416c534ff1d92af4ed1ca9904efa9f6c1abf8f1944c22e23bc49405894,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3717,7 +3718,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.88219618797302
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.8821962
 dc2181098426812ebf520e9e658033d27d64cbbf25d00c88ed1b1adbb3a2b4e0,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3735,7 +3736,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.94274282455444
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.9427428
 1e01855d2b6b20c3e30faee7b29ea75724ad9a734b91a6cc0a34d8943ab44fbf,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3753,7 +3754,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,117.33815813064575
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,117.3381581
 237c60922a9bc8d23372372fcbaec345b1ec4124c870225c4ad21cecb90ecbb6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3771,7 +3772,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.16461181640625
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.1646118
 4d4afde41b8d1fafd5254433c61dd828ef9146f691abd37a965f008e8b23189d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3789,7 +3790,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,94.58632731437683
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,94.58632731
 687b2d15bdf203624dbde787a12c8cc7f7d6d15b7eb829d7b57f05ada8710a34,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3807,7 +3808,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.39842128753662
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.3984213
 c76c5f1c985c47064eb66f16bc405e6bcf932fe574831822a35403c6ad1a95fb,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -3825,7 +3826,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,157.89556884765625
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,157.8955688
 15aad04da9a6cb319ace34d9bace8ce2a22816b9e92f918454e64e36405a9055,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -3843,7 +3844,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,99.48101902008057
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,99.48101902
 5a931b4ef37cd5a0ab698ae3b6f14ee4a9897840a3d56a3d78e4c3ce1443b3b7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -3861,7 +3862,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.83179497718811
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.831795
 57a1b21f7b815ef719e517fce3c648748484dffb16eaf1e786c6b922f664af9f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -3879,7 +3880,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,92.10045146942139
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,92.10045147
 6349701bca9130ffd8fe7cdd67e6b5d229edd7330e07611b2f228a32dd739175,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -3897,7 +3898,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,108.93790769577026
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,108.9379077
 a61526b6ce13bd2bc78e6a505639f90d87bb6c85a9bfe1110ec7d659a8df00e6,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -3915,7 +3916,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,93.4391782283783
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,93.43917823
 9eb3e63a1e92c0b585f15ae610dcf0633c9a25c90f5f7b0f688429330a30c1fe,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3933,7 +3934,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.18640065193176
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.1864007
 9c7df3c8ec74a1d07a83ba47a7e7f962e6d94041e2afd858b1286fd6220e8bd9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3951,7 +3952,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.92634749412537
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.9263475
 96dd2fc20d87ce3c7e31876dbb04415e53874f389de23bb5f167aa518fd04d94,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -3969,7 +3970,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,107.98309850692749
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,107.9830985
 37d9a26af79ea702038bb3a82c4beba93a31b05fc15dd8f3781a79d11be11523,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -3987,7 +3988,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,130.45507955551147
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,130.4550796
 2a2e6d51369e6e8f98d976d24266a26b82c68135f6596926f2594cb606000dc8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4005,7 +4006,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.31419730186462
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.3141973
 53461a3b61532a275d5191c3a4167e8abd52e9e43d7e19e229776c4c7f7e1ce9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4023,7 +4024,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,108.70595622062683
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,108.7059562
 39b4ca6710fdc57478bf890b0b7625268def7725b9c9af48ad6b0dd1f91b8321,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -4041,7 +4042,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,99.40750813484192
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,99.40750813
 6ec813d0971801f7946a429064fbd49f46fe1bc46ab84aae6844d63f13723b96,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4059,7 +4060,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,153.79462909698486
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,153.7946291
 39ef60827c73007ce0b6232372754ae2277edef989d2783b612e7246f39321b3,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -4077,7 +4078,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,103.2409737110138
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,103.2409737
 30645911a20499818f593aec78ea9c2048ae1e4dda465ee9f5099b8808091e0c,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -4095,7 +4096,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,101.90495538711548
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,101.9049554
 8db733a21575f9740925084c772264ff311cf7067f836c03ea52ef2b687c2324,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4113,7 +4114,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.23192620277405
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.2319262
 055d7bdcb4358271c5bc8fa596973367d6afe2b5922eeb4c57984125326f6896,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4131,7 +4132,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,114.22809171676636
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,114.2280917
 53461a3b61532a275d5191c3a4167e8abd52e9e43d7e19e229776c4c7f7e1ce9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4149,7 +4150,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,109.49267506599426
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,109.4926751
 a7100e0e8c7a271f399a990e5ed73fa9f8d2725e87e5069c66145a53ce252105,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4167,7 +4168,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,156.63808393478394
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,156.6380839
 dadc1385c30de63bd4c1861f9af159b964928c4e701cc94e16f34228c9ade0bd,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4185,7 +4186,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,102.22670030593872
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,102.2267003
 753c4b54a13bb66fa788c30dfd513263d388cdec76a7a2f1581091b9feaa22e8,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4203,7 +4204,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,128.51447987556458
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,128.5144799
 4fb83664ef3e3b0cfb9dbe50ad36c1a985928bce8eac6871fd866e2238d8041d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4221,7 +4222,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,111.29387307167053
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,111.2938731
 ded1ac11045361aa3ecfc6df2bf3a91a70f87f8fb38e934e547d024f24322728,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -4239,7 +4240,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,101.21050786972046
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,101.2105079
 0e14a9513cbeb5f88ac56129430874660c8f4de389d03244740feeff18fea48f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4257,7 +4258,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,109.24260878562927
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,109.2426088
 8f39d9a06fe46e0cfdc0dbaa744fb22144f7c135c8d9e9d710cb5716611dfa80,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4275,7 +4276,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.98749685287476
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.9874969
 10983bc69f48731ddf1388566edcd168aa7af5dcd3e52d12f6c890ca86f0a95d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4293,7 +4294,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,109.21356344223022
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,109.2135634
 cd4b042e5ef45d3f36b98f1ffd755ad84371ea1c6cbbc7d79e3e177cc3721f33,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4311,7 +4312,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.72669887542725
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.7266989
 b9fc1d34537d5a573de24bc2d55b506d38eea1b0ec3d93019bb00bddd560796d,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4329,7 +4330,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,116.0835645198822
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,116.0835645
 c6d20f16e16d7149814fbdef2e9b069eb40dc5ddf4f8df4d95d42889126ddecb,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -4347,7 +4348,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.14177918434143
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.1417792
 0e14a9513cbeb5f88ac56129430874660c8f4de389d03244740feeff18fea48f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4365,7 +4366,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,104.87841033935547
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,104.8784103
 39b4ca6710fdc57478bf890b0b7625268def7725b9c9af48ad6b0dd1f91b8321,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -4383,7 +4384,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,98.42503476142883
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,98.42503476
 95bbe40338fe9d7c6fcc5573b10378b4f415529d6048c10cd2a8b3f8a64c2544,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -4401,7 +4402,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,131.36581540107727
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,131.3658154
 66d8d654f7c854e3d3886394fdab82e70d1c5d50d73d4842616e4ad8a7a27cc7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4419,7 +4420,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,112.42693066596985
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,112.4269307
 3dc0f797227e495f3b700c67c17af1340866bd15487cb97db66af6bbec95869b,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM subcategory as sub
@@ -4437,7 +4438,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,99.6210732460022
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,99.62107325
 bb7be922fc9a7e653d2c22158ee47436432bbd93b526f19dc904ccd2bafb01d7,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4455,7 +4456,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.10986495018005
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.109865
 3302cc5484cdabefe727c5524134590a7771fcf22bb801e0612f421907cd2125,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM deliverer as del
@@ -4473,7 +4474,7 @@ JOIN customer as cus
 ON cus.id = ord.customer_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,159.34820246696472
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,159.3482025
 cbd552fcd13ebd9c9fdac01364434aae2f4e087f9f2f4925b771d59c8abe12c1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM customer as cus
@@ -4491,7 +4492,7 @@ JOIN subcategory as sub
 ON sub.id = prod.subcategory_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,95.54109978675842
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,95.54109979
 38f0aeb8e0966df123b774c83aa3abbda1b4fa95b51b736789c2a670c2e979f9,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM product as prod
@@ -4509,7 +4510,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,113.38875651359558
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,113.3887565
 6397855d0a839d29afda23f1a787dd5cd2724db7c6da017a0489b966b53c1aab,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4527,7 +4528,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,115.2031831741333
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,115.2031832
 2946644dbbbab02b13333716e7d633926b907f997ec5817fb40a919e35f2f44f,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4545,7 +4546,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,100.03339123725891
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,100.0333912
 fbcc4d38b25e446db752606ed010b2676ad11b0eb9cffa0abcd8b29dde977296,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4563,7 +4564,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,118.52294826507568
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,118.5229483
 962fc6ebfc79c792bc8dfc19727cbe103d91fe2744641e8ba4ee760f495b5872,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4581,7 +4582,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,97.29575252532959
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,97.29575253
 b091c667f00234e670c0111d4457d2e962e38033d028ea516d51065ab3ba5a89,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4599,7 +4600,7 @@ JOIN deliverer as del
 ON del.id = ord.deliverer_id
 JOIN category as cat
 ON cat.id = sub.category_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,116.98015284538269
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,116.9801528
 f85c81492584af2269f707aa2b9e93625aaa0a86bc00b059eca52763ae33ae7a,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM order_details as ord_det
@@ -4617,7 +4618,7 @@ JOIN discount as dis
 ON dis.id = ord.discount_id
 JOIN customer as cus
 ON cus.id = ord.customer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,117.79164505004883
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,117.7916451
 1b39ca2a372b8db77fc31ae624b8065e49a7ccc57a573e40ab24148d12c11fef,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM ""order"" as ord
@@ -4635,7 +4636,7 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN discount as dis
 ON dis.id = ord.discount_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,110.92788910865784
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,110.9278891
 f64fcc7f4e8b0db46d7a2381d73fa8e102e25ea4fe9abb17820207bd504d18f1,"BEGIN;
 SET LOCAL join_collapse_limit = 1;
 SELECT count(*) FROM discount as dis
@@ -4653,4 +4654,4 @@ JOIN category as cat
 ON cat.id = sub.category_id
 JOIN deliverer as del
 ON del.id = ord.deliverer_id;
-COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883040935672,8,104.60797691345215
+COMMIT;","('customer', 'category', 'deliverer', 'discount', 'order', 'order_details', 'product', 'subcategory')",0.14619883,8,104.6079769
