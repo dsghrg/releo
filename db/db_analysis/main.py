@@ -180,6 +180,18 @@ def enable_auto_explain(cursor):
     cursor.execute("SET auto_explain.log_min_duration = 0;")
     cursor.execute("SET auto_explain.log_analyze = true;")
 
+def execute_and_time_query(query, cursor):
+    print("Executing:\n" + query)
+    start_time = time.time()
+    cursor.execute(query)
+    result = cursor.statusmessage
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print("\t->\t" + str(elapsed_time))
+    print("\n\n")
+
+    return elapsed_time
+
 
 if __name__ == '__main__':
     conn, cursor = connect()
@@ -193,20 +205,18 @@ if __name__ == '__main__':
         if (len(queries) > 100):
             queries = random.choices(queries, k=100)
         ratio_executed_to_possible_executions = len(queries) / no_of_possible_executions
-        for query in queries:
+        for exec_order, query in enumerate(queries):
             try:
-                print("Executing:\n" + query)
-                start_time = time.time()
-                cursor.execute(query)
-                result = cursor.statusmessage
-                end_time = time.time()
-                elapsed_time = end_time - start_time
-                print("\t->\t" + str(elapsed_time))
-                print("\n\n")
-                with open("./query_execution_times_4-7.csv", "a") as csv_file:
+                elapsed_time = execute_and_time_query(query, cursor)
+
+                query_opt = query.replace("SET LOCAL join_collapse_limit = 1", "SET LOCAL join_collapse_limit = 8")
+                
+                elapsed_time_opt = execute_and_time_query(query_opt, cursor)
+
+                with open("./query_execution_times_4-8-2021-03-21.csv", "a") as csv_file:
                     writer = csv.writer(csv_file, delimiter=',')
                     writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, logical_query,
-                                     ratio_executed_to_possible_executions, len(logical_query), elapsed_time])
+                                     ratio_executed_to_possible_executions, len(logical_query), elapsed_time, elapsed_time_opt, exec_order])
             except Exception as ex:
                 print(ex)
                 conn, cursor = reconnect(conn, cursor)
