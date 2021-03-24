@@ -5,13 +5,16 @@ import itertools
 import random
 import time
 import re
+import sys
+import urllib
+from sqlalchemy import create_engine
 
 import numpy as np
-import psycopg2
 
 from dbconnection import postgres_connection
 
-QUERY_BASE = "SELECT * FROM"
+CSV_FILENAME = "query_execution_times_4-8-" + time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime(time.time())) + ".csv"
+DEFAULT_DBMS = 'postgres'
 
 
 class Join:
@@ -106,7 +109,6 @@ def get_n_joinable_tables(n, schema):
 
 
 def generate_join_orders(schema, query_patcher, logical_query):
-
     permutations = itertools.permutations(logical_query)
     queries = []
 
@@ -137,7 +139,6 @@ def generate_join_orders(schema, query_patcher, logical_query):
 
         if not impossible_query:
             query += ";"
-            query = re.sub(r'\border\b', '"order"', query)
             query = query_patcher(query)
             queries.append(query)
     return queries
@@ -155,24 +156,28 @@ def create_adjacency(schema):
 
 
 def mssql_patcher(query):
+    query = re.sub(r'\border\b', '[order]', query)
     return (query.replace(";", "")) + "\nOPTION(FORCE ORDER);"
 
 
 # preserve/force join order in postgres
 def postgres_patcher(query):
+    query = re.sub(r'\border\b', '"order"', query)
     return "BEGIN;\nSET LOCAL join_collapse_limit = 1;\n" + query + "\nCOMMIT;"
 
 
-def connect():
-    conn = psycopg2.connect(**postgres_connection())
-    cursor = conn.cursor()
-    return conn, cursor
+def create_mssql_engine():
+    params = urllib.parse.quote_plus(
+        r'DRIVER={ODBC Driver 13 for SQL Server};SERVER=MSSQLBENCH;DATABASE=order_db_unif;Trusted_Connection=yes')
+    conn_sql_server = 'mssql+pyodbc:///?odbc_connect={}'.format(params)
+    return create_engine(conn_sql_server, fast_executemany=True)
 
 
-def reconnect(conn, cursor):
-    conn.close()
-    cursor.close()
-    return connect()
+def create_postgres_engine():
+    creds = postgres_connection()
+    return create_engine(
+        'postgresql://{}:{}@{}:5432/{}'.format(creds['user'], creds['password'],
+                                               creds['host'], creds['database']))
 
 
 def enable_auto_explain(cursor):
@@ -180,11 +185,11 @@ def enable_auto_explain(cursor):
     cursor.execute("SET auto_explain.log_min_duration = 0;")
     cursor.execute("SET auto_explain.log_analyze = true;")
 
-def execute_and_time_query(query, cursor):
+
+def execute_and_time_query(query, engine):
     print("Executing:\n" + query)
     start_time = time.time()
-    cursor.execute(query)
-    result = cursor.statusmessage
+    engine.execute(query)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print("\t->\t" + str(elapsed_time))
@@ -193,30 +198,34 @@ def execute_and_time_query(query, cursor):
     return elapsed_time
 
 
+def dbms_factory(dbms_used):
+    if dbms_used == 'mssql':
+        return create_mssql_engine, mssql_patcher
+    if dbms_used == 'postgres':
+        return create_postgres_engine, postgres_patcher
+
+
 if __name__ == '__main__':
-    conn, cursor = connect()
-    enable_auto_explain(cursor)
+    connector, sql_patcher = dbms_factory(sys.argv[1] if len(sys.argv) >= 2 else DEFAULT_DBMS)
+    engine = connector()
     schema = create_schema()
     for i in range(4, 9):
         logical_queries = get_n_joinable_tables(i, schema)
         logical_query = random.choice(logical_queries)
-        queries = generate_join_orders(schema, postgres_patcher, logical_query)
+        queries = generate_join_orders(schema, sql_patcher, logical_query)
         no_of_possible_executions = len(queries)
         if (len(queries) > 100):
             queries = random.choices(queries, k=100)
         ratio_executed_to_possible_executions = len(queries) / no_of_possible_executions
         for exec_order, query in enumerate(queries):
             try:
-                elapsed_time = execute_and_time_query(query, cursor)
+                elapsed_time = execute_and_time_query(query, engine)
 
-                query_opt = query.replace("SET LOCAL join_collapse_limit = 1", "SET LOCAL join_collapse_limit = 8")
-                
-                elapsed_time_opt = execute_and_time_query(query_opt, cursor)
-
-                with open("./query_execution_times_4-8-2021-03-21.csv", "a") as csv_file:
+                with open("./" + CSV_FILENAME, "a") as csv_file:
                     writer = csv.writer(csv_file, delimiter=',')
                     writer.writerow([hashlib.sha256(query.encode('utf-8')).hexdigest(), query, logical_query,
-                                     ratio_executed_to_possible_executions, len(logical_query), elapsed_time, elapsed_time_opt, exec_order])
+                                     ratio_executed_to_possible_executions, len(logical_query), elapsed_time,
+                                     exec_order])
             except Exception as ex:
                 print(ex)
-                conn, cursor = reconnect(conn, cursor)
+                engine = connector()
