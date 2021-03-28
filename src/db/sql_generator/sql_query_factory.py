@@ -12,7 +12,8 @@ def get_sql_generator(name):
 
 def mssql_patcher(query):
     query = re.sub(r'\border\b', '[order]', query)
-    return query.replace(";", "\nOPTION(FORCE ORDER);")
+    query = query.replace(";", "\nOPTION(FORCE ORDER);")
+    return "SET STATISTICS XML ON;\n" + query
 
 
 # preserve/force join order in postgres
