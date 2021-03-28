@@ -31,7 +31,7 @@ def traverse(current, costs, schema, path):
         join_info = \
             [node for node in current.getchildren() if
              node.find('./mw:HashKeysBuild', namespaces=namespace) is not None][0]
-        cost = max([thread.attrib['ActualElapsedms'] for thread in runtime.getchildren()])
+        cost = max([float(thread.attrib['ActualElapsedms']) for thread in runtime.getchildren()])
 
         keyBuild = join_info.find('./mw:HashKeysBuild', namespaces=namespace)[0]
         keyProbe = join_info.find('./mw:HashKeysProbe', namespaces=namespace)[0]
