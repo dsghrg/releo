@@ -1,6 +1,6 @@
 import re
 
-from src.db.sql_generator.generate_sql import generate_sql_query
+from db.sql_generator.generate_sql import generate_sql_query
 
 
 def get_sql_generator(name):

@@ -19,3 +19,4 @@ if __name__ == '__main__':
         logical_query = generator.generate()
         sql = sql_creator(schema, logical_query)
         runtime_stats = executor(engine, schema, sql)
+        print(runtime_stats)
