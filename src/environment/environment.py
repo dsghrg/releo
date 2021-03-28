@@ -5,7 +5,7 @@ def get_key_from_value(value, dictionary):
     return list(dictionary.keys())[list(dictionary.values()).index(value)]
 
 
-class QueryEncoder:
+class Environment:
     def __init__(self, schema):
         self.table_count = len(schema)
         self.schema_dict = {tablename: idx for idx, tablename in enumerate(schema.keys())}
