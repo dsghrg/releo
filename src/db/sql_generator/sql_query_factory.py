@@ -1,6 +1,6 @@
 import re
 
-from src.db.generate_sql import generate_sql_query
+from src.db.sql_generator.generate_sql import generate_sql_query
 
 
 def get_sql_generator(name):
@@ -17,4 +17,5 @@ def mssql_patcher(query):
 
 # preserve/force join order in postgres
 def postgres_patcher(query):
+    query = "EXPLAIN (ANALYZE, FORMAT JSON)\n" + query
     return re.sub(r'\border\b', '"order"', query)
