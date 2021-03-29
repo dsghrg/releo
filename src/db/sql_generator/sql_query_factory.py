@@ -3,10 +3,10 @@ import re
 from db.sql_generator.generate_sql import generate_sql_query
 
 
-def get_sql_generator(name):
-    if name == 'mssql':
+def get_sql_generator(name, cfg):
+    if name == 'mssql-force-order':
         return lambda schema, order_vector: generate_sql_query(schema, order_vector, mssql_patcher)
-    else:
+    if name == 'postgres-force-order':
         return lambda schema, order_vector: generate_sql_query(schema, order_vector, postgres_patcher)
 
 

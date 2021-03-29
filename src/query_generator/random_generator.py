@@ -3,7 +3,9 @@ import random
 
 class RandomQueryGenerator:
 
-    def __init__(self, schema):
+    def __init__(self, schema, cfg):
+        self.seed = cfg['seed'] if 'seed' in cfg else 1
+        random.seed = self.seed
         self.schema = schema
 
     def generate(self):

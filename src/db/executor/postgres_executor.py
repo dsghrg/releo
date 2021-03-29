@@ -3,7 +3,6 @@ def execute_sql_query(db_engine, schema, sql_query):
     rec = rs.first()[0]
     costs = {}
     traverse_plan(rec[0]['Plan'], costs, schema)
-    print(costs)
     return costs
 
 
@@ -15,8 +14,7 @@ def traverse_plan(current, costs, schema):
         right_table = find_table_name_by_alias(right.split(".")[0].replace('"', ''), schema)
 
         cost = current['Total Cost']
-        costs[left_table.name + '->' + right_table.name] = {'left': left_table.name, 'right': right_table.name,
-                                                            'cost': cost}
+        costs[left_table.name + '->' + right_table.name] = cost
     if 'Plans' in current:
         for plan in current['Plans']:
             traverse_plan(plan, costs, schema)
