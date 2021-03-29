@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     query1, query2 = postgres_queries()
 
-    for i in range(1, 1000):
+    for i in range(1, 500):
         print(i)
         try:
             start_time = time.time()
