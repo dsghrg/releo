@@ -23,16 +23,17 @@ class MssqlJoinBreakdownXml:
         f.write(xml_plan)
         f.close()
         parsed = ET.ElementTree(ET.fromstring(xml_plan))
-        costs = {}
-        for elem in parsed.iter():
-            traverse(elem, costs, self.schema, '')
-        return costs
+        root = {'children': [], 'isRoot': True}
+        traverse(parsed.getroot(), self.schema, root)
+        return root
 
 
-def traverse(current, costs, schema, path):
+def traverse(current, schema, parent):
+    for child in current.getchildren():
+        parent = traverse(child, schema, parent)
+
     if "relop" in current.tag.lower() and 'LogicalOp' in current.attrib and 'join' in current.attrib[
         'LogicalOp'].lower():
-
         runtime = current.findall('./mw:RunTimeInformation', namespaces=namespace)[0]
         join_info = \
             [node for node in current.getchildren() if
@@ -41,11 +42,11 @@ def traverse(current, costs, schema, path):
 
         keyBuild = join_info.find('./mw:HashKeysBuild', namespaces=namespace)[0]
         keyProbe = join_info.find('./mw:HashKeysProbe', namespaces=namespace)[0]
-        left = keyBuild.attrib['Table'].replace('[', '').replace(']', '')
-        left_table = schema[left]
-        right = keyProbe.attrib['Table'].replace('[', '').replace(']', '')
+        right = keyBuild.attrib['Table'].replace('[', '').replace(']', '')
         right_table = schema[right]
-        path = path + right_table.name if path != '' else left_table.name + '->' + right_table.name
-        costs[path] = cost
-        for child in current.getchildren():
-            traverse(child, costs, schema, path)
+        left = keyProbe.attrib['Table'].replace('[', '').replace(']', '')
+        left_table = schema[left]
+        join = {'left': left_table.name, 'right': right_table.name, 'cost': cost, 'children': []}
+        parent['children'].append(join)
+        return join
+    return parent
