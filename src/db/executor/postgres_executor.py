@@ -8,23 +8,26 @@ class PostgresJoinBreakdownJson():
     def execute(self, sql_query):
         rs = self.engine.execute(sql_query)
         rec = rs.first()[0]
-        costs = {}
-        traverse_plan(rec[0]['Plan'], costs, self.schema)
+        costs = {'children': [], 'isRoot': True}
+        traverse_plan(rec[0]['Plan'], self.schema, costs)
         return costs
 
 
-def traverse_plan(current, costs, schema):
-    if 'join' in current['Node Type'].lower():
+def traverse_plan(current, schema, parent):
+    if 'Plans' in current:
+        for plan in current['Plans']:
+            parent = traverse_plan(plan, schema, parent)
+
+    if 'Node Type' in current and 'join' in current['Node Type'].lower():
         condition = current['Hash Cond'].replace('(', '').replace(')', '')
         left, right = condition.split(" = ")
         left_table = find_table_name_by_alias(left.split(".")[0].replace('"', ''), schema)
         right_table = find_table_name_by_alias(right.split(".")[0].replace('"', ''), schema)
-
         cost = current['Total Cost']
-        costs[left_table.name + '->' + right_table.name] = cost
-    if 'Plans' in current:
-        for plan in current['Plans']:
-            traverse_plan(plan, costs, schema)
+        join = {'left': left_table.name, 'right': right_table.name, 'cost': cost, 'children': []}
+        parent['children'].append(join)
+        return join
+    return parent
 
 
 def find_table_name_by_alias(alias, schema):
