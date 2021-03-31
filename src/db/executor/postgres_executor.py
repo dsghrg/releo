@@ -1,9 +1,16 @@
-def execute_sql_query(db_engine, schema, sql_query):
-    rs = db_engine.execute(sql_query)
-    rec = rs.first()[0]
-    costs = {}
-    traverse_plan(rec[0]['Plan'], costs, schema)
-    return costs
+class PostgresJoinBreakdownJson():
+
+    def __init__(self, cfg, engine, schema):
+        self.cfg = cfg
+        self.engine = engine
+        self.schema = schema
+
+    def execute(self, sql_query):
+        rs = self.engine.execute(sql_query)
+        rec = rs.first()[0]
+        costs = {}
+        traverse_plan(rec[0]['Plan'], costs, self.schema)
+        return costs
 
 
 def traverse_plan(current, costs, schema):

@@ -38,11 +38,11 @@ if __name__ == '__main__':
     # plot_schema(schema)
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)
     sql_creator = get_sql_generator(cfg[CFG_SQL_CREATOR], cfg[CFG_SQL_CREATOR_CONF])
-    executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF])
+    executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF], engine, schema)
 
     for i in range(0, 10):
         logical_query = generator.generate()
         sql = sql_creator(schema, logical_query)
-        runtime_stats = executor(engine, schema, sql)
+        runtime_stats = executor.execute(sql)
         print(runtime_stats)
     teardown(engine, schema)
