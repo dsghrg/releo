@@ -1,3 +1,6 @@
+import time
+
+
 class PostgresJoinBreakdownJson():
 
     def __init__(self, cfg, engine, schema):
@@ -6,9 +9,11 @@ class PostgresJoinBreakdownJson():
         self.schema = schema
 
     def execute(self, sql_query):
+        start_time = time.time()
         rs = self.engine.execute(sql_query)
+        elapes_time = 1000 * (time.time() - start_time)
         rec = rs.first()[0]
-        costs = {'children': [], 'isRoot': True}
+        costs = {'children': [], 'isRoot': True, 'cost': elapes_time}
         traverse_plan(rec[0]['Plan'], self.schema, costs)
         return costs
 

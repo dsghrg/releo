@@ -27,9 +27,11 @@ sql-creator: postgres-force-order
 sql-creator-config:
 
 # specifies which reinforcement learning approach is used
-environment: luc-default
+environment: one-hot-history
 # config which will passed to the specified environment for custom setup etc
 environment-config:
+  seed: 123
+#  max-joins: 8
 
 # specifies which query generator is used to create logical queries which ultimately will be passed to the environment
 # / reinforcement learning algorithm to train/eval

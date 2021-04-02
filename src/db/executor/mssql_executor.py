@@ -14,7 +14,9 @@ class MssqlJoinBreakdownXml:
     def execute(self, sql_query):
         con = self.engine.raw_connection()
         cursor = con.cursor()
+        start_time = time.time()
         cursor.execute(sql_query)
+        elapsed_time = 1000 * (time.time() - start_time)
         cursor.nextset()
         res_two = cursor.fetchall()
         xml_plan = res_two[0][0]
@@ -23,7 +25,7 @@ class MssqlJoinBreakdownXml:
         f.write(xml_plan)
         f.close()
         parsed = ET.ElementTree(ET.fromstring(xml_plan))
-        root = {'children': [], 'isRoot': True}
+        root = {'children': [], 'isRoot': True, 'cost': elapsed_time}
         traverse(parsed.getroot(), self.schema, root)
         return root
 

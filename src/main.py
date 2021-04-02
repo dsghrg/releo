@@ -1,5 +1,7 @@
 import sys
 import yaml
+import numpy as np
+import random
 
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
@@ -7,6 +9,7 @@ from db.schema import create_schema
 from db.sql_generator.sql_query_factory import get_sql_generator
 from db.setup.setup_factory import get_setup_teardown
 from query_generator.query_generator_factory import get_query_generator_creator
+from environment.environment_factory import get_environment
 
 CFG_DBMS = 'dbms'
 CFG_DBMS_CONF = 'db-connection'
@@ -18,6 +21,8 @@ CFG_EXECUTOR = 'executor'
 CFG_EXECUTOR_CONF = 'executor-config'
 CFG_DB_SETUP = 'db-setup'
 CFG_DB_SETUP_CONF = 'db-setup-config'
+CFG_ENV = 'environment'
+CFG_ENV_CONF = 'environment-config'
 
 
 def load_cfg():
@@ -39,10 +44,13 @@ if __name__ == '__main__':
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)
     sql_creator = get_sql_generator(cfg[CFG_SQL_CREATOR], cfg[CFG_SQL_CREATOR_CONF])
     executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF], engine, schema)
+    env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
 
-    for i in range(0, 10):
-        logical_query = generator.generate()
-        sql = sql_creator(schema, logical_query)
-        runtime_stats = executor.execute(sql)
-        print(runtime_stats)
-    teardown(engine, schema)
+    env.reset()
+    done = False
+    while not done:
+        action_indexes = np.where(env.get_possible_actions_enc() == 1)[0]
+        action_index = random.choice(action_indexes)
+        new_state, reward, done, _info = env.step(action_index)
+        if done:
+            print(new_state)
