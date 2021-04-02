@@ -12,12 +12,12 @@ class OneHotHistory(gym.Env):
     relations_to_join = []
     # list of tables that were joined. indicates order in which joins were done
     # ex ['order', 'deliverer', 'order_details'] : ... from ORDER join DELIVERER on ... join ORDER_DETAILS on...
-    join_history = []
+    join_order = []
 
     # list of tablenames which can be joined next
     possible_actions = []
 
-    # history of all the states for attributing every state during query generation with the costs
+    # history of all the states for associating every state with the respective cost after the query execution
     state_history = []
 
     def __init__(self, schema, query_generator, sql_generator, executor, cfg):
@@ -37,9 +37,13 @@ class OneHotHistory(gym.Env):
         return sum([self._tablename_to_vector(tablename) for tablename in self.possible_actions])
 
     def step(self, action):
+        # action is the index of the encoded table referring to the joined table
         action = self.index_to_tablename[action]
-        is_first_action = True if len(self.join_history) == 0 else False
+        is_first_action = True if len(self.join_order) == 0 else False
         self.possible_actions.remove(action)
+
+        # it is possible to start with any table.
+        # Therefore, after choosing a starting table, we need to clear all possible actions
         if is_first_action:
             self.possible_actions = []
 
@@ -48,14 +52,19 @@ class OneHotHistory(gym.Env):
                                 new_action in self.relations_to_join]
         self.possible_actions = self.possible_actions + new_possible_actions
 
+        # the action taken can be removed from the remaining tables
         self.relations_to_join.remove(action)
-        self.join_history.append(action)
+        # append the chosen table to generate a join order
+        self.join_order.append(action)
+        # append the whole state to the history in order to associate every state with the final cost after execution
         self.state_history.append(self._map_to_state_enc())
 
         is_done = True if len(self.relations_to_join) == 0 else False
         cost_infos = []
+
+        # we can only retrieve the actual costs once the join order is determined
         if is_done:
-            sql_statement = self.sql_generator(self.schema, self.join_history)
+            sql_statement = self.sql_generator(self.schema, self.join_order)
             costs = self.executor.execute(sql_statement)
             self._traverse_join_tree(costs, cost_infos, 0)
 
@@ -64,7 +73,7 @@ class OneHotHistory(gym.Env):
     def reset(self):
         logical_query = self.query_generator.generate()
         self.relations_to_join = logical_query
-        self.join_history = []
+        self.join_order = []
         # it is possible to start with any table in the query
         self.possible_actions = logical_query.copy()
         pass
@@ -107,7 +116,7 @@ class OneHotHistory(gym.Env):
 
         # add join history
         prev_join = np.zeros(self.no_of_relations)
-        for join_nr, join in enumerate(self.join_history):
+        for join_nr, join in enumerate(self.join_order):
             join_enc = prev_join + self._tablename_to_vector(join)
             state[join_nr * self.no_of_relations:join_nr * self.no_of_relations + self.no_of_relations] = join_enc
             prev_join = join_enc
