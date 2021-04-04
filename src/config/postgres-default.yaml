@@ -49,7 +49,7 @@ agent-config:
   learning-rate: 0.003
   layers:
     1:
-      units: 32
+      units: 64
       activation: relu
     2:
       units: 64
@@ -73,6 +73,8 @@ query-generator: random-generator
 
 query-generator-config:
   seed: 123
+  min-tables: 3
+  max-tables: 6
 
 
 

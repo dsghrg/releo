@@ -72,6 +72,7 @@ class OneHotHistory(gym.Env):
         if is_done:
             sql_statement = self.sql_creator(self.schema, self.join_order)
             costs = self.executor.execute(sql_statement)
+            costs['cost'] = 0
             self._traverse_join_tree(costs, cost_infos, 0)
 
         return self._map_to_state_enc(), cost_infos, is_done, {}

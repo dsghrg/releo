@@ -5,6 +5,8 @@ class RandomQueryGenerator:
 
     def __init__(self, schema, cfg):
         self.seed = cfg['seed'] if 'seed' in cfg else 1
+        self.min = cfg['min-tables'] if 'min-tables' in cfg else 2
+        self.max = cfg['max-tables'] if 'max-tables' in cfg else len(schema)
         random.seed = self.seed
         self.schema = schema
 
@@ -17,7 +19,7 @@ class RandomQueryGenerator:
         pass
 
     def generate(self):
-        n_of_relations = round(random.random() * (len(self.schema) - 3) + 3)
+        n_of_relations = round(random.random() * (self.max - self.min) + self.min)
         query = []
         self._gen(self.schema, query, [random.choice(list(self.schema.keys()))], [], n_of_relations)
         return query
