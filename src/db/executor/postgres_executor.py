@@ -28,7 +28,7 @@ def traverse_plan(current, schema, parent):
         left, right = condition.split(" = ")
         left_table = find_table_name_by_alias(left.split(".")[0].replace('"', ''), schema)
         right_table = find_table_name_by_alias(right.split(".")[0].replace('"', ''), schema)
-        cost = current['Total Cost']
+        cost = current['Actual Total Time'] if 'isRoot' in parent else current['Actual Total Time'] - parent['cost']
         join = {'left': left_table.name, 'right': right_table.name, 'cost': cost, 'children': []}
         parent['children'].append(join)
         return join

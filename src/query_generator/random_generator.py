@@ -17,7 +17,7 @@ class RandomQueryGenerator:
         pass
 
     def generate(self):
-        n_of_relations = round(random.random() * (len(self.schema) - 2) + 2)
+        n_of_relations = round(random.random() * (len(self.schema) - 3) + 3)
         query = []
         self._gen(self.schema, query, [random.choice(list(self.schema.keys()))], [], n_of_relations)
         return query

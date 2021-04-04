@@ -1,6 +1,7 @@
 import random
 
 import gym
+from gym import spaces
 import numpy as np
 
 MAX_JOINS = 'max-joins'
@@ -29,6 +30,11 @@ class OneHotHistory(gym.Env):
         self.executor = executor
         self.max_joins = cfg[MAX_JOINS] if MAX_JOINS in cfg else len(schema)
         self.no_of_relations = len(schema)
+        self.action_space = spaces.Discrete(self.no_of_relations)
+        self.observation_space = spaces.Box(
+            np.zeros(self.no_of_relations * self.max_joins + self.no_of_relations, dtype=int),
+            np.ones(self.no_of_relations * self.max_joins + self.no_of_relations, dtype=int),
+            dtype=np.int)
         self.tablename_to_index = {tablename: index for index, tablename in enumerate(schema.keys())}
         self.index_to_tablename = {self.tablename_to_index[tablename]: tablename for tablename in
                                    self.tablename_to_index.keys()}
@@ -70,8 +76,7 @@ class OneHotHistory(gym.Env):
 
         return self._map_to_state_enc(), cost_infos, is_done, {}
 
-    def reset(self):
-        logical_query = self.query_generator.generate()
+    def reset_with_query(self, logical_query):
         self.relations_to_join = logical_query
         self.join_order = []
         self.state_history = []
@@ -79,8 +84,15 @@ class OneHotHistory(gym.Env):
         self.possible_actions = logical_query.copy()
         return self._map_to_state_enc()
 
+    def reset(self):
+        logical_query = self.query_generator.generate()
+        return self.reset_with_query(logical_query)
+
     def render(self, mode='human'):
         return 1
+
+    def possible_steps(self):
+        return self.get_possible_actions_enc()
 
     # merges every state during query generation with the actual cost of the step taken
     def _traverse_join_tree(self, current_join, costs, join_nr):
@@ -105,9 +117,9 @@ class OneHotHistory(gym.Env):
 
         # length of the state is determined by max allowed joins and the number of tables in the db
         state_enc_size = self.max_joins * self.no_of_relations + self.no_of_relations
-        state = np.zeros(state_enc_size)
+        state = np.zeros(state_enc_size, dtype=int)
         tables_left_enc_offset = self.max_joins * self.no_of_relations
-        tables_to_join_adder = np.zeros(state_enc_size)
+        tables_to_join_adder = np.zeros(state_enc_size, dtype=int)
 
         # prepare an array of same length as state with all zeros except the last no_of_relations
         # set to 1 if table still needs to be joined
@@ -116,7 +128,7 @@ class OneHotHistory(gym.Env):
             tables_to_join_adder[idx] = 1
 
         # add join history
-        prev_join = np.zeros(self.no_of_relations)
+        prev_join = np.zeros(self.no_of_relations, dtype=int)
         for join_nr, join in enumerate(self.join_order):
             join_enc = prev_join + self._tablename_to_vector(join)
             state[join_nr * self.no_of_relations:join_nr * self.no_of_relations + self.no_of_relations] = join_enc
@@ -128,7 +140,7 @@ class OneHotHistory(gym.Env):
 
     # tablename to one-hot table encoding. length of vec is given by number of tables in the schema
     def _tablename_to_vector(self, tablename):
-        table_enc = np.zeros(self.no_of_relations)
+        table_enc = np.zeros(self.no_of_relations, dtype=int)
         table_enc[self.tablename_to_index[tablename]] = 1
         return table_enc
 

@@ -1,15 +1,15 @@
 import sys
-import yaml
-import numpy as np
-import random
 
+import numpy as np
+import yaml
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
 from db.schema import create_schema
-from db.sql_generator.sql_query_factory import get_sql_generator
 from db.setup.setup_factory import get_setup_teardown
-from query_generator.query_generator_factory import get_query_generator_creator
+from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
+from query_generator.query_generator_factory import get_query_generator_creator
+from rl_algorithms.dqn_default import DQNDefault
 
 CFG_DBMS = 'dbms'
 CFG_DBMS_CONF = 'db-connection'
@@ -46,11 +46,24 @@ if __name__ == '__main__':
     executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF], engine, schema)
     env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
 
-    env.reset()
+    rl_algo = DQNDefault(env)
+
+    rl_algo.train()
+
+    print('finito')
+
+    state = env.reset_with_query(list(schema.keys()))
+    state = state.reshape((1, env.observation_space.shape[0]))
     done = False
     while not done:
-        action_indexes = np.where(env.get_possible_actions_enc() == 1)[0]
-        action_index = random.choice(action_indexes)
-        new_state, reward, done, _info = env.step(action_index)
-        if done:
-            print(new_state)
+        possible_steps = env.possible_steps()
+        state = state.reshape((1, env.observation_space.shape[0]))
+        prediction = rl_algo.model.predict(state)[0]
+        for idx, action in enumerate(possible_steps):
+            if action == 0:
+                prediction[idx] = -np.inf
+        action = np.argmax(prediction)
+        state, reward, done, _info = env.step(action)
+
+    sql = sql_creator(schema, env.join_order)
+    print("\n\n" + sql)
