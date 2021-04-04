@@ -33,6 +33,40 @@ environment-config:
   random-seed: 123
 #  max-joins: 8
 
+# specifies the rl agent to train and use for predictions
+agent: dqn-default
+# config which will be passed to the specified environment for custom setup etc
+agent-config:
+  environmet-name: rl_joinorder
+  environment-continuous: false
+  episodes: 300
+  epsilon-initial: 1.0
+  epsilon-min: 0.03
+  epsilon-decay: 0.9925
+  gamma: 0.9
+  tau: 0.1
+  batch-size: 8
+  learning-rate: 0.003
+  layers:
+    1:
+      units: 32
+      activation: relu
+    2:
+      units: 64
+      activation: relu
+    3:
+      units: 16
+      activation: relu
+  output-activation: linear
+  loss: huber_loss
+  optimizer: adam
+  replay-buffer-size: 1024
+  min-experiences-to-train: 32
+  checkpoint-period: 20
+  wandb-group-name: debug
+  wandb-project-name: rl-joinorder-luc
+  broken-buffer: false
+
 # specifies which query generator is used to create logical queries which ultimately will be passed to the environment
 # / reinforcement learning algorithm to train/eval
 query-generator: random-generator

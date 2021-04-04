@@ -12,29 +12,39 @@ from keras.optimizers import Adam
 from wandb.keras import WandbCallback
 
 BASE_CONFIG = {
-    'environment_name': 'RL_joinorder',
-    'environment_continuous': False,
-    'environment_death_reward_requirement': -np.inf,
-    'num_episodes': 300,
-    'epsilon_initial': 1.0,
-    'epsilon_min': 0.03,
-    'epsilon_decay': 0.9925,  # how quickly do we change over to predictions
+    'environment-name': 'RL_joinorder',
+    'environment-continuous': False,
+    'episodes': 300,
+    'epsilon-initial': 1.0,
+    'epsilon-min': 0.03,
+    'epsilon-decay': 0.9925,  # how quickly do we change over to predictions
     'gamma': 0.9,  # horizon: how far are q-value updates propagated
     'tau': 0.1,  # how much are the target weights updated
-    'batch_size': 8,
-    'learning_rate': 0.003,
-    'n_dense1': 32,
-    'n_dense2': 64,
-    'n_dense3': 16,
-    'output_activation': 'linear',  # softmax
+    'batch-size': 8,
+    'learning-rate': 0.003,
+    'layers': {
+        '1': {
+            'units': 32,
+            'activation': 'relu'
+        },
+        '2': {
+            'units': 64,
+            'activation': 'relu'
+        },
+        '3': {
+            'units': 16,
+            'activation': 'relu'
+        }
+    },
+    'output-activation': 'linear',  # softmax
     'loss': 'huber_loss',  # huber_loss categorical_crossentropy mean_squared_error
     'optimizer': 'adam',
-    'replay_buffer_size': 1024,
-    'min_experiences_to_train': 32,
-    'checkpoint_period': 20,
-    'wandb_group_name': 'debug',
-    'wandb_project_name': 'rl-joinorder-luc',
-    'broken_buffer': False
+    'replay-buffer-size': 1024,
+    'min-experiences-to-train': 32,
+    'checkpoint-period': 20,
+    'wandb-group-name': 'debug',
+    'wandb-project-name': 'rl-joinorder-luc',
+    'broken-buffer': False
 }
 
 
@@ -92,29 +102,30 @@ class ReplayBuffer:
 
 
 class DQNDefault:
-    def __init__(self, env, config=BASE_CONFIG):
+    def __init__(self, env, config):
+        config = config if config is not None else BASE_CONFIG
         self.name = self.identifier()
         self.config = config
 
-        self.buffer = ReplayBuffer(config['replay_buffer_size'], broken=config['broken_buffer'])
+        self.buffer = ReplayBuffer(config['replay-buffer-size'], broken=config['broken-buffer'])
         self.callbacks = None
         self.epochs_run = 0
         self.episodes_run = 0
         self.last_rewards = list()
-        self.max_average_reward = 0.5 * config['environment_death_reward_requirement']
+        self.max_average_reward = 0
         self.environment_won = False
 
-        self.learning_rate = config['learning_rate']
-        self.batch_size = config['batch_size']
+        self.learning_rate = config['learning-rate']
+        self.batch_size = config['batch-size']
         self.gamma = config['gamma']  # horizon
         self.tau = config['tau']  # how much the target weights are updated
 
         # Initially: completely random exploration of state spaces
-        self.epsilon = config['epsilon_initial']
-        self.epsilon_min = config['epsilon_min']
-        self.epsilon_decay = config['epsilon_decay']
+        self.epsilon = config['epsilon-initial']
+        self.epsilon_min = config['epsilon-min']
+        self.epsilon_decay = config['epsilon-decay']
 
-        wandb.init(project=self.config['wandb_project_name'], group=self.config['wandb_group_name'], monitor_gym=True,
+        wandb.init(project=self.config['wandb-project-name'], group=self.config['wandb-group-name'], monitor_gym=True,
                    name=self.name)
         wandb.config.update(self.config)
 
@@ -131,7 +142,7 @@ class DQNDefault:
         return datetime.now().strftime(self.__class__.__name__ + "_%Y%m%d-%H%M%S")
 
     def train(self):
-        for episode in range(self.config['num_episodes']):
+        for episode in range(self.config['episodes']):
             running_reward_sum = 0
             state = self.env.reset()
             done = False
@@ -156,24 +167,17 @@ class DQNDefault:
                         exp[2] = cost
                         self.write_to_buffer(exp)
 
-                    if self.buffer.size() > self.config['min_experiences_to_train']:
+                    if self.buffer.size() > self.config['min-experiences-to-train']:
                         self.update_target_network()
                         self.replay()
 
-                    if self.episodes_run % self.config['checkpoint_period'] == 0:
+                    if self.episodes_run % self.config['checkpoint-period'] == 0:
                         self.save_model()
 
                     self.end_episode(current_step, running_reward_sum)
                     break
 
                 current_step += 1
-
-            # Abort the run if the reward gets too low
-            # if len(self.last_rewards) > 32:
-            #     if np.mean(self.last_rewards) < self.config['environment_death_reward_requirement']:
-            #         print("ABORTED!", np.mean(self.last_rewards), self.config['environment_death_reward_requirement'])
-            #         print(self.last_rewards)
-            #         break
 
         self.env.close()
 
@@ -183,51 +187,28 @@ class DQNDefault:
     def create_model(self):
         model = Sequential()
 
-        model.add(Dense(wandb.config.n_dense1, input_dim=self.env.observation_space.shape[0], activation="relu"))
-
-        if wandb.config.n_dense2 > 0:
-            model.add(Dense(wandb.config.n_dense2, activation="relu"))
-
-        if wandb.config.n_dense3 > 0:
-            model.add(Dense(wandb.config.n_dense3, activation="relu"))
+        layers = self.config['layers']
+        for layer_nr in layers:
+            if layer_nr == 1:
+                model.add(
+                    Dense(layers[layer_nr]['units'], input_dim=self.env.observation_space.shape[0],
+                          activation=layers[layer_nr]['activation']))
+            else:
+                model.add(Dense(layers[layer_nr]['units'], activation=layers[layer_nr]['activation']))
 
         # Output Layer
-        if self.config['environment_continuous']:
-            model.add(Dense(self.env.action_space.shape[0], activation=self.config['output_activation']))
+        if self.config['environment-continuous']:
+            model.add(Dense(self.env.action_space.shape[0], activation=self.config['output-activation']))
         else:
-            model.add(Dense(self.env.action_space.n, activation=self.config['output_activation']))
+            model.add(Dense(self.env.action_space.n, activation=self.config['output-activation']))
 
         model.compile(loss=wandb.config.loss, optimizer=Adam(lr=self.learning_rate))
 
-        # model.summary()
         return model
 
     # @wandb_timing
     def write_to_buffer(self, arr):
         self.buffer.add(arr)
-
-    def reset(self):
-        wandb.init(project=self.config['wandb_project_name'], group=self.config['wandb_group_name'], entity='releo',
-                   monitor_gym=True, name=self.name)
-        wandb.config.update(self.config)
-
-        env = RL_joinorder()
-
-        if self.buffer.size() > 0:
-            self.buffer.clear()
-
-        self.epsilon = self.config['epsilon_initial']
-        self.epochs_run = 0
-        self.episodes_run = 0
-        self.last_rewards = list()
-        self.max_average_reward = 0.5 * self.config['environment_death_reward_requirement']
-        self.environment_won = False
-        self.model = self.create_model()
-        self.target_model = self.create_model()
-        # Ensure both models have the same weights
-        self.hard_update_target_network()
-
-        return self.env.reset()
 
     def save_model(self, suffix=''):
         Path('./RL_program/models/' + self.name).mkdir(exist_ok=True, parents=True)
@@ -321,11 +302,7 @@ class DQNDefault:
                 if action == 0:
                     prediction[idx] = -np.inf
 
-            if self.config['environment_continuous']:
-                return prediction
-            else:
-                # env.possible_steps()
-                return np.argmax(prediction)
+            return np.argmax(prediction)
 
     def end_episode(self, total_steps, end_reward):
         self.update_running_rewards(end_reward)

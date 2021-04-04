@@ -9,7 +9,7 @@ from db.setup.setup_factory import get_setup_teardown
 from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
 from query_generator.query_generator_factory import get_query_generator_creator
-from rl_algorithms.dqn_default import DQNDefault
+from rl_algorithms.rl_agent_factory import get_rl_agent
 
 CFG_DBMS = 'dbms'
 CFG_DBMS_CONF = 'db-connection'
@@ -23,6 +23,8 @@ CFG_DB_SETUP = 'db-setup'
 CFG_DB_SETUP_CONF = 'db-setup-config'
 CFG_ENV = 'environment'
 CFG_ENV_CONF = 'environment-config'
+CFG_RL_AGENT = 'agent'
+CFG_RL_AGENT_CONF = 'agent-config'
 
 
 def load_cfg():
@@ -40,14 +42,12 @@ if __name__ == '__main__':
     schema = create_schema(engine)
     setup, teardown = get_setup_teardown(cfg[CFG_DB_SETUP], cfg[CFG_DB_SETUP_CONF])
     setup(engine, schema)
-    # plot_schema(schema)
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)
     sql_creator = get_sql_generator(cfg[CFG_SQL_CREATOR], cfg[CFG_SQL_CREATOR_CONF])
     executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF], engine, schema)
     env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
 
-    rl_algo = DQNDefault(env)
-
+    rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])
     rl_algo.train()
 
     print('finito')
@@ -67,3 +67,4 @@ if __name__ == '__main__':
 
     sql = sql_creator(schema, env.join_order)
     print("\n\n" + sql)
+    teardown(engine, schema)
