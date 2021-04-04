@@ -4,7 +4,7 @@ import gym
 import numpy as np
 
 MAX_JOINS = 'max-joins'
-RANDOM_SEED = 'seed'
+RANDOM_SEED = 'random-seed'
 
 
 class OneHotHistory(gym.Env):
@@ -20,11 +20,11 @@ class OneHotHistory(gym.Env):
     # history of all the states for associating every state with the respective cost after the query execution
     state_history = []
 
-    def __init__(self, schema, query_generator, sql_generator, executor, cfg):
+    def __init__(self, schema, query_generator, sql_creator, executor, cfg):
         random.seed = cfg[RANDOM_SEED] if RANDOM_SEED in cfg else 1
 
         self.query_generator = query_generator
-        self.sql_generator = sql_generator
+        self.sql_creator = sql_creator
         self.schema = schema
         self.executor = executor
         self.max_joins = cfg[MAX_JOINS] if MAX_JOINS in cfg else len(schema)
@@ -64,7 +64,7 @@ class OneHotHistory(gym.Env):
 
         # we can only retrieve the actual costs once the join order is determined
         if is_done:
-            sql_statement = self.sql_generator(self.schema, self.join_order)
+            sql_statement = self.sql_creator(self.schema, self.join_order)
             costs = self.executor.execute(sql_statement)
             self._traverse_join_tree(costs, cost_infos, 0)
 
@@ -74,9 +74,10 @@ class OneHotHistory(gym.Env):
         logical_query = self.query_generator.generate()
         self.relations_to_join = logical_query
         self.join_order = []
+        self.state_history = []
         # it is possible to start with any table in the query
         self.possible_actions = logical_query.copy()
-        pass
+        return self._map_to_state_enc()
 
     def render(self, mode='human'):
         return 1
@@ -92,7 +93,7 @@ class OneHotHistory(gym.Env):
         # concatenation of joins and relations left. One join is represented by a one hot encoding of the newly joined
         # table and the previously joined tables
         # [ join1   join2 .... joinN   relations left]
-        # ex: max_joins = 3, no_of_relations = 4
+        # ex: max_joins = 3, no_of_relations = 4, query involves 3 tables
         # initial:
         # -> [0 0 0 0    0 0 0 0   0 0 0 0   1 1 0 1]
         # first action: start with table '4'  (select from '4')

@@ -30,7 +30,7 @@ sql-creator-config:
 environment: one-hot-history
 # config which will passed to the specified environment for custom setup etc
 environment-config:
-  seed: 123
+  random-seed: 123
 #  max-joins: 8
 
 # specifies which query generator is used to create logical queries which ultimately will be passed to the environment
