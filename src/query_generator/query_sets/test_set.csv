@@ -1,0 +1,7 @@
+category,order_details,product,subcategory,order,deliverer
+order_details,product,subcategory,customer,order,deliverer,discount
+order_details,product,subcategory,order,deliverer
+category,order_details,product,subcategory,customer,order,discount
+category,order_details,product,subcategory,customer,order,deliverer,discount
+customer,order,discount
+order_details,product,order,deliverer,discount

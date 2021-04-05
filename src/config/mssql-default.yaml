@@ -108,12 +108,12 @@ agent-config:
 
 # specifies which query generator is used to create logical queries which ultimately will be passed to the environment
 # / reinforcement learning algorithm to train/eval
-query-generator: random-generator
+query-generator: train-split-random-generator
 
 query-generator-config:
-  seed: 123
-  min-tables: 3
-  max-tables: 8
+  trainset-location: ./query_generator/query_sets/train_set.csv
+  testset-location: ./query_generator/query_sets/test_set.csv
+
 
 
 
