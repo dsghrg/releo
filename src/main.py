@@ -4,7 +4,7 @@ import numpy as np
 import yaml
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
-from db.schema import create_schema
+from db.schema.schema_factory import get as get_schema_creator
 from db.setup.setup_factory import get_setup_teardown
 from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
@@ -25,6 +25,8 @@ CFG_ENV = 'environment'
 CFG_ENV_CONF = 'environment-config'
 CFG_RL_AGENT = 'agent'
 CFG_RL_AGENT_CONF = 'agent-config'
+CFG_SCHEMA_CREATOR = 'schema-creator'
+CFG_SCHEMA_CREATOR_CFG = 'schema-creator-config'
 
 
 def load_cfg():
@@ -39,7 +41,7 @@ def load_cfg():
 if __name__ == '__main__':
     cfg = load_cfg()
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
-    schema = create_schema(engine)
+    schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()
     setup, teardown = get_setup_teardown(cfg[CFG_DB_SETUP], cfg[CFG_DB_SETUP_CONF])
     setup(engine, schema)
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)

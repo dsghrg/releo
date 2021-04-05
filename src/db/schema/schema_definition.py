@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-from sqlalchemy import inspect
 
 
 class Join:
@@ -18,26 +17,6 @@ class Table:
         self.name = name
         self.alias = alias
         self.tablename_to_join = tablename_to_join
-
-
-def create_schema(engine):
-    schema = {}
-    inspector = inspect(engine)
-    for tablename in inspector.get_table_names():
-        table = Table(tablename, tablename, {})
-        schema[tablename] = table
-
-    for tablename in inspector.get_table_names():
-        table = schema[tablename]
-        foreign_keys = inspector.get_foreign_keys(tablename)
-        for fk in foreign_keys:
-            join = Join(table, fk['constrained_columns'][0], schema[fk['referred_table']], fk['referred_columns'][0])
-            # symmetry
-            join_back = Join(schema[fk['referred_table']], fk['referred_columns'][0], table,
-                             fk['constrained_columns'][0])
-            table.tablename_to_join[join.destination.name] = join
-            schema[fk['referred_table']].tablename_to_join[join_back.destination.name] = join_back
-    return schema
 
 
 def plot_schema(schema):

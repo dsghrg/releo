@@ -11,6 +11,11 @@ db-connection:
   schema: public
   db: shop_db
 
+# defines which creator is used to represent the database schema internally
+schema-creator: autocreate
+# config which will be passed to the specified schema-creator
+schema-creator-config:
+
 # specifies which executor to use to execute generated queries and return runtime information about joins
 executor: postgres-join-breakdown-json
 # config which will be passed to the above specified executor
@@ -45,7 +50,7 @@ agent-config:
   epsilon-decay: 0.985
   gamma: 0.9
   tau: 0.1
-  batch-size: 8
+  batch-size: 32
   learning-rate: 0.003
   layers:
     1:
@@ -60,7 +65,7 @@ agent-config:
   output-activation: linear
   loss: huber_loss
   optimizer: adam
-  replay-buffer-size: 1024
+  replay-buffer-size: 512
   min-experiences-to-train: 32
   checkpoint-period: 20
   wandb-group-name: debug
