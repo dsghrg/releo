@@ -39,10 +39,10 @@ agent: dqn-default
 agent-config:
   environmet-name: rl_joinorder
   environment-continuous: false
-  episodes: 300
+  episodes: 150
   epsilon-initial: 1.0
   epsilon-min: 0.03
-  epsilon-decay: 0.9925
+  epsilon-decay: 0.985
   gamma: 0.9
   tau: 0.1
   batch-size: 8
@@ -74,7 +74,7 @@ query-generator: random-generator
 query-generator-config:
   seed: 123
   min-tables: 3
-  max-tables: 6
+  max-tables: 8
 
 
 
