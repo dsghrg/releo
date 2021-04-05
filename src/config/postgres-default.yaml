@@ -12,9 +12,42 @@ db-connection:
   db: shop_db
 
 # defines which creator is used to represent the database schema internally
-schema-creator: autocreate
+schema-creator: definition-file
 # config which will be passed to the specified schema-creator
 schema-creator-config:
+  category:
+  order_details:
+    joins:
+      - source-column: order_id
+        referred-table: order
+        referred-column: id
+      - source-column: product_id
+        referred-table: product
+        referred-column: id
+  product:
+    joins:
+      - source-column: subcategory_id
+        referred-table: subcategory
+        referred-column: id
+  subcategory:
+    joins:
+      - source-column: category_id
+        referred-table: category
+        referred-column: id
+  customer:
+  order:
+    joins:
+      - source-column: customer_id
+        referred-table: customer
+        referred-column: id
+      - source-column: deliverer_id
+        referred-table: deliverer
+        referred-column: id
+      - source-column: discount_id
+        referred-table: discount
+        referred-column: id
+  deliverer:
+  discount:
 
 # specifies which executor to use to execute generated queries and return runtime information about joins
 executor: postgres-join-breakdown-json
