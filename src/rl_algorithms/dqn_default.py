@@ -11,42 +11,6 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from wandb.keras import WandbCallback
 
-BASE_CONFIG = {
-    'environment-name': 'RL_joinorder',
-    'environment-continuous': False,
-    'episodes': 300,
-    'epsilon-initial': 1.0,
-    'epsilon-min': 0.03,
-    'epsilon-decay': 0.9925,  # how quickly do we change over to predictions
-    'gamma': 0.9,  # horizon: how far are q-value updates propagated
-    'tau': 0.1,  # how much are the target weights updated
-    'batch-size': 8,
-    'learning-rate': 0.003,
-    'layers': {
-        '1': {
-            'units': 32,
-            'activation': 'relu'
-        },
-        '2': {
-            'units': 64,
-            'activation': 'relu'
-        },
-        '3': {
-            'units': 16,
-            'activation': 'relu'
-        }
-    },
-    'output-activation': 'linear',  # softmax
-    'loss': 'huber_loss',  # huber_loss categorical_crossentropy mean_squared_error
-    'optimizer': 'adam',
-    'replay-buffer-size': 1024,
-    'min-experiences-to-train': 32,
-    'checkpoint-period': 20,
-    'wandb-group-name': 'debug',
-    'wandb-project-name': 'rl-joinorder-luc',
-    'broken-buffer': False
-}
-
 
 # Decorator to time a function and log the
 # time it took to WandB
@@ -103,7 +67,7 @@ class ReplayBuffer:
 
 class DQNDefault:
     def __init__(self, env, config):
-        config = config if config is not None else BASE_CONFIG
+        config = config if config is not None else {}
         self.name = self.identifier()
         self.config = config
 
@@ -125,7 +89,8 @@ class DQNDefault:
         self.epsilon_min = config['epsilon-min']
         self.epsilon_decay = config['epsilon-decay']
 
-        wandb.init(project=self.config['wandb-project-name'], group=self.config['wandb-group-name'], monitor_gym=True,
+        wandb.init(entity=self.config['wandb-team-name'], project=self.config['wandb-project-name'],
+                   group=self.config['wandb-group-name'], monitor_gym=True,
                    name=self.name)
         wandb.config.update(self.config)
 

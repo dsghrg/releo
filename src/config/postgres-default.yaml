@@ -101,8 +101,9 @@ agent-config:
   replay-buffer-size: 512
   min-experiences-to-train: 32
   checkpoint-period: 20
+  wandb-team-name: releo_zhaw
   wandb-group-name: debug
-  wandb-project-name: rl-joinorder-luc
+  wandb-project-name: dqn-default
   broken-buffer: false
 
 # specifies which query generator is used to create logical queries which ultimately will be passed to the environment
