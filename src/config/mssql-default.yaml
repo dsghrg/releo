@@ -84,6 +84,7 @@ agent-config:
   epsilon-decay: 0.985
   gamma: 0.9
   tau: 0.1
+  synchronize_networks_every: 5
   batch-size: 32
   learning-rate: 0.003
   layers:

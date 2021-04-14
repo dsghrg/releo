@@ -83,6 +83,8 @@ class DQNDefault:
         self.batch_size = config['batch-size']
         self.gamma = config['gamma']  # horizon
         self.tau = config['tau']  # how much the target weights are updated
+        self.synchronize_networks_every = config['synchronize_networks_every'] 
+        self.sync_eps_run = 1
 
         # Initially: completely random exploration of state spaces
         self.epsilon = config['epsilon-initial']
@@ -133,8 +135,11 @@ class DQNDefault:
                         self.write_to_buffer(exp)
 
                     if self.buffer.size() > self.config['min-experiences-to-train']:
-                        self.update_target_network()
                         self.replay()
+                        if self.sync_eps_run >= self.synchronize_networks_every: # Freeze prediction network for some episodes
+                            self.update_target_network()
+                            self.sync_eps_run = 0
+                        self.sync_eps_run += 1
 
                     if self.episodes_run % self.config['checkpoint-period'] == 0:
                         self.save_model()
