@@ -59,7 +59,7 @@ db-setup: postgres-default
 # config which will be passed to the above specified db-setup functions
 db-setup-config:
 
-# specifes an sql generator to create a specific sql statement based on an abstract query
+# specifies an sql generator to create a specific sql statement based on an abstract query
 sql-creator: postgres-force-order
 # config which will be passed to the above specified sql-generator for custom config
 sql-creator-config:
