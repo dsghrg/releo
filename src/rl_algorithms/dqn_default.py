@@ -171,7 +171,7 @@ class DQNDefault:
                 action = np.argmax(prediction)
                 state, reward, done, _info = self.env.step(action)
 
-            join_order = self.env.state_to_join_order(state)
+            join_order = self.env.join_order
             self.evaluation_history[episode][hash(tuple(query))] = join_order
 
     def reshape_state(self, state):

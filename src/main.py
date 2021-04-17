@@ -10,6 +10,7 @@ from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
 from query_generator.query_generator_factory import get_query_generator_creator
 from rl_algorithms.rl_agent_factory import get_rl_agent
+import pandas as pd
 
 CFG_DBMS = 'dbms'
 CFG_DBMS_CONF = 'db-connection'
@@ -63,21 +64,50 @@ if __name__ == '__main__':
     rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])
     rl_algo.train()
 
-    print('finito')
+    print('training finito')
 
-    state = env.reset_with_query(list(schema.keys()))
-    state = state.reshape((1, env.observation_space.shape[0]))
-    done = False
-    while not done:
-        possible_steps = env.possible_steps()
+    query_times = {}
+    for query in test_set:
+        state = env.reset_with_query(query)
         state = state.reshape((1, env.observation_space.shape[0]))
-        prediction = rl_algo.model.predict(state)[0]
-        for idx, action in enumerate(possible_steps):
-            if action == 0:
-                prediction[idx] = -np.inf
-        action = np.argmax(prediction)
-        state, reward, done, _info = env.step(action)
+        done = False
+        while not done:
+            possible_steps = env.possible_steps()
+            state = state.reshape((1, env.observation_space.shape[0]))
+            prediction = rl_algo.model.predict(state)[0]
+            for idx, action in enumerate(possible_steps):
+                if action == 0:
+                    prediction[idx] = -np.inf
+            action = np.argmax(prediction)
+            state, reward, done, _info = env.step(action)
 
-    sql = sql_creator(schema, env.join_order)
-    print("\n\n" + sql)
+        sql = sql_creator(schema, env.join_order)
+        res = executor.execute(sql)
+        cost = res[0]['cost']
+
+        query_times[hash(tuple(env.join_order))] = cost
+        print("\n\n" + sql)
+
+    df = pd.DataFrame(columns=['hash', 'logical query', 'time releo', 'time optimizer'])
+
+    for logical_query in test_set:
+        hash = hash(tuple(logical_query))
+        df.loc[len(df.index)] = [hash, logical_query, query_times[hash], test_queries[hash]]
+
+    print(df)
+
+
+    # state = env.reset_with_query()
+    # state = state.reshape((1, env.observation_space.shape[0]))
+    # done = False
+    # while not done:
+    #     possible_steps = env.possible_steps()
+    #     state = state.reshape((1, env.observation_space.shape[0]))
+    #     prediction = rl_algo.model.predict(state)[0]
+    #     for idx, action in enumerate(possible_steps):
+    #         if action == 0:
+    #             prediction[idx] = -np.inf
+    #     action = np.argmax(prediction)
+    #     state, reward, done, _info = env.step(action)
+
     teardown(engine, schema)
