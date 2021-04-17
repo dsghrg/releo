@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-04-17T18:26:39.144Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="XCrAMhBftQjX_kpr4vrP" version="14.5.7" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-17T18:28:14.986Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="LIEyFraquBklYEAPWFN_" version="14.5.7" type="github">
   <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
-    <mxGraphModel dx="2031" dy="1089" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1673" dy="896" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -271,6 +271,9 @@
         </mxCell>
         <mxCell id="mUk0hxH7zZcaR8NZp5Ej-25" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;fontSize=7;rotation=90;" vertex="1" parent="1">
           <mxGeometry x="581" y="524.5" width="20" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="mUk0hxH7zZcaR8NZp5Ej-27" value="every X episodes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="614" y="795" width="106" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
