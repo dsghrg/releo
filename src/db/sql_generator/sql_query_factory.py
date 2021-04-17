@@ -5,14 +5,21 @@ from db.sql_generator.generate_sql import generate_sql_query
 
 def get_sql_generator(name, cfg):
     if name == 'mssql-force-order':
+        return lambda schema, order_vector: generate_sql_query(schema, order_vector, mssql_patcher_forced)
+    if name == 'mssql':
         return lambda schema, order_vector: generate_sql_query(schema, order_vector, mssql_patcher)
-    if name == 'postgres-force-order':
+    if name == 'postgres':
         return lambda schema, order_vector: generate_sql_query(schema, order_vector, postgres_patcher)
+
+
+def mssql_patcher_forced(query):
+    query = re.sub(r'\border\b', '[order]', query)
+    query = query.replace(";", "\nOPTION(FORCE ORDER);")
+    return "SET STATISTICS XML ON;\n" + query
 
 
 def mssql_patcher(query):
     query = re.sub(r'\border\b', '[order]', query)
-    query = query.replace(";", "\nOPTION(FORCE ORDER);")
     return "SET STATISTICS XML ON;\n" + query
 
 
