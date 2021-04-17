@@ -17,7 +17,19 @@ CFG_MAX_JOINS = 'max-joins'
 CFG_MIN_JOINS = 'min-joins'
 
 
-class TrainsetQueryGenerator:
+def _write_set_to_csv(file, query_set):
+    with open(file, "a") as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+        for query in list(query_set):
+            writer.writerow(query)
+
+
+def _fill_set(file, query_set):
+    with open(file) as csv_file:
+        query_set += ([line.rstrip().split(',') for line in csv_file])
+
+
+class TrainTestSetQueryGenerator:
 
     def __init__(self, schema, cfg):
         self.schema = schema
@@ -36,15 +48,15 @@ class TrainsetQueryGenerator:
 
         if self.train_set_location is None and self.test_set_location is None:
             self._generate_sets()
-            self._write_set_to_csv(self.train_out_location + self.csv_train_name, self.train_set)
-            self._write_set_to_csv(self.test_out_location + self.csv_test_name, self.test_set)
+            _write_set_to_csv(self.train_out_location + self.csv_train_name, self.train_set)
+            _write_set_to_csv(self.test_out_location + self.csv_test_name, self.test_set)
         else:
             self.test_set = []
             self.train_set = []
-            self._fill_set(self.test_set_location, self.test_set)
-            self._fill_set(self.train_set_location, self.train_set)
+            _fill_set(self.test_set_location, self.test_set)
+            _fill_set(self.train_set_location, self.train_set)
 
-    def generate(self):
+    def generate_train(self):
         return random.choice(self.train_set).copy()
 
     def _generate_sets(self):
@@ -57,15 +69,12 @@ class TrainsetQueryGenerator:
         self.train_set = list(self.all[:math.floor(self.train_size * len(self.all))])
         self.test_set = list(self.all[math.ceil(self.train_size * len(self.all)):])
 
-    def _write_set_to_csv(self, file, query_set):
-        with open(file, "a") as csv_file:
-            writer = csv.writer(csv_file, delimiter=',')
-            for query in list(query_set):
-                writer.writerow(query)
+    def get_train_set(self):
+        return self.train_set.copy()
 
-    def _fill_set(self, file, query_set):
-        with open(file) as csv_file:
-            query_set += ([line.rstrip().split(',') for line in csv_file])
+    def get_test_set(self):
+        return self.test_set.copy()
+
 
 
 def powerset(iterable):

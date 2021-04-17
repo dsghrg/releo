@@ -86,7 +86,7 @@ class OneHotHistory(gym.Env):
         return self._map_to_state_enc()
 
     def reset(self):
-        logical_query = self.query_generator.generate()
+        logical_query = self.query_generator.generate_train()
         return self.reset_with_query(logical_query)
 
     def render(self, mode='human'):
