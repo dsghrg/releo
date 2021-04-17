@@ -1,6 +1,10 @@
 import sys
+import time
+import os
+import shutil
 
 import numpy as np
+import pandas as pd
 import yaml
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
@@ -10,8 +14,8 @@ from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
 from query_generator.query_generator_factory import get_query_generator_creator
 from rl_algorithms.rl_agent_factory import get_rl_agent
-import pandas as pd
 
+CFG_GLOBAL = 'global'
 CFG_DBMS = 'dbms'
 CFG_DBMS_CONF = 'db-connection'
 CFG_QUERY_GEN = 'query-generator'
@@ -29,6 +33,15 @@ CFG_RL_AGENT_CONF = 'agent-config'
 CFG_SCHEMA_CREATOR = 'schema-creator'
 CFG_SCHEMA_CREATOR_CFG = 'schema-creator-config'
 
+cfgs_to_extend_with_global = [CFG_DBMS_CONF,
+                              CFG_QUERY_GEN_CONF,
+                              CFG_SQL_CREATOR_CONF,
+                              CFG_EXECUTOR_CONF,
+                              CFG_DB_SETUP_CONF,
+                              CFG_ENV_CONF,
+                              CFG_RL_AGENT_CONF,
+                              CFG_SCHEMA_CREATOR_CFG]
+
 
 def create_order(schema, join_order, current, left_to_join):
     if current.name not in join_order:
@@ -39,16 +52,45 @@ def create_order(schema, join_order, current, left_to_join):
                 create_order(schema, join_order, schema[neighbour], left_to_join)
 
 
-def load_cfg():
-    cfg_file = sys.argv[1] if len(sys.argv) > 1 else './config/postgres-default.yaml'
+def load_cfg(cfg_file):
     with open(cfg_file) as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     return config
 
 
+def extend_global_info(glob_cfg):
+    now = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime(time.time()))
+    log_dir = 'releo-run-' + now
+    glob_cfg['log-dir'] = log_dir
+    glob_cfg['log-path'] = glob_cfg['log-location'] + '/' + log_dir
+
+    # the whole system communicates additional info to use in different parts
+    glob_cfg['context'] = {}
+
+
+def extend_with_global_conf(cfg):
+    for sub_cfg_name in cfgs_to_extend_with_global:
+        sub_cfg = cfg[sub_cfg_name]
+        if sub_cfg is None:
+            sub_cfg = {}
+            cfg[sub_cfg_name] = sub_cfg
+        sub_cfg['global'] = cfg[CFG_GLOBAL]
+
+
+def setup_run_dir(cfg_file, cfg):
+    log_path = cfg[CFG_GLOBAL]['log-path']
+    os.makedirs(log_path, exist_ok=True)
+    shutil.copyfile(cfg_file, log_path + '/' + cfg_file.split('/')[-1])
+
+
 if __name__ == '__main__':
-    cfg = load_cfg()
+    cfg_file = sys.argv[1] if len(sys.argv) > 1 else './config/postgres-default.yaml'
+    cfg = load_cfg(cfg_file)
+    extend_global_info(cfg[CFG_GLOBAL])
+    extend_with_global_conf(cfg)
+    setup_run_dir(cfg_file, cfg)
+
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
     schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)
@@ -102,20 +144,7 @@ if __name__ == '__main__':
     for logical_query in test_set:
         hashed_query = hash(tuple(logical_query))
         df.loc[len(df.index)] = [hashed_query, logical_query, query_times[hashed_query], test_queries[hashed_query]]
-
+    df.to_csv('./eval.csv', sep=",")
     print(df)
-
-    # state = env.reset_with_query()
-    # state = state.reshape((1, env.observation_space.shape[0]))
-    # done = False
-    # while not done:
-    #     possible_steps = env.possible_steps()
-    #     state = state.reshape((1, env.observation_space.shape[0]))
-    #     prediction = rl_algo.model.predict(state)[0]
-    #     for idx, action in enumerate(possible_steps):
-    #         if action == 0:
-    #             prediction[idx] = -np.inf
-    #     action = np.argmax(prediction)
-    #     state, reward, done, _info = env.step(action)
 
     teardown(engine, schema)

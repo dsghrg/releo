@@ -1,3 +1,8 @@
+
+global:
+  log-location: ./runs
+
+
 # used for to determine database engine
 # will be used for the factory to determine which function to invoke
 # connection details are provided below
@@ -80,7 +85,7 @@ agent-config:
   episodes: 150
   epsilon-initial: 1.0
   epsilon-min: 0.03
-  epsilon-decay: 0.985
+  epsilon-decay: 0.977
   gamma: 0.9
   tau: 0.1
   synchronize_networks_every: 5
@@ -101,7 +106,7 @@ agent-config:
   optimizer: adam
   replay-buffer-size: 512
   min-experiences-to-train: 32
-  checkpoint-period: 20
+  checkpoint-period: 9999
   wandb-team-name: releo_zhaw
   wandb-group-name: debug
   wandb-project-name: dqn-default

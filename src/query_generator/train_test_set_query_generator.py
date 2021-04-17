@@ -4,6 +4,7 @@ import math
 import random
 import time
 import copy
+import os
 
 import numpy as np
 
@@ -19,7 +20,7 @@ CFG_MIN_JOINS = 'min-joins'
 
 
 def _write_set_to_csv(file, query_set):
-    with open(file, "a") as csv_file:
+    with open(file, "w+") as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         for query in list(query_set):
             writer.writerow(query)
@@ -34,9 +35,12 @@ class TrainTestSetQueryGenerator:
 
     def __init__(self, schema, cfg):
         self.schema = schema
-        now = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime(time.time()))
-        self.csv_train_name = 'train_set-' + now + ".csv"
-        self.csv_test_name = 'test_set-' + now + ".csv"
+        self.global_log_path = cfg['global']['log-path']
+        self.local_log_path = self.global_log_path + '/query-generator'
+        os.makedirs(self.local_log_path)
+        self.system_context = cfg['global']['context']
+        self.csv_train_name = 'train_set.csv'
+        self.csv_test_name = 'test_set.csv'
 
         cfg = cfg if cfg is not None else {}
         self.train_set_location = cfg[CFG_TRAIN_SET_LOCATION] if CFG_TRAIN_SET_LOCATION in cfg else None
@@ -57,7 +61,15 @@ class TrainTestSetQueryGenerator:
             _fill_set(self.test_set_location, self.test_set)
             _fill_set(self.train_set_location, self.train_set)
 
+        # log the used sets to run-dir
+        _write_set_to_csv(self.local_log_path + '/' + self.csv_test_name, self.test_set)
+        _write_set_to_csv(self.local_log_path + '/' + self.csv_train_name, self.train_set)
+
     def generate_train(self):
+        logical_query = random.choice(self.train_set).copy()
+        if 'current_episode' in self._get_rl_context():
+            print('logical train query for episode: ' + str(self._get_rl_context()['current_episode']) + ':\t\t' + str(
+                logical_query))
         return random.choice(self.train_set).copy()
 
     def _generate_sets(self):
@@ -75,6 +87,9 @@ class TrainTestSetQueryGenerator:
 
     def get_test_set(self):
         return copy.deepcopy(self.test_set.copy())
+
+    def _get_rl_context(self):
+        return self.system_context['rl-agent'] if 'rl-agent' in self.system_context else {}
 
 
 def powerset(iterable):

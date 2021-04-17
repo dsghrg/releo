@@ -1,3 +1,4 @@
+import os
 import random
 import time
 from collections import deque
@@ -67,7 +68,11 @@ class ReplayBuffer:
 
 class DQNDefault:
     def __init__(self, env, config):
-        config = config if config is not None else {}
+        self.global_log_path = config['global']['log-path']
+        self.local_log_path = self.global_log_path + '/rl-agent'
+        config['global']['context']['rl-agent'] = {}
+        self.rl_context = config['global']['context']['rl-agent']
+        os.makedirs(self.local_log_path)
         self.name = self.identifier()
         self.config = config
         self.evaluation_history = {}
@@ -84,7 +89,7 @@ class DQNDefault:
         self.batch_size = config['batch-size']
         self.gamma = config['gamma']  # horizon
         self.tau = config['tau']  # how much the target weights are updated
-        self.synchronize_networks_every = config['synchronize_networks_every'] 
+        self.synchronize_networks_every = config['synchronize_networks_every']
         self.sync_eps_run = 1
 
         # Initially: completely random exploration of state spaces
@@ -110,7 +115,9 @@ class DQNDefault:
         return datetime.now().strftime(self.__class__.__name__ + "_%Y%m%d-%H%M%S")
 
     def train(self):
+        self.rl_context['isTrain'] = True
         for episode in range(self.config['episodes']):
+            self.rl_context['current_episode'] = episode
             running_reward_sum = 0
             if episode % 5 == 0:
                 self.evaluate_at_episode(episode)
@@ -140,19 +147,16 @@ class DQNDefault:
 
                     if self.buffer.size() > self.config['min-experiences-to-train']:
                         self.replay()
-                        if self.sync_eps_run >= self.synchronize_networks_every: # Freeze prediction network for some episodes
+                        if self.sync_eps_run >= self.synchronize_networks_every:  # Freeze prediction network for some episodes
                             self.update_target_network()
                             self.sync_eps_run = 0
                         self.sync_eps_run += 1
-
-                    if self.episodes_run % self.config['checkpoint-period'] == 0:
-                        self.save_model()
 
                     self.end_episode(current_step, running_reward_sum)
                     break
 
                 current_step += 1
-
+        self.save_model()
         self.env.close()
 
     def evaluate_at_episode(self, episode):
@@ -204,13 +208,8 @@ class DQNDefault:
         self.buffer.add(arr)
 
     def save_model(self, suffix=''):
-        Path('./RL_program/models/' + self.name).mkdir(exist_ok=True, parents=True)
-        self.model.save(
-            './RL_program/models/' + self.name + '/' + self.name + '_ep' + str(self.episodes_run) + suffix + '.h5')
-
-    def save_best_model(self):
-        Path('./RL_program/models/' + self.name).mkdir(exist_ok=True, parents=True)
-        self.model.save('./RL_program/models/' + self.name + '/' + self.name + '_best.h5')
+        Path(self.local_log_path).mkdir(exist_ok=True, parents=True)
+        self.model.save(self.local_log_path + '/model.h5')
 
     def get_callbacks(self):
         if self.callbacks is None:
@@ -326,4 +325,3 @@ class DQNDefault:
         # Update average reward maximum
         if new_average_reward > self.max_average_reward:
             self.max_average_reward = new_average_reward
-            self.save_best_model()
