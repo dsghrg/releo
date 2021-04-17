@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-04-17T18:29:40.479Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="20SSeHM5SKEuA5pMNaUd" version="14.5.7" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-17T18:30:18.355Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="B6AZ3l-RoGMvhJaAcQq3" version="14.5.7" type="github">
   <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
-    <mxGraphModel dx="2031" dy="1089" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1673" dy="896" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -60,7 +60,7 @@
         <mxCell id="-BK6sEllFb7gdvOe7oFn-109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="-BK6sEllFb7gdvOe7oFn-51" target="-BK6sEllFb7gdvOe7oFn-52" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="-BK6sEllFb7gdvOe7oFn-51" value="predicted q-values" style="fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+        <mxCell id="-BK6sEllFb7gdvOe7oFn-51" value="predicted q-values&#xa;(Main network)" style="fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="550" y="130" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="-BK6sEllFb7gdvOe7oFn-118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="-BK6sEllFb7gdvOe7oFn-52" target="-BK6sEllFb7gdvOe7oFn-61" edge="1">
