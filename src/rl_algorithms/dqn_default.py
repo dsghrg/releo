@@ -70,6 +70,7 @@ class DQNDefault:
         config = config if config is not None else {}
         self.name = self.identifier()
         self.config = config
+        self.evaluation_history = {}
 
         self.buffer = ReplayBuffer(config['replay-buffer-size'], broken=config['broken-buffer'])
         self.callbacks = None
@@ -111,6 +112,9 @@ class DQNDefault:
     def train(self):
         for episode in range(self.config['episodes']):
             running_reward_sum = 0
+            if episode % 5 == 0:
+                self.evaluate_at_episode(episode)
+
             state = self.env.reset()
             done = False
             current_step = 0
@@ -150,6 +154,25 @@ class DQNDefault:
                 current_step += 1
 
         self.env.close()
+
+    def evaluate_at_episode(self, episode):
+        self.evaluation_history[episode] = {}
+        for query in self.env.generator.get_test_set():
+            state = self.env.reset_with_query(query)
+            state = state.reshape((1, self.env.observation_space.shape[0]))
+            done = False
+            while not done:
+                possible_steps = self.env.possible_steps()
+                state = state.reshape((1, self.env.observation_space.shape[0]))
+                prediction = self.model.predict(state)[0]
+                for idx, action in enumerate(possible_steps):
+                    if action == 0:
+                        prediction[idx] = -np.inf
+                action = np.argmax(prediction)
+                state, reward, done, _info = self.env.step(action)
+
+            join_order = self.env.state_to_join_order(state)
+            self.evaluation_history[episode][hash(tuple(query))] = join_order
 
     def reshape_state(self, state):
         return state.reshape((1, self.env.observation_space.shape[0]))
