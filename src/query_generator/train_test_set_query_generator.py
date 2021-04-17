@@ -3,6 +3,7 @@ import itertools
 import math
 import random
 import time
+import copy
 
 import numpy as np
 
@@ -70,11 +71,10 @@ class TrainTestSetQueryGenerator:
         self.test_set = list(self.all[math.ceil(self.train_size * len(self.all)):])
 
     def get_train_set(self):
-        return self.train_set.copy()
+        return copy.deepcopy(self.train_set)
 
     def get_test_set(self):
-        return self.test_set.copy()
-
+        return copy.deepcopy(self.test_set.copy())
 
 
 def powerset(iterable):

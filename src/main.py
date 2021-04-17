@@ -30,6 +30,15 @@ CFG_SCHEMA_CREATOR = 'schema-creator'
 CFG_SCHEMA_CREATOR_CFG = 'schema-creator-config'
 
 
+def create_order(schema, join_order, current, left_to_join):
+    if current.name not in join_order:
+        join_order.append(current.name)
+        left_to_join.remove(current.name)
+        for neighbour in schema[current.name].tablename_to_join.keys():
+            if neighbour in left_to_join:
+                create_order(schema, join_order, schema[neighbour], left_to_join)
+
+
 def load_cfg():
     cfg_file = sys.argv[1] if len(sys.argv) > 1 else './config/postgres-default.yaml'
     with open(cfg_file) as f:
@@ -49,13 +58,12 @@ if __name__ == '__main__':
     test_set = generator.get_test_set()
     test_queries = {}
     for test_plan in test_set:
-        sql_query = sql_creator.generate_sql_query(schema, test_plan)
+        order = []
+        create_order(schema, order, schema[test_plan[0]], test_plan.copy())
+        sql_query = sql_creator(schema, order)
         res = executor.execute(sql_query)
         # keep in mind the hashes of the queries in the db_analysis dir are created with hashlib (maybe patch the files)
-        test_queries[hash(tuple(test_plan))] = res[0]['cost']
-
-
-
+        test_queries[hash(tuple(test_plan))] = res['cost']
 
     setup, teardown = get_setup_teardown(cfg[CFG_DB_SETUP], cfg[CFG_DB_SETUP_CONF])
     setup(engine, schema)
@@ -68,7 +76,8 @@ if __name__ == '__main__':
 
     query_times = {}
     for query in test_set:
-        state = env.reset_with_query(query)
+        query = query.copy()
+        state = env.reset_with_query(query.copy())
         state = state.reshape((1, env.observation_space.shape[0]))
         done = False
         while not done:
@@ -83,19 +92,18 @@ if __name__ == '__main__':
 
         sql = sql_creator(schema, env.join_order)
         res = executor.execute(sql)
-        cost = res[0]['cost']
+        cost = res['cost']
 
-        query_times[hash(tuple(env.join_order))] = cost
+        query_times[hash(tuple(query))] = cost
         print("\n\n" + sql)
 
     df = pd.DataFrame(columns=['hash', 'logical query', 'time releo', 'time optimizer'])
 
     for logical_query in test_set:
-        hash = hash(tuple(logical_query))
-        df.loc[len(df.index)] = [hash, logical_query, query_times[hash], test_queries[hash]]
+        hashed_query = hash(tuple(logical_query))
+        df.loc[len(df.index)] = [hashed_query, logical_query, query_times[hashed_query], test_queries[hashed_query]]
 
     print(df)
-
 
     # state = env.reset_with_query()
     # state = state.reshape((1, env.observation_space.shape[0]))

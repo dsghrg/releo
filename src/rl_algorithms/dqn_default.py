@@ -157,7 +157,7 @@ class DQNDefault:
 
     def evaluate_at_episode(self, episode):
         self.evaluation_history[episode] = {}
-        for query in self.env.generator.get_test_set():
+        for query in self.env.query_generator.get_test_set():
             state = self.env.reset_with_query(query)
             state = state.reshape((1, self.env.observation_space.shape[0]))
             done = False
