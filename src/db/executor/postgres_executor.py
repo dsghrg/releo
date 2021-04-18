@@ -1,4 +1,4 @@
-import time
+import json
 import os
 
 
@@ -11,15 +11,16 @@ class PostgresJoinBreakdownJson():
         self.global_log_path = cfg['global']['log-path']
         self.local_log_path = self.global_log_path + '/executor'
         self.system_context = cfg['global']['context']
+        self.logger = cfg['global']['logger']
         os.makedirs(self.local_log_path)
 
     def execute(self, sql_query):
-        if 'current_episode' in self._get_rl_context():
-            print('executing stmt for episode: ' + str(self._get_rl_context()['current_episode']))
-        start_time = time.time()
+        self.logger.log('stmt', sql_query)
         rs = self.engine.execute(sql_query)
-        elapes_time = 1000 * (time.time() - start_time)
         rec = rs.first()[0]
+        elapes_time = rec[0]['Plan']['Actual Total Time']
+        self.logger.log('exec-time', elapes_time)
+        self.logger.log('resp', json.dumps(rec))
         costs = {'children': [], 'isRoot': True, 'cost': elapes_time}
         _traverse(rec[0]['Plan'], self.schema, costs)
         return costs
@@ -45,8 +46,8 @@ def _traverse(current, schema, parent_join):
         inclusive_children_sum = sum([get_inclusive(child) for child in current['Plans'] if 'Plans' in current] + [0])
         current_elapsed_time = current['Actual Total Time']
         # https://github.com/postgres/pgadmin4/blob/c1ba645dceed5c9551a5f408e37a14d1041ee598/web/pgadmin/misc/static/explain/js/explain.js#L617
-        # elapsed_time_join = current_elapsed_time - inclusive_children_sum
-        elapsed_time_join = current_elapsed_time
+        elapsed_time_join = current_elapsed_time - inclusive_children_sum
+        # elapsed_time_join = current_elapsed_time
         condition = current['Hash Cond'].replace('(', '').replace(')', '')
         left, right = condition.split(" = ")
         left_table = find_table_name_by_alias(left.split(".")[0].replace('"', ''), schema)

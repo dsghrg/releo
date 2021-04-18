@@ -23,7 +23,7 @@ class OneHotHistory(gym.Env):
 
     def __init__(self, schema, query_generator, sql_creator, executor, cfg):
         random.seed = cfg[RANDOM_SEED] if RANDOM_SEED in cfg else 1
-
+        self.logger = cfg['global']['logger']
         self.query_generator = query_generator
         self.sql_creator = sql_creator
         self.schema = schema
@@ -70,6 +70,7 @@ class OneHotHistory(gym.Env):
 
         # we can only retrieve the actual costs once the join order is determined
         if is_done:
+            self.logger.log('join-order', str(self.join_order))
             sql_statement = self.sql_creator(self.schema, self.join_order)
             costs = self.executor.execute(sql_statement)
             costs['cost'] = 0

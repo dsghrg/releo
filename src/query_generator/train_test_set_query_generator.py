@@ -38,11 +38,11 @@ class TrainTestSetQueryGenerator:
         self.global_log_path = cfg['global']['log-path']
         self.local_log_path = self.global_log_path + '/query-generator'
         os.makedirs(self.local_log_path)
+        self.logger = cfg['global']['logger']
         self.system_context = cfg['global']['context']
         self.csv_train_name = 'train_set.csv'
         self.csv_test_name = 'test_set.csv'
 
-        cfg = cfg if cfg is not None else {}
         self.train_set_location = cfg[CFG_TRAIN_SET_LOCATION] if CFG_TRAIN_SET_LOCATION in cfg else None
         self.test_set_location = cfg[CFG_TEST_SET_LOCATION] if CFG_TEST_SET_LOCATION in cfg else None
         self.train_out_location = cfg[CFG_TRAIN_SET_OUT_LOCATION] if CFG_TRAIN_SET_OUT_LOCATION in cfg else './'
@@ -67,10 +67,8 @@ class TrainTestSetQueryGenerator:
 
     def generate_train(self):
         logical_query = random.choice(self.train_set).copy()
-        if 'current_episode' in self._get_rl_context():
-            print('logical train query for episode: ' + str(self._get_rl_context()['current_episode']) + ':\t\t' + str(
-                logical_query))
-        return random.choice(self.train_set).copy()
+        self.logger.log('logical-query', logical_query.copy())
+        return logical_query
 
     def _generate_sets(self):
         self.all = []

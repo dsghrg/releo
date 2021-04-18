@@ -14,6 +14,7 @@ from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
 from query_generator.query_generator_factory import get_query_generator_creator
 from rl_algorithms.rl_agent_factory import get_rl_agent
+from logger.logger import Logger
 
 CFG_GLOBAL = 'global'
 CFG_DBMS = 'dbms'
@@ -32,6 +33,7 @@ CFG_RL_AGENT = 'agent'
 CFG_RL_AGENT_CONF = 'agent-config'
 CFG_SCHEMA_CREATOR = 'schema-creator'
 CFG_SCHEMA_CREATOR_CFG = 'schema-creator-config'
+CFG_LOGGER_CONF = 'logger-conf'
 
 cfgs_to_extend_with_global = [CFG_DBMS_CONF,
                               CFG_QUERY_GEN_CONF,
@@ -40,7 +42,8 @@ cfgs_to_extend_with_global = [CFG_DBMS_CONF,
                               CFG_DB_SETUP_CONF,
                               CFG_ENV_CONF,
                               CFG_RL_AGENT_CONF,
-                              CFG_SCHEMA_CREATOR_CFG]
+                              CFG_SCHEMA_CREATOR_CFG,
+                              CFG_LOGGER_CONF]
 
 
 def create_order(schema, join_order, current, left_to_join):
@@ -71,6 +74,8 @@ def extend_global_info(glob_cfg):
 
 def extend_with_global_conf(cfg):
     for sub_cfg_name in cfgs_to_extend_with_global:
+        if sub_cfg_name not in cfg:
+            cfg[sub_cfg_name] = {}
         sub_cfg = cfg[sub_cfg_name]
         if sub_cfg is None:
             sub_cfg = {}
@@ -90,6 +95,9 @@ if __name__ == '__main__':
     extend_global_info(cfg[CFG_GLOBAL])
     extend_with_global_conf(cfg)
     setup_run_dir(cfg_file, cfg)
+    logger = Logger(cfg)
+    cfg[CFG_GLOBAL]['logger'] = logger
+    system_context = cfg['global']['context']
 
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
     schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()
@@ -99,7 +107,12 @@ if __name__ == '__main__':
 
     test_set = generator.get_test_set()
     test_queries = {}
-    for test_plan in test_set:
+
+    logger.select_log('eval-set-benchmarking')
+    for idx, test_plan in enumerate(test_set):
+        logger.new_record()
+        logger.log('test-query-nr', idx)
+        logger.log('logical-query', str(test_plan.copy()))
         order = []
         create_order(schema, order, schema[test_plan[0]], test_plan.copy())
         sql_query = sql_creator(schema, order)
@@ -117,7 +130,11 @@ if __name__ == '__main__':
     print('training finito')
 
     query_times = {}
-    for query in test_set:
+    logger.select_log('evaluation')
+    for idx, query in enumerate(test_set):
+        logger.new_record()
+        logger.log('test-query-nr', idx)
+        logger.log('logical-query', str(query.copy()))
         query = query.copy()
         state = env.reset_with_query(query.copy())
         state = state.reshape((1, env.observation_space.shape[0]))
@@ -135,16 +152,13 @@ if __name__ == '__main__':
         sql = sql_creator(schema, env.join_order)
         res = executor.execute(sql)
         cost = res['cost']
-
+        logger.log('time-releo', cost)
+        hashed_query = hash(tuple(query))
+        logger.log('hash', hashed_query)
+        logger.log('time-optimizer', test_queries[hashed_query])
         query_times[hash(tuple(query))] = cost
         print("\n\n" + sql)
 
-    df = pd.DataFrame(columns=['hash', 'logical query', 'time releo', 'time optimizer'])
-
-    for logical_query in test_set:
-        hashed_query = hash(tuple(logical_query))
-        df.loc[len(df.index)] = [hashed_query, logical_query, query_times[hashed_query], test_queries[hashed_query]]
-    df.to_csv('./eval.csv', sep=",")
-    print(df)
+    logger.save_logs()
 
     teardown(engine, schema)

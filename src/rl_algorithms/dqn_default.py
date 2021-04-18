@@ -71,7 +71,9 @@ class DQNDefault:
         self.global_log_path = config['global']['log-path']
         self.local_log_path = self.global_log_path + '/rl-agent'
         config['global']['context']['rl-agent'] = {}
-        self.rl_context = config['global']['context']['rl-agent']
+        self.system_context = config['global']['context']
+        self.rl_context = self.system_context['rl-agent']
+        self.logger = config['global']['logger']
         os.makedirs(self.local_log_path)
         self.name = self.identifier()
         self.config = config
@@ -116,11 +118,15 @@ class DQNDefault:
 
     def train(self):
         self.rl_context['isTrain'] = True
+        self.logger.select_log('train')
         for episode in range(self.config['episodes']):
+            self.logger.new_record()
+            self.logger.log('episode', episode)
             self.rl_context['current_episode'] = episode
             running_reward_sum = 0
             if episode % 5 == 0:
                 self.evaluate_at_episode(episode)
+                self.logger.select_log('train')
 
             state = self.env.reset()
             done = False
@@ -156,12 +162,17 @@ class DQNDefault:
                     break
 
                 current_step += 1
-        self.save_model()
+        self.save_models()
         self.env.close()
 
     def evaluate_at_episode(self, episode):
+        self.logger.select_log('train-eval')
         self.evaluation_history[episode] = {}
-        for query in self.env.query_generator.get_test_set():
+        for idx, query in enumerate(self.env.query_generator.get_test_set()):
+            self.logger.new_record()
+            self.logger.log('episode', episode)
+            self.logger.log('eval-query-nr', idx)
+            self.logger.log('logical-query', str(query.copy()))
             state = self.env.reset_with_query(query)
             state = state.reshape((1, self.env.observation_space.shape[0]))
             done = False
@@ -207,9 +218,10 @@ class DQNDefault:
     def write_to_buffer(self, arr):
         self.buffer.add(arr)
 
-    def save_model(self, suffix=''):
+    def save_models(self, suffix=''):
         Path(self.local_log_path).mkdir(exist_ok=True, parents=True)
         self.model.save(self.local_log_path + '/model.h5')
+        self.target_model.save(self.local_log_path + '/target-model.h5')
 
     def get_callbacks(self):
         if self.callbacks is None:
