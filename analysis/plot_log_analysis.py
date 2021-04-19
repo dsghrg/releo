@@ -17,9 +17,9 @@ with open(EVAL_FILE_LOCATION) as csv_file:
             print(f'Column names are {", ".join(row)}')
             line_count += 1
         else:
-            logical_query = row[4]
-            episode = row[1]
-            exec_time_in_ms = row[8]
+            logical_query = row[1]
+            episode = row[2]
+            exec_time_in_ms = row[4]
 
             eval_per_logical_q[logical_query][episode] = exec_time_in_ms
     print(f'Processed {line_count} lines.')
@@ -35,8 +35,8 @@ with open(BENCHMARK_FILE_LOCATION) as csv_file:
             print(f'Column names are {", ".join(row)}')
             line_count += 1
         else:
-            logical_query = row[4]
-            exec_time_in_ms = float(row[6])
+            logical_query = row[1]
+            exec_time_in_ms = float(row[4])
 
             benchmark_dict[logical_query] = exec_time_in_ms
     print(f'Processed {line_count} lines.')
@@ -59,7 +59,6 @@ fig.set_figheight(4)
 ax = plt.subplot(111)
 for logical_query, times in line_dict.items():
     ax.plot(times[0], times[1], label=logical_query)
-
 
 
 # Shrink current axis by 50%
