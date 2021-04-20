@@ -14,7 +14,8 @@ class Logger:
     def new_record(self):
         if self.current_log is not None:
             new_rec = self._create_record()
-            new_rec['record-id'] = self.current_log['current-record']['record-id'] + 1
+            if 'current-record' in self.current_log and self.current_log['current-record'] is not None:
+                new_rec['record-id'] = self.current_log['current-record']['record-id'] + 1
             self.current_log['records'][new_rec['record-id']] = new_rec
             self.current_log['current-record'] = new_rec
 
@@ -48,5 +49,4 @@ class Logger:
         return {'record-id': 0}
 
     def _create_log(self, name):
-        rec = self._create_record()
-        return {'name': name, 'records': {rec['record-id']: rec}, 'current-record': rec}
+        return {'name': name, 'records': {}, 'current-record': None}

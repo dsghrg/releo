@@ -10,8 +10,9 @@ def __get_plot(line_dict, relative):
     fig.set_figwidth(15)
     fig.set_figheight(5)
     ax = plt.subplot(111)
+    time_index = 2 if relative else 1
     for logical_query, times in line_dict.items():
-        ax.plot(times[0], times[1], label=logical_query)
+        ax.plot(times[0], times[time_index], label=logical_query)
     # Shrink current axis by 50%
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.5, box.height])
@@ -24,8 +25,8 @@ def __get_plot(line_dict, relative):
 
 
 def plot_results(filepath, benchmark_filename, train_eval_filename):
-    eval_df = pd.read_csv(train_eval_filename)
-    benchmark_df = pd.read_csv(benchmark_filename)
+    eval_df = pd.read_csv(filepath + '/' + train_eval_filename)
+    benchmark_df = pd.read_csv(filepath + '/' + benchmark_filename)
     benchmark_dict = dict(zip(benchmark_df['logical-query'], benchmark_df['exec-time']))
     eval_line_dict = {}
     all_logical_queries = eval_df['logical-query'].unique()
@@ -46,4 +47,3 @@ def plot_results(filepath, benchmark_filename, train_eval_filename):
 
     __get_plot(eval_line_dict, True).savefig(filepath + '/relative')
     __get_plot(eval_line_dict, False).savefig(filepath + '/absolute')
-
