@@ -1,0 +1,192 @@
+global:
+  log-location: ./runs
+
+
+# used for to determine database engine
+# will be used for the factory to determine which function to invoke
+# connection details are provided below
+dbms: postgres
+
+# connection details passed to a specific implementation in './db/connector' based on the specified dbms
+db-connection:
+  host: localhost
+  username: postgres
+  password: example
+  schema: public
+  db: shop_db
+
+# defines which creator is used to represent the database schema internally
+schema-creator: definition-file
+# config which will be passed to the specified schema-creator
+schema-creator-config:
+  name:
+  aka_name:
+    joins:
+      - source-column: person_id
+        referred-table: name
+        referred-column: id
+  role_type:
+  char_name:
+  company_type:
+  company_name:
+  link_type:
+  keyword:
+  comp_cast_type:
+  kind_type:
+  aka_title:
+    joins:
+      - source-column: kind_id
+        referred-table: kind_type
+        referred-column: id
+  info-type:
+  title:
+    joins:
+      - source-column: kind_id
+        referred-table: kind_type
+        referred-column: id
+  movie_info:
+    joins:
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: info_type_id
+        referred-table: info_type
+        referred-column: id
+  cast_info:
+    joins:
+      - source-column: person_id
+        referred-table: name
+        referred-column: id
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: person_role_id
+        referred-table: char_name
+        referred-column: id
+      - source-column: role_id
+        referred-table: role_type
+        referred-column: id
+  person_info:
+    joins:
+      - source-column: person_id
+        referred-table: name
+        referred-column: id
+      - source-column: info_type_id
+        referred-table: info_type
+        referred-column: id
+  movie_info_idx:
+    joins:
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: info_type_id
+        referred-table: info_type
+        referred-column: id
+  comple_cast:
+    joins:
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: subject_id
+        referred-table: comp_cast_type
+        referred-column: id
+        # ??? what should we do with two columns pointing to comp_cast_type?
+  movie_keyword:
+    joins:
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: keyword_id
+        referred-table: keyword
+        referred-column: id
+  movie_link:
+    joins:
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: link_type_id
+        referred-table: link_type
+        referred-column: id
+      # ??? what should we do with two columns pointing to title?
+  movie-companies:
+    joins:
+      - source-column: movie_id
+        referred-table: title
+        referred-column: id
+      - source-column: company_id
+        referred-table: company_name
+        referred-column: id
+      - source-column: company_type_id
+        referred-table: company_type
+        referred-column: id
+
+# specifies which executor to use to execute generated queries and return runtime information about joins
+executor: postgres-join-breakdown-json
+# config which will be passed to the above specified executor
+executor-config:
+
+# specifies a setup and teardown logic once the db engine connected. can be used to set log levels or join order forcing
+db-setup: postgres-default
+# config which will be passed to the above specified db-setup functions
+db-setup-config:
+
+# specifies an sql generator to create a specific sql statement based on an abstract query
+sql-creator: postgres
+# config which will be passed to the above specified sql-generator for custom config
+sql-creator-config:
+
+# specifies which reinforcement learning approach is used
+environment: one-hot-history
+# config which will passed to the specified environment for custom setup etc
+environment-config:
+  random-seed: 123
+#  max-joins: 8
+
+# specifies the rl agent to train and use for predictions
+agent: dqn-default
+# config which will be passed to the specified environment for custom setup etc
+agent-config:
+  environmet-name: rl_joinorder
+  environment-continuous: false
+  episodes: 150
+  epsilon-initial: 1.0
+  epsilon-min: 0.03
+  epsilon-decay: 0.977
+  gamma: 0.9
+  tau: 0.1
+  synchronize_networks_every: 5
+  batch-size: 32
+  learning-rate: 0.003
+  layers:
+    1:
+      units: 64
+      activation: relu
+    2:
+      units: 64
+      activation: relu
+    3:
+      units: 16
+      activation: relu
+  output-activation: linear
+  loss: huber_loss
+  optimizer: adam
+  replay-buffer-size: 512
+  min-experiences-to-train: 32
+  checkpoint-period: 9999
+  wandb-team-name: releo_zhaw
+  wandb-group-name: debug
+  wandb-project-name: dqn-default
+  broken-buffer: false
+
+# specifies which query generator is used to create logical queries which ultimately will be passed to the environment
+# / reinforcement learning algorithm to train/eval
+query-generator: train-split-random-generator
+
+query-generator-config:
+  trainset-location: ./query_generator/query_sets/train_set.csv
+  testset-location: ./query_generator/query_sets/test_set.csv
+
+
+
+
+
