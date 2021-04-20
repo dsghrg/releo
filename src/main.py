@@ -4,7 +4,6 @@ import os
 import shutil
 
 import numpy as np
-import pandas as pd
 import yaml
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
@@ -15,6 +14,7 @@ from environment.environment_factory import get_environment
 from query_generator.query_generator_factory import get_query_generator_creator
 from rl_algorithms.rl_agent_factory import get_rl_agent
 from logger.logger import Logger
+from logger.plot_log_analysis import plot_results
 
 CFG_GLOBAL = 'global'
 CFG_DBMS = 'dbms'
@@ -160,5 +160,8 @@ if __name__ == '__main__':
         print("\n\n" + sql)
 
     logger.save_logs()
+    plot_results(filepath=cfg[CFG_GLOBAL]['log-path'],
+                 benchmark_filename='eval-set-benchmarking-log.csv',
+                 train_eval_filename='train-eval-log.csv')
 
     teardown(engine, schema)
