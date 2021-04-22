@@ -15,6 +15,7 @@ from query_generator.query_generator_factory import get_query_generator_creator
 from rl_algorithms.rl_agent_factory import get_rl_agent
 from logger.logger import Logger
 from logger.plot_log_analysis import plot_results
+from utils.queryplan import create_all_plans
 
 CFG_GLOBAL = 'global'
 CFG_DBMS = 'dbms'
@@ -122,6 +123,30 @@ if __name__ == '__main__':
 
     setup, teardown = get_setup_teardown(cfg[CFG_DB_SETUP], cfg[CFG_DB_SETUP_CONF])
     setup(engine, schema)
+
+    if 'create-testset-reference' in cfg and cfg['create-testset-reference'] is True:
+        print('creating and executing all possible QPs of test set')
+        logger.select_log('testset-all-permutations')
+        all_query_plans = []
+        for query in test_set:
+            all_query_plans = all_query_plans + create_all_plans(schema, query)
+        nbr_query_plans = len(all_query_plans)
+        print('starting to execute query plans')
+        for query in test_set:
+            for idx, query_plan in enumerate(create_all_plans(schema, query)):
+                print(str(idx + 1) + '/' + str(nbr_query_plans))
+                logger.new_record()
+                logger.log('logical-query', str(query))
+                logger.log('order', str(query_plan))
+                logger.log('logical-query-hash', hash(tuple(query)))
+                logger.log('order-hash', hash(tuple(query_plan)))
+                sql_query = sql_creator(schema, query_plan)
+                res = executor.execute(sql_query)
+                logger.log('latency', str(res['cost']))
+                if idx % 5 == 0:
+                    logger.save_logs()
+        logger.save_logs()
+
     env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
 
     rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])

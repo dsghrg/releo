@@ -1,4 +1,8 @@
 
+# !! IF SET TO TRUE RELEO WILL EXECUTE EVERY POSSIBLE QUERY PLAN FOR EVERY LOGICAL QUERY IN THE TEST-SET !!
+create-testset-reference: true
+
+# config values which are provided to every sub-system
 global:
   log-location: ./runs
 
