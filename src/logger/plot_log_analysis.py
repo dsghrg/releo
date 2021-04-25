@@ -16,11 +16,13 @@ def __get_plot(line_dict, relative):
     # Shrink current axis by 50%
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.5, box.height])
+    ylabel = 'execution time (ms)'
     if relative:
         plt.axhline(y=1, color='black', linestyle='--', label='optimized / benchmark')
+        ylabel = 'our prediction(ms) / optimizer(ms)'
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.xlabel('episode (query plan)')
-    plt.ylabel('our prediction(ms) / optimizer(ms)')
+    plt.ylabel(ylabel)
     return plt
 
 
