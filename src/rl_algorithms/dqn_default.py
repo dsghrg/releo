@@ -35,11 +35,12 @@ def wandb_timing(func):
 # storage of experiences from the gym
 #
 class ReplayBuffer:
-    def __init__(self, size, broken=False):
+    def __init__(self, size, seed, broken=False):
         self.buffer_size = size
         self.count = 0
         self.buffer = deque(maxlen=size)
         self.broken = broken
+        self.myrandom = random.Random(seed)
 
     def full(self):
         return self.count == self.buffer_size
@@ -59,7 +60,7 @@ class ReplayBuffer:
         return self.count
 
     def sample(self, num_samples):
-        return random.sample(self.buffer, min(self.count, num_samples))
+        return self.myrandom.sample(self.buffer, min(self.count, num_samples))
 
     def clear(self):
         self.buffer.clear()
@@ -78,14 +79,21 @@ class DQNDefault:
         self.name = self.identifier()
         self.config = config
         self.evaluation_history = {}
+        self.epsilon_seed = config['epsilon-random-seed'] if 'epsilon-random-seed' in config else 1
+        self.sample_seed = config['sampling-random-seed'] if 'sampling-random-seed' in config else 1
+        self.epsilon_random = random.Random(self.epsilon_seed)
+        self.np_epsilon_random = np.random.default_rng(self.epsilon_seed)
+        self.evaluation_interval = config['evaluation-interval'] if 'evaluation-interval' in config else 5
 
-        self.buffer = ReplayBuffer(config['replay-buffer-size'], broken=config['broken-buffer'])
+        self.buffer = ReplayBuffer(config['replay-buffer-size'], self.sample_seed, broken=config['broken-buffer'])
         self.callbacks = None
         self.epochs_run = 0
         self.episodes_run = 0
         self.last_rewards = list()
         self.max_average_reward = 0
         self.environment_won = False
+        self.target_model_switch_interval = config[
+            'target-model-switch-interval'] if 'target-model-switch-interval' in config else 3
 
         self.learning_rate = config['learning-rate']
         self.batch_size = config['batch-size']
@@ -124,7 +132,8 @@ class DQNDefault:
             self.logger.log('episode', episode)
             self.rl_context['current_episode'] = episode
             running_reward_sum = 0
-            if episode % 5 == 0:
+
+            if episode % self.evaluation_interval == 0:
                 self.evaluate_at_episode(episode)
                 self.logger.select_log('train')
 
@@ -162,6 +171,12 @@ class DQNDefault:
                     break
 
                 current_step += 1
+
+            if episode % self.target_model_switch_interval == 0:
+                temp = self.model
+                self.model = self.target_model
+                self.target_model = temp
+
         self.save_models()
         self.env.close()
 
@@ -292,11 +307,11 @@ class DQNDefault:
 
     # @wandb_timing
     def choose_action(self, state):
-        if random.random() < self.epsilon:
+        if self.epsilon_random.random() < self.epsilon:
             # Choose random action
             possible_steps = self.env.possible_steps()
             possible_steps = [i for i, x in enumerate(possible_steps) if x]
-            action = np.random.choice(possible_steps)
+            action = self.np_epsilon_random.choice(possible_steps)
             return action
 
         else:

@@ -2,6 +2,7 @@ import sys
 import time
 import os
 import shutil
+import random
 
 import numpy as np
 import yaml
@@ -98,6 +99,9 @@ if __name__ == '__main__':
     logger = Logger(cfg)
     cfg[CFG_GLOBAL]['logger'] = logger
     system_context = cfg['global']['context']
+    global_random_seed = cfg['global']['random-seed']
+    random.seed = global_random_seed
+    np.random.seed(global_random_seed)
 
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
     schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()
@@ -116,7 +120,7 @@ if __name__ == '__main__':
         order = []
         create_order(schema, order, schema[test_plan[0]], test_plan.copy())
         sql_query = sql_creator(schema, order)
-        res = executor.execute(sql_query)
+        res = executor.execute(sql_query) # TODO Force Order muss deaktiviert werden!!!
         # keep in mind the hashes of the queries in the db_analysis dir are created with hashlib (maybe patch the files)
         test_queries[hash(tuple(test_plan))] = res['cost']
 
