@@ -20,10 +20,10 @@ class MssqlJoinBreakdownXml:
         cursor.nextset()
         res_two = cursor.fetchall()
         xml_plan = res_two[0][0]
-        filename = "query_execution-" + time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime(time.time())) + ".xml"
-        f = open('./' + filename, 'w+')
-        f.write(xml_plan)
-        f.close()
+        # filename = "query_execution-" + time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime(time.time())) + ".xml"
+        # f = open('./' + filename, 'w+')
+        # f.write(xml_plan)
+        # f.close()
         parsed = ET.ElementTree(ET.fromstring(xml_plan))
         root = {'children': [], 'isRoot': True, 'cost': elapsed_time}
         traverse(parsed.getroot(), self.schema, root)

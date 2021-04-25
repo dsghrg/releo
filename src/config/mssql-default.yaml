@@ -1,3 +1,11 @@
+# !! IF SET TO TRUE RELEO WILL EXECUTE EVERY POSSIBLE QUERY PLAN FOR EVERY LOGICAL QUERY IN THE TEST-SET !!
+create-testset-reference: false
+
+# config values which are provided to every sub-system
+global:
+  log-location: ./runs
+
+
 # used for to determine database engine
 # will be used for the factory to determine which function to invoke
 # connection details are provided below
@@ -113,8 +121,8 @@ agent-config:
 query-generator: train-split-random-generator
 
 query-generator-config:
-  trainset-location: ./query_generator/query_sets/train_set.csv
-  testset-location: ./query_generator/query_sets/test_set.csv
+  trainset-location: ./src/query_generator/query_sets/train_set.csv
+  testset-location: ./src/query_generator/query_sets/test_set.csv
 
 
 

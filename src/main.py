@@ -44,7 +44,6 @@ cfgs_to_extend_with_global = [CFG_DBMS_CONF,
                               CFG_DB_SETUP_CONF,
                               CFG_ENV_CONF,
                               CFG_RL_AGENT_CONF,
-                              CFG_SCHEMA_CREATOR_CFG,
                               CFG_LOGGER_CONF]
 
 
