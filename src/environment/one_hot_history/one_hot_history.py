@@ -1,11 +1,8 @@
-import random
-
 import gym
-from gym import spaces
 import numpy as np
+from gym import spaces
 
 MAX_JOINS = 'max-joins'
-RANDOM_SEED = 'random-seed'
 
 
 class OneHotHistory(gym.Env):
@@ -22,7 +19,6 @@ class OneHotHistory(gym.Env):
     state_history = []
 
     def __init__(self, schema, query_generator, sql_creator, executor, cfg):
-        random.seed = cfg[RANDOM_SEED] if RANDOM_SEED in cfg else 1
         self.logger = cfg['global']['logger']
         self.query_generator = query_generator
         self.sql_creator = sql_creator

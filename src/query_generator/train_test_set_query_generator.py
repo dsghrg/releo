@@ -1,10 +1,9 @@
+import copy
 import csv
 import itertools
 import math
-import random
-import time
-import copy
 import os
+import random
 
 import numpy as np
 
@@ -42,6 +41,9 @@ class TrainTestSetQueryGenerator:
         self.system_context = cfg['global']['context']
         self.csv_train_name = 'train_set.csv'
         self.csv_test_name = 'test_set.csv'
+        seed = cfg['random-seed'] if 'random-seed' in cfg else 1
+        self.myrand = random.Random(seed)
+        self.nprandom = np.random.default_rng(seed)
 
         self.train_set_location = cfg[CFG_TRAIN_SET_LOCATION] if CFG_TRAIN_SET_LOCATION in cfg else None
         self.test_set_location = cfg[CFG_TEST_SET_LOCATION] if CFG_TEST_SET_LOCATION in cfg else None
@@ -66,7 +68,7 @@ class TrainTestSetQueryGenerator:
         _write_set_to_csv(self.local_log_path + '/' + self.csv_train_name, self.train_set)
 
     def generate_train(self):
-        logical_query = random.choice(self.train_set).copy()
+        logical_query = self.myrand.choice(self.train_set).copy()
         self.logger.log('logical-query', logical_query.copy())
         return logical_query
 
@@ -76,7 +78,7 @@ class TrainTestSetQueryGenerator:
             self.all = self.all + get_n_joinable_tables(i, self.schema)
 
         self.all = np.array(self.all)
-        np.random.shuffle(self.all)
+        self.nprandom.shuffle(self.all)
         self.train_set = list(self.all[:math.floor(self.train_size * len(self.all))])
         self.test_set = list(self.all[math.ceil(self.train_size * len(self.all)):])
 

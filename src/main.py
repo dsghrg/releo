@@ -2,6 +2,7 @@ import sys
 import time
 import os
 import shutil
+import random
 
 import numpy as np
 import yaml
@@ -99,6 +100,9 @@ if __name__ == '__main__':
     logger = Logger(cfg)
     cfg[CFG_GLOBAL]['logger'] = logger
     system_context = cfg['global']['context']
+    global_random_seed = cfg['global']['random-seed']
+    random.seed = global_random_seed
+    np.random.seed(global_random_seed)
 
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
     schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()

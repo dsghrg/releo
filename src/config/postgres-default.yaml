@@ -1,10 +1,12 @@
-
 # !! IF SET TO TRUE RELEO WILL EXECUTE EVERY POSSIBLE QUERY PLAN FOR EVERY LOGICAL QUERY IN THE TEST-SET !!
-create-testset-reference: true
+create-testset-reference: false
 
 # config values which are provided to every sub-system
 global:
   log-location: ./runs
+  # this will initialize random and np.random globally. One of the consequences is, that the keras models
+  # will have the same initial weights
+  random-seed: 123
 
 
 # used for to determine database engine
@@ -115,6 +117,10 @@ agent-config:
   wandb-group-name: debug
   wandb-project-name: dqn-default
   broken-buffer: false
+  epsilon-random-seed: 123
+  sampling-random-seed: 123
+  target-model-switch-interval: 5
+  evaluation-interval: 5
 
 # specifies which query generator is used to create logical queries which ultimately will be passed to the environment
 # / reinforcement learning algorithm to train/eval
@@ -123,6 +129,7 @@ query-generator: train-split-random-generator
 query-generator-config:
   trainset-location: ./query_generator/query_sets/train_set.csv
   testset-location: ./query_generator/query_sets/test_set.csv
+  random-seed: 123
 
 
 

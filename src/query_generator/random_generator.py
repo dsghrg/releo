@@ -7,7 +7,7 @@ class RandomQueryGenerator:
         self.seed = cfg['seed'] if 'seed' in cfg else 1
         self.min = cfg['min-tables'] if 'min-tables' in cfg else 2
         self.max = cfg['max-tables'] if 'max-tables' in cfg else len(schema)
-        random.seed = self.seed
+        self.myrandom = random.Random(self.seed)
         self.schema = schema
 
     def notify(self, info):
@@ -19,13 +19,13 @@ class RandomQueryGenerator:
         pass
 
     def generate(self):
-        n_of_relations = round(random.random() * (self.max - self.min) + self.min)
+        n_of_relations = round(self.myrandom.random() * (self.max - self.min) + self.min)
         query = []
-        self._gen(self.schema, query, [random.choice(list(self.schema.keys()))], [], n_of_relations)
+        self._gen(self.schema, query, [self.myrandom.choice(list(self.schema.keys()))], [], n_of_relations)
         return query
 
     def _gen(self, schema, current_query, children, visited, n):
-        next_relation = schema[random.choice(children)]
+        next_relation = schema[self.myrandom.choice(children)]
         children.remove(next_relation.name)
         visited.append(next_relation.name)
         children_to_add = [child for child in next_relation.tablename_to_join if child not in visited]
