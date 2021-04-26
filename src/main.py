@@ -135,9 +135,9 @@ if __name__ == '__main__':
             all_query_plans = all_query_plans + create_all_plans(schema, query)
         nbr_query_plans = len(all_query_plans)
         print('starting to execute query plans')
-        for query in test_set:
+        for nr, query in enumerate(test_set):
             for idx, query_plan in enumerate(create_all_plans(schema, query)):
-                print(str(idx + 1) + '/' + str(nbr_query_plans))
+                print(str(nr + 1) + '/' + str(nbr_query_plans))
                 logger.new_record()
                 logger.log('logical-query', str(query))
                 logger.log('order', str(query_plan))
@@ -150,46 +150,46 @@ if __name__ == '__main__':
                     logger.save_logs()
         logger.save_logs()
 
-    env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
-
-    rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])
-    rl_algo.train()
-
-    print('training finito')
-
-    query_times = {}
-    logger.select_log('evaluation')
-    for idx, query in enumerate(test_set):
-        logger.new_record()
-        logger.log('test-query-nr', idx)
-        logger.log('logical-query', str(query.copy()))
-        query = query.copy()
-        state = env.reset_with_query(query.copy())
-        state = state.reshape((1, env.observation_space.shape[0]))
-        done = False
-        while not done:
-            possible_steps = env.possible_steps()
-            state = state.reshape((1, env.observation_space.shape[0]))
-            prediction = rl_algo.model.predict(state)[0]
-            for idx, action in enumerate(possible_steps):
-                if action == 0:
-                    prediction[idx] = -np.inf
-            action = np.argmax(prediction)
-            state, reward, done, _info = env.step(action)
-
-        sql = sql_creator(schema, env.join_order)
-        res = executor.execute(sql)
-        cost = res['cost']
-        logger.log('time-releo', cost)
-        hashed_query = hash(tuple(query))
-        logger.log('hash', hashed_query)
-        logger.log('time-optimizer', test_queries[hashed_query])
-        query_times[hash(tuple(query))] = cost
-        print("\n\n" + sql)
+    # env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
+    #
+    # rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])
+    # rl_algo.train()
+    #
+    # print('training finito')
+    #
+    # query_times = {}
+    # logger.select_log('evaluation')
+    # for idx, query in enumerate(test_set):
+    #     logger.new_record()
+    #     logger.log('test-query-nr', idx)
+    #     logger.log('logical-query', str(query.copy()))
+    #     query = query.copy()
+    #     state = env.reset_with_query(query.copy())
+    #     state = state.reshape((1, env.observation_space.shape[0]))
+    #     done = False
+    #     while not done:
+    #         possible_steps = env.possible_steps()
+    #         state = state.reshape((1, env.observation_space.shape[0]))
+    #         prediction = rl_algo.model.predict(state)[0]
+    #         for idx, action in enumerate(possible_steps):
+    #             if action == 0:
+    #                 prediction[idx] = -np.inf
+    #         action = np.argmax(prediction)
+    #         state, reward, done, _info = env.step(action)
+    #
+    #     sql = sql_creator(schema, env.join_order)
+    #     res = executor.execute(sql)
+    #     cost = res['cost']
+    #     logger.log('time-releo', cost)
+    #     hashed_query = hash(tuple(query))
+    #     logger.log('hash', hashed_query)
+    #     logger.log('time-optimizer', test_queries[hashed_query])
+    #     query_times[hash(tuple(query))] = cost
+    #     print("\n\n" + sql)
 
     logger.save_logs()
-    plot_results(filepath=cfg[CFG_GLOBAL]['log-path'],
-                 benchmark_filename='eval-set-benchmarking-log.csv',
-                 train_eval_filename='train-eval-log.csv')
+    # plot_results(filepath=cfg[CFG_GLOBAL]['log-path'],
+    #              benchmark_filename='eval-set-benchmarking-log.csv',
+    #              train_eval_filename='train-eval-log.csv')
 
     teardown(engine, schema)
