@@ -4,8 +4,8 @@ from colour import Color
 
 
 
-ALL_PERMUTATIONS = './logs/asdf/testset-all-permutations-log.csv'
-BENCHMARK = './logs/asdf/eval-set-benchmarking-log.csv'
+ALL_PERMUTATIONS = './testset-reference-time.csv'
+BENCHMARK = './benchmark-reference-time.csv'
 TRAIN_EVAL = './logs/asdf/train-eval-log.csv'
 
 
@@ -39,10 +39,10 @@ def lighten_color(color, percentage):
 
 def plot_results(filepath, benchmark_filepath, train_eval_filepath):
     all_permutations = pd.read_csv(filepath)
-    sorted_perm = all_permutations.sort_values('exec-time')
+    sorted_perm = all_permutations.sort_values('mean-exec-time')
 
     benchmark_df = pd.read_csv(benchmark_filepath)
-    benchmark_dict = dict(zip(benchmark_df['logical-query'], benchmark_df['exec-time']))
+    benchmark_dict = dict(zip(benchmark_df['logical-query'], benchmark_df['mean-exec-time']))
 
     train_eval_df = pd.read_csv(train_eval_filepath)
     train_eval_df['join-order'] = train_eval_df['join-order'].str.replace('[', '(').str.replace(']', ')')
@@ -69,7 +69,7 @@ def plot_results(filepath, benchmark_filepath, train_eval_filepath):
         logical_query = row['logical-query']
         order = row['order']
         record_id = row['record-id']
-        exec_time = row['exec-time']
+        exec_time = row['mean-exec-time']
 
         bar_dict[logical_query][0].append(record_id)
         bar_dict[logical_query][1].append(order)
