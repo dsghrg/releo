@@ -1,0 +1,6 @@
+partsupp,orders,lineitem
+part,partsupp,orders,lineitem
+nation,supplier,partsupp
+region,nation,supplier,customer,orders,lineitem
+part,supplier,partsupp,orders,lineitem
+region,nation,supplier,customer

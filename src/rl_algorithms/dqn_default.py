@@ -106,6 +106,8 @@ class DQNDefault:
         self.epsilon = config['epsilon-initial']
         self.epsilon_min = config['epsilon-min']
         self.epsilon_decay = config['epsilon-decay']
+        test_set = list(env.query_generator.get_test_set())
+        self.wandb_eval_table = {'x': [], 'ys': [[] for qry in test_set], 'labels': [str(qry) for qry in test_set]}
 
         wandb.init(entity=self.config['wandb-team-name'], project=self.config['wandb-project-name'],
                    group=self.config['wandb-group-name'], monitor_gym=True,
@@ -183,14 +185,17 @@ class DQNDefault:
     def evaluate_at_episode(self, episode):
         self.logger.select_log('train-eval')
         self.evaluation_history[episode] = {}
-        for idx, query in enumerate(self.env.query_generator.get_test_set()):
+        self.wandb_eval_table['x'].append(episode)
+        for eval_query_nr, query in enumerate(self.env.query_generator.get_test_set()):
+            qry = query.copy()
             self.logger.new_record()
             self.logger.log('episode', episode)
-            self.logger.log('eval-query-nr', idx)
+            self.logger.log('eval-query-nr', eval_query_nr)
             self.logger.log('logical-query', str(query.copy()))
             state = self.env.reset_with_query(query)
             state = state.reshape((1, self.env.observation_space.shape[0]))
             done = False
+            reward = 0
             while not done:
                 possible_steps = self.env.possible_steps()
                 state = state.reshape((1, self.env.observation_space.shape[0]))
@@ -203,6 +208,14 @@ class DQNDefault:
 
             join_order = self.env.join_order
             self.evaluation_history[episode][hash(tuple(query))] = join_order
+            exec_time = self.logger.current_log['current-record']['exec-time']
+            wandb.log({str(qry): exec_time}, commit=False)
+            self.wandb_eval_table['ys'][eval_query_nr].append(exec_time)
+        wandb.log({'test-set-performance': wandb.plot.line_series(xs=self.wandb_eval_table['x'],
+                                                                  ys=self.wandb_eval_table['ys'],
+                                                                  keys=self.wandb_eval_table['labels'],
+                                                                  title='Testset query performance - absolute',
+                                                                  xname='episode')}, commit=False)
 
     def reshape_state(self, state):
         return state.reshape((1, self.env.observation_space.shape[0]))

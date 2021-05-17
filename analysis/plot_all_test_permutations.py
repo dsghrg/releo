@@ -4,9 +4,12 @@ from colour import Color
 
 
 
-ALL_PERMUTATIONS = './testset-reference-time.csv'
-BENCHMARK = './benchmark-reference-time.csv'
-TRAIN_EVAL = './logs/asdf/train-eval-log.csv'
+# ALL_PERMUTATIONS = './testset-reference-time.csv'
+ALL_PERMUTATIONS = './testset-reference-time-local-hard-no-par.csv'
+# BENCHMARK = './benchmark-reference-time.csv'
+BENCHMARK = './benchmark-reference-time-local-hard-no-par.csv'
+TRAIN_EVAL = './input_runs/local-hard-no-parallel/releo-run-2021-05-09-14-16-23/train-eval-log.csv'
+# TRAIN_EVAL = './input_runs/releo-run-2021-04-22-16-42-02/train-eval-log.csv'
 
 
 def lighten_color(color, percentage):
@@ -88,7 +91,7 @@ def plot_results(filepath, benchmark_filepath, train_eval_filepath):
     #     # ax_i.legend()
     #     ax_i.set_title(curren_logical_query)
     red = Color("yellow")
-    color_grade = list(red.range_to(Color("red"), num_episodes+1))
+    color_grade = list(red.range_to(Color("red"), int(num_episodes+1)))
     for current_logical_query in all_logical_queries:
         f = plt.figure()
         f.set_figwidth(15)
@@ -107,7 +110,7 @@ def plot_results(filepath, benchmark_filepath, train_eval_filepath):
                 index = None
             if index is not None:
                 # ep_ratio = e§ / num_episodes
-                colors.append(color_grade[ep_order[entry]].hex)
+                colors.append(color_grade[int(ep_order[entry])].hex)
                 # colors.append(lighten_color('FFA500', ep_ratio).replace('0x', '#'))
             else:
                 colors.append('lightgrey')

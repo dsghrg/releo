@@ -47,16 +47,12 @@ class TrainTestSetQueryGenerator:
 
         self.train_set_location = cfg[CFG_TRAIN_SET_LOCATION] if CFG_TRAIN_SET_LOCATION in cfg else None
         self.test_set_location = cfg[CFG_TEST_SET_LOCATION] if CFG_TEST_SET_LOCATION in cfg else None
-        self.train_out_location = cfg[CFG_TRAIN_SET_OUT_LOCATION] if CFG_TRAIN_SET_OUT_LOCATION in cfg else './'
-        self.test_out_location = cfg[CFG_TEST_SET_OUT_LOCATION] if CFG_TEST_SET_OUT_LOCATION in cfg else './'
         self.train_size = cfg[CFG_TRAIN_SIZE] if CFG_TRAIN_SIZE in cfg else 0.8
         self.max_joins = min(len(schema), cfg[CFG_MAX_JOINS]) if CFG_MAX_JOINS in cfg else min(len(schema), 15)
         self.min_joins = max(3, cfg[CFG_MIN_JOINS]) if CFG_MIN_JOINS in cfg else 3
 
         if self.train_set_location is None and self.test_set_location is None:
             self._generate_sets()
-            _write_set_to_csv(self.train_out_location + self.csv_train_name, self.train_set)
-            _write_set_to_csv(self.test_out_location + self.csv_test_name, self.test_set)
         else:
             self.test_set = []
             self.train_set = []
@@ -79,11 +75,11 @@ class TrainTestSetQueryGenerator:
 
         self.all = np.array(self.all)
         self.nprandom.shuffle(self.all)
-        self.train_set = list(self.all[:math.floor(self.train_size * len(self.all))])
-        self.test_set = list(self.all[math.ceil(self.train_size * len(self.all)):])
+        self.train_set = list(self.all[:math.floor(self.train_size * len(self.all))]).copy()
+        self.test_set = list(self.all[math.ceil(self.train_size * len(self.all)):]).copy()
 
     def get_train_set(self):
-        return copy.deepcopy(self.train_set)
+        return copy.deepcopy(self.train_set.copy())
 
     def get_test_set(self):
         return copy.deepcopy(self.test_set.copy())
@@ -116,5 +112,5 @@ def get_n_joinable_tables(n, schema):
         visited = set()
         dfs(visited, schema, comb, schema[comb[0]])
         if len(visited) == n:
-            all_possible_joinable_tables.append(comb)
+            all_possible_joinable_tables.append(list(comb))
     return all_possible_joinable_tables

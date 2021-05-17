@@ -4,6 +4,7 @@ create-testset-reference: false
 # config values which are provided to every sub-system
 global:
   log-location: ./runs
+  random-seed: 123
 
 
 # used for to determine database engine
@@ -13,11 +14,14 @@ dbms: mssql
 
 # connection details passed to a specific implementation in './db/connector' based on the specified dbms
 db-connection:
-  host:
-  username:
-  password:
-  schema:
+  host: localhost
+  username: SA
+  password: 
+  schema: dbo
   db: order_db_non_unif
+  # sql server default port ist 1433. 5434 is for my local docker image
+  port: 5434
+  driver: {ODBC Driver 13 for SQL Server}
 
 
 # defines which creator is used to represent the database schema internally

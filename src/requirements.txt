@@ -7,6 +7,7 @@ certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
 cloudpickle==1.6.0
+colour==0.1.5
 configparser==5.0.2
 cycler==0.10.0
 decorator==4.4.2
@@ -44,6 +45,7 @@ psycopg2-binary==2.8.6
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pyglet==1.5.0
+pyodbc==4.0.30
 pyparsing==2.4.7
 python-dateutil==2.8.1
 python-decouple==3.4

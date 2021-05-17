@@ -1,4 +1,6 @@
 import pandas as pd
+import json
+import copy
 
 
 class Logger:
@@ -13,6 +15,10 @@ class Logger:
 
     def new_record(self):
         if self.current_log is not None:
+            stdout_rec = copy.deepcopy(self.current_log['current-record'])
+            if stdout_rec and 'resp' in stdout_rec:
+                stdout_rec['resp'] = '...'
+            print(json.dumps(stdout_rec))
             new_rec = self._create_record()
             if 'current-record' in self.current_log and self.current_log['current-record'] is not None:
                 new_rec['record-id'] = self.current_log['current-record']['record-id'] + 1

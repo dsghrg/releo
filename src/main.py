@@ -9,6 +9,7 @@ import yaml
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
 from db.schema.schema_factory import get as get_schema_creator
+from db.schema.schema_definition import plot_schema
 from db.setup.setup_factory import get_setup_teardown
 from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
@@ -105,6 +106,7 @@ if __name__ == '__main__':
 
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
     schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()
+    plot_schema(schema)
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)
     sql_creator = get_sql_generator(cfg[CFG_SQL_CREATOR], cfg[CFG_SQL_CREATOR_CONF])
     executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF], engine, schema)
@@ -120,7 +122,8 @@ if __name__ == '__main__':
         order = []
         create_order(schema, order, schema[test_plan[0]], test_plan.copy())
         sql_query = sql_creator(schema, order)
-        res = executor.execute(sql_query) # TODO Force Order muss deaktiviert werden!!!
+        sql_query = sql_query.replace('OPTION(FORCE ORDER);', ';')
+        res = executor.execute(sql_query)  # TODO Force Order muss deaktiviert werden!!!
         # keep in mind the hashes of the queries in the db_analysis dir are created with hashlib (maybe patch the files)
         test_queries[hash(tuple(test_plan))] = res['cost']
 
@@ -131,13 +134,14 @@ if __name__ == '__main__':
         print('creating and executing all possible QPs of test set')
         logger.select_log('testset-all-permutations')
         all_query_plans = []
+        nr = 1
         for query in test_set:
             all_query_plans = all_query_plans + create_all_plans(schema, query)
         nbr_query_plans = len(all_query_plans)
         print('starting to execute query plans')
-        for nr, query in enumerate(test_set):
+        for query in test_set:
             for idx, query_plan in enumerate(create_all_plans(schema, query)):
-                print(str(nr + 1) + '/' + str(nbr_query_plans))
+                print(str(nr) + '/' + str(nbr_query_plans))
                 logger.new_record()
                 logger.log('logical-query', str(query))
                 logger.log('order', str(query_plan))
@@ -148,48 +152,49 @@ if __name__ == '__main__':
                 logger.log('latency', str(res['cost']))
                 if idx % 5 == 0:
                     logger.save_logs()
+                nr += 1
         logger.save_logs()
 
-    # env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
-    #
-    # rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])
-    # rl_algo.train()
-    #
-    # print('training finito')
-    #
-    # query_times = {}
-    # logger.select_log('evaluation')
-    # for idx, query in enumerate(test_set):
-    #     logger.new_record()
-    #     logger.log('test-query-nr', idx)
-    #     logger.log('logical-query', str(query.copy()))
-    #     query = query.copy()
-    #     state = env.reset_with_query(query.copy())
-    #     state = state.reshape((1, env.observation_space.shape[0]))
-    #     done = False
-    #     while not done:
-    #         possible_steps = env.possible_steps()
-    #         state = state.reshape((1, env.observation_space.shape[0]))
-    #         prediction = rl_algo.model.predict(state)[0]
-    #         for idx, action in enumerate(possible_steps):
-    #             if action == 0:
-    #                 prediction[idx] = -np.inf
-    #         action = np.argmax(prediction)
-    #         state, reward, done, _info = env.step(action)
-    #
-    #     sql = sql_creator(schema, env.join_order)
-    #     res = executor.execute(sql)
-    #     cost = res['cost']
-    #     logger.log('time-releo', cost)
-    #     hashed_query = hash(tuple(query))
-    #     logger.log('hash', hashed_query)
-    #     logger.log('time-optimizer', test_queries[hashed_query])
-    #     query_times[hash(tuple(query))] = cost
-    #     print("\n\n" + sql)
+    env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
+
+    rl_algo = get_rl_agent(cfg[CFG_RL_AGENT], env, cfg[CFG_RL_AGENT_CONF])
+    rl_algo.train()
+
+    print('training finito')
+
+    query_times = {}
+    logger.select_log('evaluation')
+    for idx, query in enumerate(test_set):
+        logger.new_record()
+        logger.log('test-query-nr', idx)
+        logger.log('logical-query', str(query.copy()))
+        query = query.copy()
+        state = env.reset_with_query(query.copy())
+        state = state.reshape((1, env.observation_space.shape[0]))
+        done = False
+        while not done:
+            possible_steps = env.possible_steps()
+            state = state.reshape((1, env.observation_space.shape[0]))
+            prediction = rl_algo.model.predict(state)[0]
+            for idx, action in enumerate(possible_steps):
+                if action == 0:
+                    prediction[idx] = -np.inf
+            action = np.argmax(prediction)
+            state, reward, done, _info = env.step(action)
+
+        sql = sql_creator(schema, env.join_order)
+        res = executor.execute(sql)
+        cost = res['cost']
+        logger.log('time-releo', cost)
+        hashed_query = hash(tuple(query))
+        logger.log('hash', hashed_query)
+        logger.log('time-optimizer', test_queries[hashed_query])
+        query_times[hash(tuple(query))] = cost
+        print("\n\n" + sql)
 
     logger.save_logs()
-    # plot_results(filepath=cfg[CFG_GLOBAL]['log-path'],
-    #              benchmark_filename='eval-set-benchmarking-log.csv',
-    #              train_eval_filename='train-eval-log.csv')
+    plot_results(filepath=cfg[CFG_GLOBAL]['log-path'],
+                 benchmark_filename='eval-set-benchmarking-log.csv',
+                 train_eval_filename='train-eval-log.csv')
 
     teardown(engine, schema)

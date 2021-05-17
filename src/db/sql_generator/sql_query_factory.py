@@ -14,12 +14,14 @@ def get_sql_generator(name, cfg):
 
 def mssql_patcher_forced(query):
     query = re.sub(r'\border\b', '[order]', query)
+    query = query.replace('count(*)', 'COUNT_BIG(*)')
     query = query.replace(";", "\nOPTION(FORCE ORDER);")
     return "SET STATISTICS XML ON;\n" + query
 
 
 def mssql_patcher(query):
     query = re.sub(r'\border\b', '[order]', query)
+    query = query.replace('count(*)', 'COUNT_BIG(*)')
     return "SET STATISTICS XML ON;\n" + query
 
 

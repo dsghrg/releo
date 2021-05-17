@@ -18,7 +18,7 @@ class PostgresJoinBreakdownJson():
         self.logger.log('stmt', sql_query)
         rs = self.engine.execute(sql_query)
         rec = rs.first()[0]
-        elapes_time = rec[0]['Plan']['Actual Total Time']
+        elapes_time = rec[0]['Execution Time']
         self.logger.log('exec-time', elapes_time)
         self.logger.log('resp', json.dumps(rec))
         costs = {'children': [], 'isRoot': True, 'cost': elapes_time}
@@ -48,7 +48,10 @@ def _traverse(current, schema, parent_join):
         # https://github.com/postgres/pgadmin4/blob/c1ba645dceed5c9551a5f408e37a14d1041ee598/web/pgadmin/misc/static/explain/js/explain.js#L617
         elapsed_time_join = current_elapsed_time - inclusive_children_sum
         # elapsed_time_join = current_elapsed_time
-        condition = current['Hash Cond'].replace('(', '').replace(')', '')
+        condition = current['Hash Cond'] if 'Hash Cond' in current else current['Merge Cond']
+        if condition is None:
+            condition = current['Index Cond']
+        condition = condition.replace('(', '').replace(')', '')
         left, right = condition.split(" = ")
         left_table = find_table_name_by_alias(left.split(".")[0].replace('"', ''), schema)
         right_table = find_table_name_by_alias(right.split(".")[0].replace('"', ''), schema)

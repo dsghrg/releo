@@ -1,0 +1,16 @@
+supplier,partsupp,lineitem
+nation,supplier,customer,orders
+part,nation,supplier,partsupp,lineitem
+region,nation,supplier
+supplier,partsupp,orders,lineitem
+region,nation,supplier,customer,orders
+part,supplier,partsupp
+region,nation,customer,orders
+region,nation,customer
+nation,supplier,customer,partsupp,orders
+part,partsupp,lineitem
+nation,supplier,customer
+nation,customer,orders
+customer,orders,lineitem
+region,nation,supplier,customer,partsupp
+region,nation,supplier,customer,orders

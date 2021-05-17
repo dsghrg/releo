@@ -10,8 +10,13 @@ class MssqlJoinBreakdownXml:
         self.cfg = cfg
         self.engine = engine
         self.schema = schema
+        self.global_log_path = cfg['global']['log-path']
+        self.local_log_path = self.global_log_path + '/executor'
+        self.system_context = cfg['global']['context']
+        self.logger = cfg['global']['logger']
 
     def execute(self, sql_query):
+        self.logger.log('stmt', sql_query)
         con = self.engine.raw_connection()
         cursor = con.cursor()
         start_time = time.time()
@@ -20,6 +25,8 @@ class MssqlJoinBreakdownXml:
         cursor.nextset()
         res_two = cursor.fetchall()
         xml_plan = res_two[0][0]
+        self.logger.log('exec-time', elapsed_time)
+        self.logger.log('resp', xml_plan)
         # filename = "query_execution-" + time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime(time.time())) + ".xml"
         # f = open('./' + filename, 'w+')
         # f.write(xml_plan)
@@ -37,18 +44,59 @@ def traverse(current, schema, parent):
     if "relop" in current.tag.lower() and 'LogicalOp' in current.attrib and 'join' in current.attrib[
         'LogicalOp'].lower():
         runtime = current.findall('./mw:RunTimeInformation', namespaces=namespace)[0]
-        join_info = \
-            [node for node in current.getchildren() if
-             node.find('./mw:HashKeysBuild', namespaces=namespace) is not None][0]
         cost = max([float(thread.attrib['ActualElapsedms']) for thread in runtime.getchildren()])
 
-        keyBuild = join_info.find('./mw:HashKeysBuild', namespaces=namespace)[0]
-        keyProbe = join_info.find('./mw:HashKeysProbe', namespaces=namespace)[0]
-        right = keyBuild.attrib['Table'].replace('[', '').replace(']', '')
-        right_table = schema[right]
-        left = keyProbe.attrib['Table'].replace('[', '').replace(']', '')
-        left_table = schema[left]
-        join = {'left': left_table.name, 'right': right_table.name, 'cost': cost, 'children': []}
+        join = {}
+        if current.attrib['PhysicalOp'] == 'Merge Join':
+            join = merge_join(current, schema)
+        elif current.attrib['PhysicalOp'] == 'Hash Match':
+            join = hash_join(current, schema)
+        elif current.attrib['PhysicalOp'] == 'Nested Loops':
+            join = nested_loop(current, schema)
+        else:
+            print('unknonwn join ' + str(current.attrib['PhysicalOp']))
+
+        join['cost'] = cost
         parent['children'].append(join)
         return join
     return parent
+
+
+def hash_join(current, schema):
+    join_info = \
+        [node for node in current.getchildren() if
+         node.find('./mw:HashKeysBuild', namespaces=namespace) is not None][0]
+
+    keyBuild = join_info.find('./mw:HashKeysBuild', namespaces=namespace)[0]
+    keyProbe = join_info.find('./mw:HashKeysProbe', namespaces=namespace)[0]
+    right = keyBuild.attrib['Table'].replace('[', '').replace(']', '')
+    right_table = schema[right]
+    left = keyProbe.attrib['Table'].replace('[', '').replace(']', '')
+    left_table = schema[left]
+    return {'left': left_table.name, 'right': right_table.name, 'children': []}
+
+
+def merge_join(current, schema):
+    join_info = current.find('./mw:Merge', namespaces=namespace)
+    innerSide = join_info.find('./mw:InnerSideJoinColumns', namespaces=namespace).getchildren()[0]
+    outerSide = join_info.find('./mw:OuterSideJoinColumns', namespaces=namespace).getchildren()[0]
+    right = innerSide.attrib['Table'].replace('[', '').replace(']', '')
+    right_table = schema[right]
+    left = outerSide.attrib['Table'].replace('[', '').replace(']', '')
+    left_table = schema[left]
+    return {'left': left_table.name, 'right': right_table.name, 'children': []}
+
+
+def nested_loop(current, schema):
+    join_info = current.find('./mw:NestedLoops', namespaces=namespace)
+    join_info = join_info.find('./mw:Predicate', namespaces=namespace)
+    join_info = join_info.find('./mw:ScalarOperator', namespaces=namespace)
+    join_info = join_info.find('./mw:Compare', namespaces=namespace)
+
+    left_side = join_info.findall('./mw:ScalarOperator', namespaces=namespace)[0].getchildren()[0].getchildren()[0]
+    right_side = join_info.findall('./mw:ScalarOperator', namespaces=namespace)[1].getchildren()[0].getchildren()[0]
+    right = right_side.attrib['Table'].replace('[', '').replace(']', '')
+    right_table = schema[right]
+    left = left_side.attrib['Table'].replace('[', '').replace(']', '')
+    left_table = schema[left]
+    return {'left': left_table.name, 'right': right_table.name, 'children': []}
