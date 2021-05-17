@@ -1,9 +1,11 @@
 import json
 import os
+
 import db.executor.utils.postgres_utils as utils
+import pandas as pd
 
 
-class PostgresJoinBreakdownJson():
+class PostgresLookupJoinBreakdownJson():
 
     def __init__(self, cfg, engine, schema):
         self.cfg = cfg
@@ -13,12 +15,13 @@ class PostgresJoinBreakdownJson():
         self.local_log_path = self.global_log_path + '/executor'
         self.system_context = cfg['global']['context']
         self.logger = cfg['global']['logger']
+        self.lookup_csv = cfg['lookup-csv-path']
+        self.lookup_frame = pd.read_csv(self.lookup_csv)
         os.makedirs(self.local_log_path)
 
     def execute(self, sql_query):
         self.logger.log('stmt', sql_query)
-        rs = self.engine.execute(sql_query)
-        rec = rs.first()[0]
+        rec = json.loads(self.lookup_frame[self.lookup_frame['stmt'] == sql_query]['resp'][0])
         elapes_time = rec[0]['Execution Time']
         self.logger.log('exec-time', elapes_time)
         self.logger.log('resp', json.dumps(rec))

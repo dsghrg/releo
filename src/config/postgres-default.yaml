@@ -61,9 +61,11 @@ schema-creator-config:
   discount:
 
 # specifies which executor to use to execute generated queries and return runtime information about joins
-executor: postgres-join-breakdown-json
+#executor: postgres-join-breakdown-json
+executor: postgres-lookup-join-breakdown-json
 # config which will be passed to the above specified executor
 executor-config:
+  lookup-csv-path: ./runs/local-hard-no-parallel/releo-run-2021-05-17-15-36-45/all-permutations-log.csv
 
 # specifies a setup and teardown logic once the db engine connected. can be used to set log levels or join order forcing
 db-setup: postgres-default
