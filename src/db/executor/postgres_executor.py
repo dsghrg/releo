@@ -10,7 +10,8 @@ class PostgresJoinBreakdownJson():
         self.engine = engine
         self.schema = schema
         self.global_log_path = cfg['global']['log-path']
-        self.local_log_path = self.global_log_path + '/executor'
+        dir = 'executor' if 'log-dir-name' not in cfg else cfg['log-dir-name']
+        self.local_log_path = self.global_log_path + '/' + dir
         self.system_context = cfg['global']['context']
         self.logger = cfg['global']['logger']
         os.makedirs(self.local_log_path)

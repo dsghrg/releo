@@ -1,23 +1,25 @@
 # config values which are provided to every sub-system
 global:
   log-location: ./runs/shizzle
-  # this will initialize random and np.random globally. One of the consequences is, that the keras models
-  # will have the same initial weights
   random-seed: 123
 
 
 # used for to determine database engine
 # will be used for the factory to determine which function to invoke
 # connection details are provided below
-dbms: postgres
+dbms: mssql
 
 # connection details passed to a specific implementation in './db/connector' based on the specified dbms
 db-connection:
   host: localhost
-  username: postgres
-  password: example
-  schema: public
-  db: shop_db_non_uniform
+  username: SA
+  password: zhaw2021_mssql
+  schema: dbo
+  db: shop_db
+  # sql server default port ist 1433. 5434 is for my local docker image
+  port: 5434
+  driver: ODBC Driver 17 for SQL Server
+
 
 # defines which creator is used to represent the database schema internally
 schema-creator: definition-file
@@ -58,19 +60,18 @@ schema-creator-config:
   discount:
 
 # specifies which executor to use to execute generated queries and return runtime information about joins
-#executor: postgres-join-breakdown-json
-executor: postgres-lookup-join-breakdown-json
+#executor: mssql-join-breakdown-xml
+executor: mssql-lookup-join-breakdown-xml
 # config which will be passed to the above specified executor
 executor-config:
-  lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-non-uniform-reference.csv
-
+  lookup-csv-path: ./db/executor/lookup-files/mssql/shop-db-uniform-reference.csv
 # specifies a setup and teardown logic once the db engine connected. can be used to set log levels or join order forcing
-db-setup: postgres-default
+db-setup:
 # config which will be passed to the above specified db-setup functions
 db-setup-config:
 
-# specifies an sql generator to create a specific sql statement based on an abstract query
-sql-creator: postgres
+# specifes an sql generator to create a specific sql statement based on an abstract query
+sql-creator: mssql-force-order
 # config which will be passed to the above specified sql-generator for custom config
 sql-creator-config:
 
@@ -85,8 +86,8 @@ environment-config:
 agent: dqn-default
 # config which will be passed to the specified environment for custom setup etc
 agent-config:
-  environmet-name: rl_joinorder
   environment-continuous: false
+  environmet-name: rl_joinorder
   episodes: 200
   epsilon-initial: 1.0
   epsilon-min: 0.03
@@ -109,7 +110,7 @@ agent-config:
   output-activation: linear
   loss: huber_loss
   optimizer: adam
-  replay-buffer-size: 256
+  replay-buffer-size: 512
   min-experiences-to-train: 32
   checkpoint-period: 9999
   wandb-team-name: releo_zhaw
@@ -130,14 +131,22 @@ query-generator-config:
   testset-location: ./query_generator/query_sets/test_set.csv
   random-seed: 123
 
-benchmark-creator: postgres
+
+benchmark-creator: mssql
 
 benchmark-creator-config:
-  executor: postgres-lookup-join-breakdown-json
+  executor: mssql-lookup-join-breakdown-xml
   # config which will be passed to the above specified executor
   executor-config:
     log-dir-name: benchmark-executor
-    lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-non-uniform-testset-reference.csv
+    lookup-csv-path: ./db/executor/lookup-files/mssql/shop-db-uniform-testset-reference.csv
+
+
+
+
+
+
+
 
 
 

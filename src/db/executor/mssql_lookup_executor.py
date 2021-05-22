@@ -13,7 +13,8 @@ class MssqlLookupJoinBreakdownXml:
         self.engine = engine
         self.schema = schema
         self.global_log_path = cfg['global']['log-path']
-        self.local_log_path = self.global_log_path + '/executor'
+        dir = 'executor' if 'log-dir-name' not in cfg else cfg['log-dir-name']
+        self.local_log_path = self.global_log_path + '/' + dir
         self.system_context = cfg['global']['context']
         self.logger = cfg['global']['logger']
         self.lookup_csv = cfg['lookup-csv-path']
@@ -21,9 +22,9 @@ class MssqlLookupJoinBreakdownXml:
 
     def execute(self, sql_query):
         self.logger.log('stmt', sql_query)
-        xml_plan = self.lookup_frame[self.lookup_frame['stmt'] == sql_query]['resp'][0]
+        xml_plan = self.lookup_frame[self.lookup_frame['stmt'] == sql_query]['resp'].values[0]
         parsed = ET.ElementTree(ET.fromstring(xml_plan))
-        elapsed_time = parsed.find('.//mw:QueryTimeStats', namespaces=namespace)[0].attrib['ElapsedTime']
+        elapsed_time = parsed.findall('.//mw:QueryTimeStats', namespaces=namespace)[0].attrib['ElapsedTime']
         self.logger.log('exec-time', elapsed_time)
         self.logger.log('resp', xml_plan)
         root = {'children': [], 'isRoot': True, 'cost': elapsed_time}

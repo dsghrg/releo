@@ -46,3 +46,12 @@ def get_n_joinable_tables(n, schema):
         if len(visited) == n:
             all_possible_joinable_tables.append(list(comb))
     return all_possible_joinable_tables
+
+
+def create_valid_order(schema, join_order, current, left_to_join):
+    if current.name not in join_order:
+        join_order.append(current.name)
+        left_to_join.remove(current.name)
+        for neighbour in schema[current.name].tablename_to_join.keys():
+            if neighbour in left_to_join:
+                create_valid_order(schema, join_order, schema[neighbour], left_to_join)

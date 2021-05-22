@@ -1,23 +1,22 @@
+import os
+import random
+import shutil
 import sys
 import time
-import os
-import shutil
-import random
 
 import numpy as np
 import yaml
+from benchmarkers.benchmark_factory import get_benchmark_creator
 from db.connector.connection_factory import create_engine
 from db.executor.executor_factory import get_executor
 from db.schema.schema_factory import get as get_schema_creator
-from db.schema.schema_definition import plot_schema
 from db.setup.setup_factory import get_setup_teardown
 from db.sql_generator.sql_query_factory import get_sql_generator
 from environment.environment_factory import get_environment
-from query_generator.query_generator_factory import get_query_generator_creator
-from rl_algorithms.rl_agent_factory import get_rl_agent
 from logger.logger import Logger
 from logger.plot_log_analysis import plot_results
-from utils.queryplan import create_all_plans
+from query_generator.query_generator_factory import get_query_generator_creator
+from rl_algorithms.rl_agent_factory import get_rl_agent
 
 CFG_GLOBAL = 'global'
 CFG_DBMS = 'dbms'
@@ -37,6 +36,8 @@ CFG_RL_AGENT_CONF = 'agent-config'
 CFG_SCHEMA_CREATOR = 'schema-creator'
 CFG_SCHEMA_CREATOR_CFG = 'schema-creator-config'
 CFG_LOGGER_CONF = 'logger-conf'
+CFG_BENCH = 'benchmark-creator'
+CFG_BENCH_CONF = 'benchmark-creator-config'
 
 cfgs_to_extend_with_global = [CFG_DBMS_CONF,
                               CFG_QUERY_GEN_CONF,
@@ -45,16 +46,8 @@ cfgs_to_extend_with_global = [CFG_DBMS_CONF,
                               CFG_DB_SETUP_CONF,
                               CFG_ENV_CONF,
                               CFG_RL_AGENT_CONF,
-                              CFG_LOGGER_CONF]
-
-
-def create_order(schema, join_order, current, left_to_join):
-    if current.name not in join_order:
-        join_order.append(current.name)
-        left_to_join.remove(current.name)
-        for neighbour in schema[current.name].tablename_to_join.keys():
-            if neighbour in left_to_join:
-                create_order(schema, join_order, schema[neighbour], left_to_join)
+                              CFG_LOGGER_CONF,
+                              CFG_BENCH_CONF]
 
 
 def load_cfg(cfg_file):
@@ -106,54 +99,17 @@ if __name__ == '__main__':
 
     engine = create_engine(cfg[CFG_DBMS], cfg[CFG_DBMS_CONF])
     schema = get_schema_creator(cfg[CFG_SCHEMA_CREATOR], engine, cfg[CFG_SCHEMA_CREATOR_CFG]).create()
-    plot_schema(schema)
     generator = get_query_generator_creator(cfg[CFG_QUERY_GEN], cfg[CFG_QUERY_GEN_CONF])(schema)
     sql_creator = get_sql_generator(cfg[CFG_SQL_CREATOR], cfg[CFG_SQL_CREATOR_CONF])
     executor = get_executor(cfg[CFG_EXECUTOR], cfg[CFG_EXECUTOR_CONF], engine, schema)
-
     test_set = generator.get_test_set()
-    test_queries = {}
+    benchmark_creator = get_benchmark_creator(cfg[CFG_BENCH], schema, engine, sql_creator, test_set,
+                                              cfg[CFG_BENCH_CONF])
 
-    logger.select_log('eval-set-benchmarking')
-    for idx, test_plan in enumerate(test_set):
-        logger.new_record()
-        logger.log('test-query-nr', idx)
-        logger.log('logical-query', str(test_plan.copy()))
-        order = []
-        create_order(schema, order, schema[test_plan[0]], test_plan.copy())
-        sql_query = sql_creator(schema, order)
-        sql_query = sql_query.replace('OPTION(FORCE ORDER);', ';')
-        res = executor.execute(sql_query)  # TODO Force Order muss deaktiviert werden!!!
-        # keep in mind the hashes of the queries in the db_analysis dir are created with hashlib (maybe patch the files)
-        test_queries[hash(tuple(test_plan))] = res['cost']
+    test_queries = {rec['query-hash']: rec['cost'] for rec in benchmark_creator.benchmark()}
 
     setup, teardown = get_setup_teardown(cfg[CFG_DB_SETUP], cfg[CFG_DB_SETUP_CONF])
     setup(engine, schema)
-
-    if 'create-testset-reference' in cfg and cfg['create-testset-reference'] is True:
-        print('creating and executing all possible QPs of test set')
-        logger.select_log('testset-all-permutations')
-        all_query_plans = []
-        nr = 1
-        for query in test_set:
-            all_query_plans = all_query_plans + create_all_plans(schema, query)
-        nbr_query_plans = len(all_query_plans)
-        print('starting to execute query plans')
-        for query in test_set:
-            for idx, query_plan in enumerate(create_all_plans(schema, query)):
-                print(str(nr) + '/' + str(nbr_query_plans))
-                logger.new_record()
-                logger.log('logical-query', str(query))
-                logger.log('order', str(query_plan))
-                logger.log('logical-query-hash', hash(tuple(query)))
-                logger.log('order-hash', hash(tuple(query_plan)))
-                sql_query = sql_creator(schema, query_plan)
-                res = executor.execute(sql_query)
-                logger.log('latency', str(res['cost']))
-                if idx % 5 == 0:
-                    logger.save_logs()
-                nr += 1
-        logger.save_logs()
 
     env = get_environment(cfg[CFG_ENV], schema, generator, sql_creator, executor, cfg[CFG_ENV_CONF])
 

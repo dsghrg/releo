@@ -208,8 +208,12 @@ class DQNDefault:
 
             join_order = self.env.join_order
             self.evaluation_history[episode][hash(tuple(query))] = join_order
+            # not that pretty tbh...
             exec_time = self.logger.current_log['current-record']['exec-time']
-            wandb.log({str(qry): exec_time}, commit=False)
+            eval_recs = self.logger.logs['eval-set-benchmarking']['records']
+            bench_query = [eval_recs[idx] for idx in eval_recs if eval_recs[idx]['logical-query'] == str(qry)][0]
+            wandb.log({str(qry): float(exec_time)}, commit=False)
+            wandb.log({str(qry) + '-bench': float(bench_query['exec-time'])}, commit=False)
             self.wandb_eval_table['ys'][eval_query_nr].append(exec_time)
         wandb.log({'test-set-performance': wandb.plot.line_series(xs=self.wandb_eval_table['x'],
                                                                   ys=self.wandb_eval_table['ys'],
