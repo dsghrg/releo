@@ -1,6 +1,6 @@
 # config values which are provided to every sub-system
 global:
-  log-location: ./runs/postgres/uniform/min-random-20
+  log-location: ./runs/postgres/uniform/query-gen-epsilon-rnd
   # this will initialize random and np.random globally. One of the consequences is, that the keras models
   # will have the same initial weights
   random-seed: 123
@@ -89,7 +89,7 @@ agent-config:
   environment-continuous: false
   episodes: 200
   epsilon-initial: 1.0
-  epsilon-min: 0.2
+  epsilon-min: 0.03
   epsilon-decay: 0.988
   gamma: 0.9
   tau: 0.1
@@ -113,7 +113,7 @@ agent-config:
   min-experiences-to-train: 32
   checkpoint-period: 9999
   wandb-team-name: releo_zhaw
-  wandb-group-name: postgres-uniform-min-epsilon-20
+  wandb-group-name: postgres-uniform-query-gen-epsilon-rnd
   wandb-project-name: dqn-default
   broken-buffer: false
   epsilon-random-seed: 123

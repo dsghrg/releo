@@ -1,6 +1,6 @@
 # config values which are provided to every sub-system
 global:
-  log-location: ./runs/postgres/uniform/min-random-20
+  log-location: ./runs/postgres/non-uniform/nn-xs
   # this will initialize random and np.random globally. One of the consequences is, that the keras models
   # will have the same initial weights
   random-seed: 123
@@ -62,7 +62,7 @@ schema-creator-config:
 executor: postgres-lookup-join-breakdown-json
 # config which will be passed to the above specified executor
 executor-config:
-  lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-uniform-reference.csv
+  lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-non-uniform-reference.csv
 
 # specifies a setup and teardown logic once the db engine connected. can be used to set log levels or join order forcing
 db-setup: postgres-default
@@ -89,8 +89,8 @@ agent-config:
   environment-continuous: false
   episodes: 200
   epsilon-initial: 1.0
-  epsilon-min: 0.2
-  epsilon-decay: 0.988
+  epsilon-min: 0.03
+  epsilon-decay: 0.981
   gamma: 0.9
   tau: 0.1
   synchronize_networks_every: 2
@@ -98,13 +98,10 @@ agent-config:
   learning-rate: 0.005
   layers:
     1:
-      units: 32
+      units: 16
       activation: relu
     2:
-      units: 32
-      activation: relu
-    3:
-      units: 16
+      units: 8
       activation: relu
   output-activation: linear
   loss: huber_loss
@@ -113,7 +110,7 @@ agent-config:
   min-experiences-to-train: 32
   checkpoint-period: 9999
   wandb-team-name: releo_zhaw
-  wandb-group-name: postgres-uniform-min-epsilon-20
+  wandb-group-name: postgres-non-uniform-nn-xs
   wandb-project-name: dqn-default
   broken-buffer: false
   epsilon-random-seed: 123
@@ -137,7 +134,7 @@ benchmark-creator-config:
   # config which will be passed to the above specified executor
   executor-config:
     log-dir-name: benchmark-executor
-    lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-uniform-testset-reference.csv
+    lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-non-uniform-testset-reference.csv
 
 
 
