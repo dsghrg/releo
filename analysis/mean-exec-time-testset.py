@@ -14,34 +14,39 @@ def logicall_eq(query1, query2):
     return tb1 == tb2
 
 
-base_dir = './input_runs/local-force-parallel'
+# base_dir = './input_runs/all-permutations/uniform'
+base_dir = './logs/releo-all-test-permutations'
+# base_dir = './input_runs/local-runs'
 # all_bench_files = glob.glob(base_dir + '/local-hard-no-parallel/**/eval-set-benchmarking-log.csv')
 # all_bench_files = glob.glob(base_dir + '/local-runs/**/eval-set-benchmarking-log.csv')
 # all_bench_files = glob.glob(base_dir + '/**/eval-set-benchmarking-log.csv')
-all_bench_files = glob.glob(base_dir + '/**/eval-set-benchmarking-log.csv')
-
-runs_bench = []
-for file in all_bench_files:
-    runs_bench.append(pd.read_csv(file, sep=','))
-
-# runs_bench = [run1_bench, run2_bench, run3_bench]
+# all_bench_files = glob.glob(base_dir + '/**/eval-set-benchmarking-log.csv')
 #
-merged_bench = pd.concat(runs_bench)
-grouped_by_query = merged_bench.groupby(['logical-query'], as_index=False)['exec-time']
-mean_exec = grouped_by_query.mean()
-std_exec = grouped_by_query.std()
+# runs_bench = []
+# for file in all_bench_files:
+#     runs_bench.append(pd.read_csv(file, sep=','))
+#
+# runs_bench = [run1_bench, run2_bench, run3_bench]
 
-for run in runs_bench:
-    run['mean-exec-time'] = np.nan
-    run['mean-exec-time'] = run['logical-query'].apply(
-        lambda x: mean_exec[mean_exec['logical-query'] == x]['exec-time'].values[0])
-    run['std-exec-time'] = run['logical-query'].apply(
-        lambda x: std_exec[mean_exec['logical-query'] == x]['exec-time'].values[0])
-
-reference_bench = runs_bench[0]
-reference_bench.to_csv('benchmark-reference-time-local-force-parallel.csv', sep=',')
-
+# merged_bench = pd.concat(runs_bench)
+# grouped_by_query = merged_bench.groupby(['logical-query'], as_index=False)['exec-time']
+# mean_exec = grouped_by_query.mean()
+# std_exec = grouped_by_query.std()
+#
+# for run in runs_bench:
+#     run['mean-exec-time'] = np.nan
+#     run['mean-exec-time'] = run['logical-query'].apply(
+#         lambda x: mean_exec[mean_exec['logical-query'] == x]['exec-time'].values[0])
+#     run['std-exec-time'] = run['logical-query'].apply(
+#         lambda x: std_exec[mean_exec['logical-query'] == x]['exec-time'].values[0])
+#
+# reference_bench = runs_bench[0]
+# reference_bench.to_csv('benchmark-reference-time-local-force-parallel.csv', sep=',')
+#
+# all_perms_files = glob.glob(base_dir + '/**/all-permutations-log.csv')
 all_perms_files = glob.glob(base_dir + '/**/testset-all-permutations-log.csv')
+qname_lookup = pd.read_csv('query-name-lookup.csv')
+
 runs_perm = []
 for file in all_perms_files:
     runs_perm.append(pd.read_csv(file, sep=','))
@@ -88,7 +93,7 @@ for idx, run in enumerate(runs_perm):
     #         0]))
 
 reference_set = runs_perm[0]
-reference_set.to_csv('testset-reference-time-local-force-parallel.csv', sep=',')
+# reference_set.to_csv('testset-reference-time-local-force-parallel.csv', sep=',')
 
 reference_set = reference_set.sort_values(['mean-exec-time'], ascending=True).groupby('query-name')
 
@@ -97,11 +102,11 @@ for name, group in reference_set:
     fig, ax = plt.subplots(2, 1, figsize=(8, 6))
     logical_query_name = group['logical-query'].unique()[0]
     x_vals = range(0, group.shape[0])
-    reference_record = reference_bench[reference_bench['logical-query'] == logical_query_name]
-    bench_mean = reference_record['mean-exec-time'].values[0]
-    ax[0].bar(x_vals, group['mean-exec-time'])
-    ax[0].plot(x_vals, [bench_mean for x in x_vals], color='red')
-    ax[0].set_title('mean Ausführungszeit aufsteigend von ' + name)
+    # reference_record = reference_bench[reference_bench['logical-query'] == logical_query_name]
+    # bench_mean = reference_record['mean-exec-time'].values[0]
+    ax[0].bar(x_vals, group['mean-exec-time'], label='mean execution time (ms), n=' + str(len(all_perms_files)))
+    # ax[0].plot(x_vals, [bench_mean for x in x_vals], color='red')
+    ax[0].set_title('Mean latency of execution plans for ' + name)
     ax[0].set_ylim(
         [min([min(group['mean-exec-time'])]) * 0.95,
          max([max(group['mean-exec-time'])]) * 1.05])
