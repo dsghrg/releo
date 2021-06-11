@@ -92,8 +92,11 @@ if __name__ == "__main__":
     setup(engine, schema)
 
     all_permutations = []
+    all_queries = []
     for query_length in range(3, len(schema) + 1):
-        for query in get_n_joinable_tables(query_length, schema):
+        new_queries = get_n_joinable_tables(query_length, schema)
+        all_queries += new_queries
+        for query in new_queries:
             all_permutations += create_all_plans(schema, query)
 
     logger.select_log("all-permutations")

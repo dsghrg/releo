@@ -16,14 +16,14 @@ for i in range(0, 30):
         dest = filepath.replace('.yaml', '-tmp.yaml')
         shutil.copy(filepath, dest)
         filepath = dest
-        if 'epsilon-rnd' in filepath:
+        if 'epsilon-rnd' in filepath or 'top-mix' in filepath:
             config = None
             with open(filepath, 'r') as stream:
                 config = yaml.load(stream, Loader=yaml.FullLoader)
             with open(filepath, 'w') as stream:
                 config['agent-config']['epsilon-random-seed'] = int(math.floor(random.random() * 1000))
                 yaml.dump(config, stream, Dumper=yaml.CDumper)
-        if 'query-gen-rnd' in filepath:
+        if 'query-gen-rnd' in filepath or 'top-mix' in filepath:
             config = None
             with open(filepath, 'r') as stream:
                 config = yaml.load(stream, Loader=yaml.FullLoader)

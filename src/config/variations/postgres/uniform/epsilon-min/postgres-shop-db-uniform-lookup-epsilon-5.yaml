@@ -1,0 +1,143 @@
+# config values which are provided to every sub-system
+global:
+  log-location: ./runs/postgres/uniform/min-random-5
+  # this will initialize random and np.random globally. One of the consequences is, that the keras models
+  # will have the same initial weights
+  random-seed: 123
+
+
+# used for to determine database engine
+# will be used for the factory to determine which function to invoke
+# connection details are provided below
+dbms: postgres
+
+# connection details passed to a specific implementation in './db/connector' based on the specified dbms
+db-connection:
+  host: localhost
+  username: postgres
+  password: example
+  schema: public
+  db: shop_db_non_uniform
+
+# defines which creator is used to represent the database schema internally
+schema-creator: definition-file
+# config which will be passed to the specified schema-creator
+schema-creator-config:
+  category:
+  order_details:
+    joins:
+      - source-column: order_id
+        referred-table: order
+        referred-column: id
+      - source-column: product_id
+        referred-table: product
+        referred-column: id
+  product:
+    joins:
+      - source-column: subcategory_id
+        referred-table: subcategory
+        referred-column: id
+  subcategory:
+    joins:
+      - source-column: category_id
+        referred-table: category
+        referred-column: id
+  customer:
+  order:
+    joins:
+      - source-column: customer_id
+        referred-table: customer
+        referred-column: id
+      - source-column: deliverer_id
+        referred-table: deliverer
+        referred-column: id
+      - source-column: discount_id
+        referred-table: discount
+        referred-column: id
+  deliverer:
+  discount:
+
+# specifies which executor to use to execute generated queries and return runtime information about joins
+#executor: postgres-join-breakdown-json
+executor: postgres-lookup-join-breakdown-json
+# config which will be passed to the above specified executor
+executor-config:
+  lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-uniform-reference.csv
+
+# specifies a setup and teardown logic once the db engine connected. can be used to set log levels or join order forcing
+db-setup: postgres-default
+# config which will be passed to the above specified db-setup functions
+db-setup-config:
+
+# specifies an sql generator to create a specific sql statement based on an abstract query
+sql-creator: postgres
+# config which will be passed to the above specified sql-generator for custom config
+sql-creator-config:
+
+# specifies which reinforcement learning approach is used
+environment: one-hot-history
+# config which will passed to the specified environment for custom setup etc
+environment-config:
+  random-seed: 123
+#  max-joins: 8
+
+# specifies the rl agent to train and use for predictions
+agent: dqn-default
+# config which will be passed to the specified environment for custom setup etc
+agent-config:
+  environmet-name: rl_joinorder
+  environment-continuous: false
+  episodes: 200
+  epsilon-initial: 1.0
+  epsilon-min: 0.05
+  epsilon-decay: 0.9705
+  gamma: 0.9
+  tau: 0.1
+  synchronize_networks_every: 2
+  batch-size: 32
+  learning-rate: 0.005
+  layers:
+    1:
+      units: 32
+      activation: relu
+    2:
+      units: 32
+      activation: relu
+    3:
+      units: 16
+      activation: relu
+  output-activation: linear
+  loss: huber_loss
+  optimizer: adam
+  replay-buffer-size: 256
+  min-experiences-to-train: 32
+  checkpoint-period: 9999
+  wandb-team-name: releo_zhaw
+  wandb-group-name: postgres-uniform-min-epsilon-5
+  wandb-project-name: dqn-default
+  broken-buffer: false
+  epsilon-random-seed: 123
+  sampling-random-seed: 123
+  target-model-switch-interval: 5
+  evaluation-interval: 5
+
+# specifies which query generator is used to create logical queries which ultimately will be passed to the environment
+# / reinforcement learning algorithm to train/eval
+query-generator: train-split-random-generator
+
+query-generator-config:
+  trainset-location: ./query_generator/query_sets/train_set.csv
+  testset-location: ./query_generator/query_sets/test_set.csv
+  random-seed: 123
+
+benchmark-creator: postgres
+
+benchmark-creator-config:
+  executor: postgres-lookup-join-breakdown-json
+  # config which will be passed to the above specified executor
+  executor-config:
+    log-dir-name: benchmark-executor
+    lookup-csv-path: ./db/executor/lookup-files/postgres/shop-db-uniform-testset-reference.csv
+
+
+
